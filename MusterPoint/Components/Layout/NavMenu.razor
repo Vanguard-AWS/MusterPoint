@@ -1,30 +1,117 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">MusterPoint</a>
+﻿@using MusterPoint.Client.Services
+@inject AuthService AuthService
+@inject NavigationManager NavigationManager
+@rendermode InteractiveWebAssembly
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+            <strong class="title is-5">MusterPoint</strong>
+        </a>
     </div>
-</div>
 
-<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
-
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="nav flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
+    <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-start">
+            @if (isAuthenticated)
+            {
+             <a href="/" class="navbar-item">
+         <span class="icon-text">
+    <span class="icon">
+   <i class="fas fa-home"></i>
+   </span>
+         <span>Home</span>
+   </span>
+     </a>
+    <a href="/lists" class="navbar-item">
+         <span class="icon-text">
+   <span class="icon">
+   <i class="fas fa-list"></i>
+       </span>
+   <span>My Lists</span>
+   </span>
+ </a>
+ <a href="/listbuilder" class="navbar-item">
+          <span class="icon-text">
+       <span class="icon">
+  <i class="fas fa-hammer"></i>
+       </span>
+          <span>List Builder</span>
+            </span>
+    </a>
+   }
         </div>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
+        <div class="navbar-end">
+       <div class="navbar-item">
+            @if (isAuthenticated)
+     {
+        <div class="buttons">
+       <span class="mr-3 is-size-6">
+   <span class="tag is-info">Logged In</span>
+          </span>
+    <button class="button is-light" @onclick="HandleLogout">
+          <span class="icon-text">
+        <span class="icon">
+         <i class="fas fa-sign-out-alt"></i>
+          </span>
+      <span>Logout</span>
+ </span>
+               </button>
+ </div>
+     }
+       else
+ {
+   <div class="buttons">
+    <a href="/login" class="button is-primary">
+      <span class="icon-text">
+          <span class="icon">
+            <i class="fas fa-sign-in-alt"></i>
+        </span>
+            <span>Sign In</span>
+         </span>
+       </a>
+   <a href="/register" class="button is-info is-light">
+           <span class="icon-text">
+       <span class="icon">
+       <i class="fas fa-user-plus"></i>
+   </span>
+           <span>Register</span>
+              </span>
+       </a>
+             </div>
+       }
+            </div>
         </div>
+    </div>
+</nav>
 
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
-    </nav>
-</div>
+@code {
+    private bool isAuthenticated = false;
+    private bool hasCheckedAuth = false;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && !hasCheckedAuth)
+        {
+            hasCheckedAuth = true;
+try
+            {
+      isAuthenticated = await AuthService.IsAuthenticatedAsync();
+       StateHasChanged();
+            }
+        catch (Exception ex)
+    {
+      Console.WriteLine($"Error checking authentication in NavMenu: {ex.Message}");
+}
+        }
+    }
+
+    private async Task HandleLogout()
+    {
+        await AuthService.LogoutAsync();
+        isAuthenticated = false;
+    StateHasChanged();
+        NavigationManager.NavigateTo("/", replace: true);
+    }
+}
 

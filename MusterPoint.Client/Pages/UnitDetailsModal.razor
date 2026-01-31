@@ -1,0 +1,358 @@
+@namespace MusterPoint.Client.Pages
+@using MusterPoint.Client.Models
+
+<!-- Modal Overlay -->
+<div class="modal @(IsOpen ? "is-active" : "")">
+    <div class="modal-background" @onclick="OnClose"></div>
+    <div class="modal-card unit-details-modal">
+        <header class="modal-card-head">
+            <p class="modal-card-title">@SelectedUnit?.Name</p>
+    <button class="delete" aria-label="close" @onclick="OnClose"></button>
+        </header>
+        <section class="modal-card-body">
+         @if (SelectedUnit != null)
+        {
+        <!-- Unit Header Info -->
+       <div class="box mb-4">
+            <div class="columns is-multiline">
+       <div class="column is-4">
+   <p class="has-text-grey-light">Category</p>
+    <p class="has-text-weight-bold">@(SelectedUnit.Category ?? "N/A")</p>
+            </div>
+          <div class="column is-4">
+ <p class="has-text-grey-light">Points (Min)</p>
+           <p class="has-text-weight-bold">@SelectedUnit.BasePoints pts</p>
+    </div>
+     <div class="column is-4">
+         <p class="has-text-grey-light">Squad Size</p>
+                 <p class="has-text-weight-bold">@SelectedUnit.MinSize-@SelectedUnit.MaxSize models</p>
+  </div>
+    </div>
+
+           <!-- Keywords -->
+             @if (SelectedUnit.Keywords.Any())
+    {
+      <div class="mt-4">
+           <p class="has-text-grey-light mb-2">Keywords</p>
+        <div class="tags">
+  @foreach (var keyword in SelectedUnit.Keywords)
+            {
+      <span class="tag is-light">@keyword</span>
+         }
+     </div>
+       </div>
+               }
+
+         <!-- Faction Keywords -->
+          @if (SelectedUnit.FactionKeywords.Any())
+        {
+         <div class="mt-3">
+         <p class="has-text-grey-light mb-2">Faction</p>
+         <div class="tags">
+          @foreach (var keyword in SelectedUnit.FactionKeywords)
+        {
+            <span class="tag is-info">@keyword</span>
+        }
+            </div>
+        </div>
+               }
+     </div>
+
+       <!-- Enhancements Section (Characters only) -->
+    @if (IsCharacter && AvailableEnhancements.Any())
+                {
+  <div class="box mb-4 enhancement-section">
+           <h3 class="title is-5">Enhancements</h3>
+   <p class="is-size-7 has-text-grey mb-3">Select an enhancement for this character</p>
+       
+  <div class="enhancement-list">
+          <div class="enhancement-option @(string.IsNullOrEmpty(SelectedEnhancementId) ? "is-selected" : "")">
+     <div class="enhancement-content">
+  <span class="enhancement-label">-- No Enhancement --</span>
+    </div>
+   <button class="button is-small @(string.IsNullOrEmpty(SelectedEnhancementId) ? "is-light" : "is-danger")" 
+       @onclick="() => SelectEnhancement(string.Empty)">
+       @(string.IsNullOrEmpty(SelectedEnhancementId) ? "Selected" : "Remove")
+   </button>
+          </div>
+ 
+    @foreach (var enhancement in AvailableEnhancements)
+      {
+        <div class="enhancement-option @(SelectedEnhancementId == enhancement.Id ? "is-selected" : "")">
+  <div class="enhancement-content">
+      <p class="enhancement-name"><strong>@enhancement.Name</strong> <span class="enhancement-cost">+@enhancement.Points pts</span></p>
+         <p class="enhancement-desc">@enhancement.Description</p>
+    </div>
+ <button class="button is-small @(SelectedEnhancementId == enhancement.Id ? "is-danger" : "is-success")" 
+       @onclick="() => SelectEnhancement(enhancement.Id)">
+       @(SelectedEnhancementId == enhancement.Id ? "Remove" : "Add")
+   </button>
+ </div>
+  }
+ </div>
+     </div>
+        }
+
+    <!-- Warlord Section (Characters only) -->
+    @if (IsCharacter)
+    {
+<div class="box mb-4 warlord-section">
+     <h3 class="title is-5">Warlord</h3>
+     <label class="checkbox">
+<input type="checkbox" @bind="IsWarlordSelected" @bind:event="onchange" />
+       <span class="ml-2">Set as Warlord</span>
+   </label>
+         @if (IsWarlordSelected)
+    {
+            <p class="is-size-7 has-text-success mt-2"><i class="fas fa-crown mr-2"></i>This character is your Warlord</p>
+         }
+   </div>
+    }
+
+    <!-- Unit Composition -->
+   @if (SelectedUnit.UnitComposition.Any())
+      {
+      <div class="box mb-4">
+       <h3 class="title is-5">Unit Composition</h3>
+           <table class="table is-fullwidth is-narrow">
+ <tbody>
+   @foreach (var role in SelectedUnit.UnitComposition)
+       {
+  <tr>
+  <td>@role.Role</td>
+      <td class="has-text-right"><strong>@role.Count</strong></td>
+        </tr>
+        }
+   </tbody>
+             </table>
+     </div>
+                }
+
+   <!-- Profiles (Stats) -->
+           @if (SelectedUnit.Profiles.Any())
+        {
+<div class="box mb-4">
+       <h3 class="title is-5">Model Profiles</h3>
+           @foreach (var profile in SelectedUnit.Profiles)
+            {
+    <div class="mb-3">
+     <p class="has-text-weight-bold">@profile.Name</p>
+           <table class="table is-fullwidth is-narrow is-size-7">
+         <thead>
+             <tr>
+          <th>M</th>
+  <th>T</th>
+      <th>Sv</th>
+          <th>W</th>
+    <th>Ld</th>
+       <th>OC</th>
+          </tr>
+         </thead>
+         <tbody>
+           <tr>
+                  <td>@profile.Movement</td>
+          <td>@profile.Toughness</td>
+        <td>@profile.Save</td>
+       <td>@profile.Wounds</td>
+      <td>@profile.Leadership</td>
+        <td>@profile.ObjectiveControl</td>
+         </tr>
+   </tbody>
+       </table>
+    </div>
+              }
+  </div>
+   }
+
+           <!-- Ranged Weapons -->
+     @if (SelectedUnit.RangedWeapons.Any())
+         {
+        <div class="box mb-4">
+       <h3 class="title is-5">Ranged Weapons</h3>
+                @foreach (var weapon in SelectedUnit.RangedWeapons)
+      {
+              <div class="mb-3 pb-3 border-bottom">
+    <p class="has-text-weight-bold">@weapon.Name</p>
+             <table class="table is-fullwidth is-narrow is-size-7">
+   <thead>
+    <tr>
+           <th>Range</th>
+        <th>Attacks</th>
+        <th>BS</th>
+         <th>Strength</th>
+       <th>AP</th>
+           <th>Damage</th>
+           <th>Type</th>
+             </tr>
+         </thead>
+         <tbody>
+          <tr>
+      <td>@weapon.Range</td>
+             <td>@weapon.Attacks</td>
+             <td>@weapon.BallisticSkill</td>
+<td>@weapon.Strength</td>
+   <td>@weapon.ArmorPenetration</td>
+                <td>@weapon.Damage</td>
+         <td><span class="tag is-light">@weapon.Type</span></td>
+     </tr>
+      </tbody>
+          </table>
+           @if (!string.IsNullOrEmpty(weapon.Special))
+            {
+         <p class="is-size-7 has-text-grey-light mt-1"><em>Special: @weapon.Special</em></p>
+      }
+           </div>
+          }
+      </div>
+      }
+
+     <!-- Melee Weapons -->
+         @if (SelectedUnit.MeleeWeapons.Any())
+                {
+      <div class="box mb-4">
+             <h3 class="title is-5">Melee Weapons</h3>
+          @foreach (var weapon in SelectedUnit.MeleeWeapons)
+      {
+  <div class="mb-3 pb-3 border-bottom">
+       <p class="has-text-weight-bold">@weapon.Name</p>
+ <table class="table is-fullwidth is-narrow is-size-7">
+    <thead>
+      <tr>
+     <th>Attacks</th>
+          <th>WS</th>
+   <th>Strength</th>
+     <th>AP</th>
+   <th>Damage</th>
+    </tr>
+     </thead>
+                <tbody>
+  <tr>
+           <td>@weapon.Attacks</td>
+         <td>@weapon.WeaponSkill</td>
+           <td>@weapon.Strength</td>
+     <td>@weapon.ArmorPenetration</td>
+              <td>@weapon.Damage</td>
+     </tr>
+     </tbody>
+         </table>
+              @if (!string.IsNullOrEmpty(weapon.Special))
+        {
+           <p class="is-size-7 has-text-grey-light mt-1"><em>Special: @weapon.Special</em></p>
+      }
+               </div>
+        }
+              </div>
+}
+
+  <!-- Abilities -->
+      @if (SelectedUnit.Abilities.Any())
+                {
+                 <div class="box mb-4">
+       <h3 class="title is-5">Abilities</h3>
+@foreach (var ability in SelectedUnit.Abilities)
+      {
+   <div class="mb-3 pb-3 border-bottom">
+   <p class="has-text-weight-bold">
+           @ability.Name
+          <span class="tag @(ability.Type == "faction" ? "is-info" : "is-warning") is-small ml-2">@ability.Type</span>
+       </p>
+       <p class="is-size-7">@ability.Description</p>
+            </div>
+            }
+         </div>
+     }
+
+              <!-- Wargear Options -->
+    @if (SelectedUnit.WargearOptions.Any())
+     {
+               <div class="box mb-4">
+  <h3 class="title is-5">Wargear Options</h3>
+             @foreach (var option in SelectedUnit.WargearOptions)
+         {
+       <div class="mb-4 pb-3 border-bottom">
+   <p class="has-text-weight-bold">@option.Name</p>
+       <p class="is-size-7 mb-2">@option.Description</p>
+            <div class="tags">
+      @foreach (var choice in option.Options)
+    {
+             <span class="tag is-light">@choice</span>
+     }
+    </div>
+   @if (!string.IsNullOrEmpty(option.SelectionLimit))
+      {
+        <p class="is-size-7 has-text-grey-light mt-1">Limit: @option.SelectionLimit</p>
+              }
+ @if (option.PointsCost > 0)
+     {
+                <p class="is-size-7 has-text-grey-light">+@option.PointsCost pts</p>
+        }
+  </div>
+      }
+         </div>
+      }
+            }
+        </section>
+        <footer class="modal-card-foot">
+  <button class="button" @onclick="OnClose">Close</button>
+        </footer>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Unit? SelectedUnit { get; set; }
+
+    [Parameter]
+    public bool IsOpen { get; set; }
+
+    [Parameter]
+    public bool InitialWarlordState { get; set; } = false;
+
+    [Parameter]
+    public Detachment? SelectedDetachment { get; set; }
+
+    [Parameter]
+    public EventCallback<(string enhancementId, string enhancementName, int enhancementPoints, string enhancementDescription)> OnEnhancementSelected { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnWarlordSelected { get; set; }
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    private List<Enhancement> AvailableEnhancements => SelectedDetachment?.Enhancements ?? new();
+    private string SelectedEnhancementId { get; set; } = string.Empty;
+    private bool IsWarlordSelected { get; set; } = false;
+    
+    private bool IsCharacter => SelectedUnit?.Category == "Characters";
+
+    protected override void OnParametersSet()
+    {
+    // Load warlord state from parameter
+     if (IsOpen)
+      {
+        SelectedEnhancementId = string.Empty;
+  IsWarlordSelected = InitialWarlordState;
+         }
+    }
+
+    private async Task SelectEnhancement(string enhancementId)
+    {
+        SelectedEnhancementId = enhancementId;
+        
+        // Notify parent with enhancement selection
+        if (!string.IsNullOrEmpty(enhancementId))
+        {
+ var selectedEnhance = AvailableEnhancements.FirstOrDefault(e => e.Id == enhancementId);
+      if (selectedEnhance != null)
+            {
+     await OnEnhancementSelected.InvokeAsync((enhancementId, selectedEnhance.Name, selectedEnhance.Points, selectedEnhance.Description));
+        }
+        }
+        else
+        {
+  // Clear enhancement if "No Enhancement" selected
+  await OnEnhancementSelected.InvokeAsync((string.Empty, string.Empty, 0, string.Empty));
+   }
+    }
+}

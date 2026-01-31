@@ -1,0 +1,373 @@
+/* Build List Step Styles */
+
+.build-list-container {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.build-list-container .title {
+    color: #2c3e50;
+}
+
+.info-bar {
+    background: #f5f5f5;
+    padding: 1rem;
+    border-radius: 6px;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.unit-list {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.unit-category {
+    margin-bottom: 0.5rem;
+}
+
+.unit-category-toggle {
+    width: 100%;
+    padding: 1rem;
+    background-color: #f0f0f0;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    color: #363636;
+    transition: all 0.2s ease;
+}
+
+.unit-category-toggle:hover {
+    background-color: #e8e8e8;
+    border-color: #3273dc;
+}
+
+.category-name {
+    flex: 1;
+}
+
+.category-units {
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    background-color: #fafafa;
+    border-left: 3px solid #3273dc;
+    animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        max-height: 1000px;
+    }
+}
+
+.unit-list .box {
+    margin-bottom: 0.75rem;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+/* Responsive */
+@media screen and (max-width: 1023px) {
+    .build-list-container {
+        padding: 1rem;
+    }
+
+    .columns {
+        flex-direction: column;
+    }
+
+    .column {
+        width: 100% !important;
+    }
+
+    .unit-list {
+        max-height: 400px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .build-list-container {
+        padding: 0.75rem;
+    }
+
+    .build-list-container .title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .info-bar {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .level-right .buttons {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .button {
+        font-size: 0.875rem;
+    }
+
+    table {
+        font-size: 0.875rem;
+    }
+
+    .level {
+        flex-direction: column;
+    }
+
+    .level-left,
+    .level-right {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .unit-category-toggle {
+        padding: 0.75rem;
+        font-size: 0.95rem;
+    }
+
+    .category-units {
+        padding-left: 1rem;
+    }
+}
+
+/* Unit Card Styling */
+::deep .unit-card {
+    transition: all 0.2s ease;
+    cursor: default;
+}
+
+::deep .unit-card:hover {
+    box-shadow: 0 4px 8px rgba(10, 10, 10, 0.15);
+    transform: translateY(-2px);
+}
+
+::deep .unit-card-content {
+    flex: 1;
+    transition: color 0.2s ease;
+}
+
+::deep .unit-card-content:hover {
+    color: #3273dc;
+}
+
+::deep .unit-card-content p {
+    margin: 0;
+}
+
+/* Unit List Styling */
+::deep .unit-list {
+    max-height: 700px;
+    overflow-y: auto;
+}
+
+::deep .unit-list::-webkit-scrollbar {
+ width: 6px;
+}
+
+::deep .unit-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::deep .unit-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+::deep .unit-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Category Styling */
+::deep .unit-category {
+  margin-bottom: 0.5rem;
+}
+
+::deep .unit-category-toggle {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #f5f5f5;
+  border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    text-align: left;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+::deep .unit-category-toggle:hover {
+    background-color: #eeeeee;
+    border-color: #3273dc;
+    color: #3273dc;
+}
+
+::deep .category-name {
+    flex: 1;
+}
+
+::deep .category-units {
+    padding: 0.5rem 0;
+    animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+  transform: translateY(-10px);
+    }
+    to {
+  opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Info Bar */
+::deep .info-bar {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* Build List Container */
+::deep .build-list-container {
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+/* Table Enhancements */
+::deep .table-container {
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid #e5e5e5;
+ border-radius: 4px;
+}
+
+::deep .table-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+::deep .table-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::deep .table-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+::deep .table-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+::deep table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+::deep table td {
+    vertical-align: middle;
+}
+
+/* Input Fields */
+::deep .input {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+::deep .input:focus {
+    border-color: #3273dc;
+    box-shadow: 0 0 0 0.125em rgba(50, 115, 220, 0.25);
+}
+
+/* Button Styling */
+::deep .button.is-primary {
+    transition: all 0.2s ease;
+}
+
+::deep .button.is-primary:hover:not(:disabled) {
+ box-shadow: 0 2px 8px rgba(50, 115, 220, 0.3);
+}
+
+::deep .button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Unit link styling */
+::deep .has-text-link {
+    color: #3273dc;
+    text-decoration: none;
+}
+
+::deep .has-text-link:hover {
+    color: #2366d1;
+    text-decoration: underline;
+}
+
+/* Columns */
+@media (max-width: 768px) {
+    ::deep .columns {
+        flex-direction: column;
+    }
+
+    ::deep .column.is-4,
+    ::deep .column.is-8 {
+      width: 100%;
+    }
+
+    ::deep .unit-list {
+        max-height: 400px;
+    }
+}
+
+/* List Category Section Styling */
+.list-category-section {
+    background-color: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 6px;
+    border-left: 4px solid #3273dc;
+    animation: slideIn 0.3s ease;
+}
+
+.list-category-section .title {
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #3273dc;
+    padding-bottom: 0.5rem;
+}
+
+.list-category-section .icon {
+    color: #3273dc;
+    margin-right: 0.5rem;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+     transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+  }
+}

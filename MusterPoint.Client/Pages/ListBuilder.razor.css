@@ -1,0 +1,84 @@
+/* List Builder Page Styles */
+
+.listbuilder-container {
+  padding: 2rem;
+max-width: 1400px;
+    margin: 0 auto;
+}
+
+.listbuilder-container .title {
+    margin-bottom: 2rem;
+    color: #2c3e50;
+}
+
+.unit-list {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.unit-list .box {
+    margin-bottom: 1rem;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.saved-lists {
+    display: flex;
+    flex-direction: column;
+}
+
+.saved-lists .box {
+    margin-bottom: 1rem;
+}
+
+/* List Builder Main Page Styles */
+
+.list-setup-container {
+    width: 100%;
+ min-height: 100vh;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 1023px) {
+    .listbuilder-container {
+        padding: 1rem;
+    }
+
+    .columns {
+  flex-direction: column;
+  }
+
+    .column {
+        width: 100% !important;
+  }
+
+    .unit-list {
+        max-height: 400px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .listbuilder-container {
+        padding: 0.75rem;
+    }
+
+    .listbuilder-container .title {
+ font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+  .level-right .buttons {
+     flex-wrap: wrap;
+        gap: 0.5rem;
+ }
+
+    .button {
+ font-size: 0.875rem;
+    }
+
+    table {
+   font-size: 0.875rem;
+    }
+}

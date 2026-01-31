@@ -1,0 +1,40 @@
+{
+  "id": "gladius-task-force",
+  "name": "Gladius Task Force",
+  "faction": "Space Marines",
+  "factionKeyword": "ADEPTUS ASTARTES",
+  "detachmentRule": {
+    "name": "Combat Doctrines",
+    "description": "The Codex Astartes has proven its worth as a superb treatise on warfare over countless battlefields, and has remained so even after ten thousand years. Many Space Marines hold its wisdom in awe, and exemplify its teachings, employing a flexible set of combat doctrines to eliminate their enemy. Few opponents can withstand the fury of such an onslaught.\n\nAt the start of your Command phase, you can select one of the Combat Doctrines listed below. Until the start of your next Command phase, that Combat Doctrine is active and its effects apply to all ADEPTUS ASTARTES units from your army. You can only select each Combat Doctrine once per battle.\n\nDevastator Doctrine: The Codex Astartes details the strategic value of overwhelming firepower applied to key targets while advancing into position to eliminate threats. This unit is eligible to shoot in a turn in which it Advanced.\n\nTactical Doctrine: As the warring armies close upon one another and vicious fire-fights erupt, the Codex lays out strategies for swiftly seizing the initiative and combining versatility with firepower. This unit is eligible to shoot and declare a charge in a turn in which it Fell Back.\n\nAssault Doctrine: The Codex Astartes leaves no doubt that the killing blow in most engagements must be delivered with a decisive close-quarters strike. It presents plentiful tactical means to achieve this end. This unit is eligible to declare a charge in a turn in which it Advanced."
+  },
+  "enhancements": [
+    {
+  "id": "artificer-armour",
+    "name": "Artificer Armour",
+      "points": 10,
+      "restrictions": "ADEPTUS ASTARTES model only",
+   "description": "Crafted by the Chapter's finest artificers, this suit of armour provides superior protection.\n\nThe bearer has a Save characteristic of 2+ and the Feel No Pain 5+ ability."
+    },
+    {
+   "id": "the-honour-vehement",
+    "name": "The Honour Vehement",
+      "points": 15,
+      "restrictions": "ADEPTUS ASTARTES model only",
+      "description": "This stanza is inscribed on thrice-blessed parchment and affixed to its bearers' wargear with a purity seal, there to inspire them to heroic acts of martial prowess.\n\nAdd 1 to the Attacks and Strength characteristics of the bearer's melee weapons. While the bearer is under the effects of the Assault Doctrine, add 2 to the Attacks and Strength characteristics of the bearers melee weapons instead."
+    },
+    {
+      "id": "adept-of-the-codex",
+   "name": "Adept of the Codex",
+      "points": 20,
+      "restrictions": "CAPTAIN model only",
+      "description": "An ardent student of the Codex Astartes, this commander epitomises its tactical genius, and the wisdom gleaned from its teachings guides their measured strategic responses amidst the fiercest battle.\n\nAt the start of your Command phase, if the bearer is on the battlefield, instead of selecting a Combat Doctrine to be active for your army, you can select the Tactical Doctrine. If you do, until the start of your next Command phase, that Combat Doctrine is active for the bearer's unit only, even if you have already selected that Combat Doctrine to be active for your army this battle."
+    },
+    {
+ "id": "fire-discipline",
+      "name": "Fire Discipline",
+      "points": 25,
+  "restrictions": "ADEPTUS ASTARTES model only",
+    "description": "This commander drills his warriors relentlessly; combined with the Adeptus Astartes' incredible reflexes, they produce a devastating rate of fire.\n\nWhile the bearer is leading a unit, ranged weapons equipped by models in that unit have the [SUSTAINED HITS 1] ability. In addition, while the bearer's unit is under the effects of the Devastator Doctrine, you can reroll Advance rolls made for that unit."
+    }
+  ]
+}

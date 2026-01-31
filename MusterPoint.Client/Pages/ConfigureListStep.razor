@@ -1,0 +1,159 @@
+@namespace MusterPoint.Client.Pages
+@using MusterPoint.Client.Models
+@using MusterPoint.Client.Services
+@inject DetachmentService DetachmentService
+@rendermode InteractiveWebAssembly
+
+<div class="configure-list-container">
+ <div class="level mb-5">
+  <div class="level-left">
+   <h1 class="title is-2 mb-0">Configure Your List</h1>
+        </div>
+    </div>
+
+ <div class="configure-box">
+    <p class="mb-5"><strong>Faction:</strong> <span class="tag is-info is-large">@SelectedFaction</span></p>
+
+   <div class="field mb-5">
+ <label class="label">List Name</label>
+      <div class="control">
+   <input type="text" class="input is-medium" placeholder="e.g., Competitive Build, Casual Patrol..." @bind="ListName" @bind:event="oninput" />
+         </div>
+    </div>
+
+   <div class="field mb-5">
+     <label class="label">Detachment</label>
+     <div class="control">
+        @if (isLoadingDetachments)
+    {
+         <p class="has-text-grey"><em>Loading detachments...</em></p>
+    }
+    else if (availableDetachments == null || !availableDetachments.Any())
+         {
+   <p class="has-text-grey">No detachments available for this faction.</p>
+        }
+        else
+       {
+  <div class="select is-fullwidth is-medium">
+           <select @bind="SelectedDetachment">
+     <option value="">-- Select a Detachment --</option>
+        @foreach (var detachment in availableDetachments)
+       {
+        <option value="@detachment.Id">@detachment.Name</option>
+   }
+  </select>
+    </div>
+   }
+   </div>
+   </div>
+
+  <div class="field mb-5">
+  <label class="label">Game Size</label>
+   <div class="control game-size-options">
+        <button class="game-size-button @(SelectedGameSize == 1000 ? "is-selected" : "")" @onclick="() => SelectGameSize(1000)">
+     <span class="size-name">Incursion</span>
+  <span class="size-points">1000 points</span>
+  </button>
+     <button class="game-size-button @(SelectedGameSize == 2000 ? "is-selected" : "")" @onclick="() => SelectGameSize(2000)">
+       <span class="size-name">Strike Force</span>
+<span class="size-points">2000 points</span>
+  </button>
+   <button class="game-size-button @(SelectedGameSize == 3000 ? "is-selected" : "")" @onclick="() => SelectGameSize(3000)">
+<span class="size-name">Onslaught</span>
+<span class="size-points">3000 points</span>
+ </button>
+      </div>
+   </div>
+   </div>
+
+    <div class="level mt-6">
+  <div class="level-left">
+ <button class="button is-large" @onclick="HandleBack">
+     <span class="icon">
+ <i class="fas fa-arrow-left"></i>
+      </span>
+       <span>Back</span>
+     </button>
+      </div>
+   <div class="level-right">
+  <button class="button is-primary is-large" disabled="@(string.IsNullOrWhiteSpace(ListName) || string.IsNullOrWhiteSpace(SelectedDetachment))" @onclick="HandleContinue">
+ <span class="icon">
+    <i class="fas fa-arrow-right"></i>
+             </span>
+<span>Continue</span>
+</button>
+   </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+  public string SelectedFaction { get; set; } = string.Empty;
+
+    [Parameter]
+    public string ListName { get; set; } = string.Empty;
+
+   [Parameter]
+    public string SelectedDetachment { get; set; } = string.Empty;
+
+   [Parameter]
+    public int SelectedGameSize { get; set; } = 2000;
+
+    [Parameter]
+    public EventCallback<string> OnListNameChanged { get; set; }
+
+ [Parameter]
+    public EventCallback<string> OnDetachmentChanged { get; set; }
+
+   [Parameter]
+    public EventCallback<int> OnGameSizeChanged { get; set; }
+
+    [Parameter]
+    public EventCallback OnBack { get; set; }
+
+    [Parameter]
+    public EventCallback OnContinue { get; set; }
+
+    private List<Detachment> availableDetachments = new();
+    private bool isLoadingDetachments = false;
+
+    protected override async Task OnInitializedAsync()
+   {
+    await LoadDetachments();
+    }
+
+    private async Task LoadDetachments()
+    {
+        try
+   {
+isLoadingDetachments = true;
+            availableDetachments = await DetachmentService.GetDetachmentsByFactionAsync(SelectedFaction);
+        }
+        catch (Exception ex)
+    {
+     Console.WriteLine($"Error loading detachments: {ex.Message}");
+        }
+      finally
+ {
+          isLoadingDetachments = false;
+     }
+    }
+
+    private async Task HandleBack()
+    {
+  await OnBack.InvokeAsync();
+    }
+
+    private async Task SelectGameSize(int size)
+    {
+    SelectedGameSize = size;
+        await OnGameSizeChanged.InvokeAsync(size);
+    }
+
+  private async Task HandleContinue()
+  {
+  await OnListNameChanged.InvokeAsync(ListName);
+        await OnDetachmentChanged.InvokeAsync(SelectedDetachment);
+    await OnContinue.InvokeAsync();
+    }
+}

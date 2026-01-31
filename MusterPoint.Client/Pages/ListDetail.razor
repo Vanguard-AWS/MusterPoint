@@ -1,0 +1,411 @@
+@page "/list/{ListId}"
+@using MusterPoint.Client.Models
+@using MusterPoint.Client.Services
+@inject ListStorageService ListStorageService
+@inject DatasheetService DatasheetService
+@inject NavigationManager NavigationManager
+@rendermode InteractiveWebAssembly
+
+<PageTitle>List Details - MusterPoint</PageTitle>
+
+<div class="list-detail-container">
+<div class="level mb-6">
+      <div class="level-left">
+    <div>
+ <h1 class="title is-2">@(currentList?.Name ?? "Loading...")</h1>
+          @if (currentList != null)
+            {
+    <p class="subtitle is-5">
+    <span class="tag is-light mr-2">@currentList.Faction</span>
+    <span class="tag is-success">@currentList.CalculateTotalPoints() / 2000 pts</span>
+      </p>
+         }
+       </div>
+     </div>
+        <div class="level-right">
+            <div class="buttons">
+        @if (currentList != null)
+   {
+  <a href="/listbuilder/@currentList.Id" class="button is-primary">
+       <span class="icon">
+    <i class="fas fa-edit"></i>
+     </span>
+           <span>Edit List</span>
+     </a>
+         }
+       <a href="/lists" class="button is-light">
+         <span class="icon">
+         <i class="fas fa-arrow-left"></i>
+         </span>
+   <span>Back</span>
+   </a>
+    </div>
+        </div>
+    </div>
+
+    @if (isLoading)
+    {
+    <div class="box">
+   <p class="has-text-grey"><em>Loading list details...</em></p>
+ </div>
+    }
+    else if (currentList == null || !currentList.Entries.Any())
+    {
+        <div class="box">
+       <p class="has-text-grey has-text-centered py-5">This list is empty.</p>
+        </div>
+    }
+    else
+  {
+        <div class="units-list">
+     <!-- Group units by category -->
+            @foreach (var categoryGroup in unitsByCategory)
+        {
+                <div class="category-section mb-6">
+        <h2 class="title is-4 mb-4 has-text-primary">
+           <span class="icon mr-2">
+      <i class="fas fa-folder"></i>
+    </span>
+    @categoryGroup.Key
+      </h2>
+
+         <div class="category-units">
+ @foreach (var entry in categoryGroup.Value)
+     {
+   var unit = allUnits?.FirstOrDefault(u => u.Id == entry.UnitId);
+         var isExpanded = expandedUnits.Contains(entry.Id);
+
+      <div class="box unit-entry mb-4">
+   <div class="level is-mobile">
+     <div class="level-left">
+        <div>
+         <h3 class="title is-5 mb-1">@entry.UnitName</h3>
+     @if (entry.IsWarlord)
+          {
+  <p class="is-size-7 has-text-warning mb-2">
+          <i class="fas fa-crown mr-1"></i><strong>Warlord</strong>
+   </p>
+     }
+ <p class="has-text-grey is-size-7">
+     @entry.ModelCount model@(entry.ModelCount != 1 ? "s" : "") - @entry.CalculatePoints() pts
+     </p>
+        </div>
+       </div>
+  <div class="level-right">
+        <button class="button is-ghost" @onclick="() => ToggleExpanded(entry.Id)">
+ <span class="icon">
+              <i class="fas @(isExpanded ? "fa-chevron-up" : "fa-chevron-down")"></i>
+     </span>
+         </button>
+      </div>
+         </div>
+
+                 @if (isExpanded && unit != null)
+           {
+    <div class="unit-details mt-4">
+ <!-- Enhancement (if character) -->
+     @if (!string.IsNullOrEmpty(entry.Enhancement) && unit.Category == "Characters")
+       {
+     <div class="box mb-4 enhancement-display">
+   <h3 class="subtitle is-6 has-text-weight-bold has-text-success">
+    <span class="icon mr-2">
+      <i class="fas fa-star"></i>
+   </span>
+    Enhancement Applied
+ </h3>
+ <p class="enhancement-name"><strong>@(entry.EnhancementName ?? "Unknown")</strong></p>
+    <p class="has-text-weight-bold is-size-7 mb-2 has-text-success">+@entry.EnhancementPoints pts</p>
+      <p class="is-size-7">@entry.EnhancementDescription</p>
+     </div>
+      }
+
+ <!-- Unit Composition -->
+           @if (unit.UnitComposition.Any())
+    {
+         <div class="mb-4">
+      <h3 class="subtitle is-6 has-text-weight-bold">Unit Composition</h3>
+            @foreach (var role in unit.UnitComposition)
+    {
+     <p class="is-size-7">
+                  @role.Role: @role.Count
+          </p>
+          }
+           </div>
+        }
+
+       <!-- Keywords -->
+           @if (unit.Keywords.Any())
+         {
+     <div class="mb-4">
+      <h3 class="subtitle is-6 has-text-weight-bold">Keywords</h3>
+    <div>
+  @foreach (var keyword in unit.Keywords)
+         {
+      <span class="tag is-light mr-2 mb-1">@keyword</span>
+     }
+            </div>
+     </div>
+           }
+
+ <!-- Unit Profiles (Stats) -->
+       @if (unit.Profiles.Any())
+     {
+        <div class="mb-4">
+  <h3 class="subtitle is-6 has-text-weight-bold">Unit Profiles</h3>
+   <div class="table-container">
+      <table class="table is-fullwidth is-size-7">
+   <thead>
+ <tr>
+        <th>Model</th>
+       <th>M</th>
+         <th>T</th>
+    <th>Sv</th>
+                <th>W</th>
+      <th>Ld</th>
+     <th>OC</th>
+             </tr>
+       </thead>
+       <tbody>
+     @foreach (var profile in unit.Profiles)
+      {
+     <tr>
+        <td class="has-text-weight-bold">@profile.Name</td>
+              <td>@profile.Movement</td>
+             <td>@profile.Toughness</td>
+   <td>@profile.Save</td>
+      <td>@profile.Wounds</td>
+      <td>@profile.Leadership</td>
+         <td>@profile.ObjectiveControl</td>
+            </tr>
+     }
+            </tbody>
+      </table>
+  </div>
+                </div>
+           }
+
+    <!-- Ranged Weapons -->
+   @if (unit.RangedWeapons.Any())
+  {
+            <div class="mb-4">
+      <h3 class="subtitle is-6 has-text-weight-bold">Ranged Weapons</h3>
+     <div class="table-container">
+    <table class="table is-fullwidth is-size-7">
+           <thead>
+           <tr>
+       <th>Weapon</th>
+         <th>Range</th>
+    <th>A</th>
+        <th>BS</th>
+            <th>S</th>
+     <th>AP</th>
+       <th>D</th>
+             </tr>
+        </thead>
+             <tbody>
+       @foreach (var weapon in unit.RangedWeapons)
+         {
+          <tr>
+           <td class="has-text-weight-bold">@weapon.Name</td>
+        <td>@weapon.Range</td>
+        <td>@weapon.Attacks</td>
+    <td>@weapon.BallisticSkill</td>
+<td>@weapon.Strength</td>
+     <td>@weapon.ArmorPenetration</td>
+          <td>@weapon.Damage</td>
+              </tr>
+  }
+       </tbody>
+            </table>
+               </div>
+     </div>
+ }
+
+ <!-- Melee Weapons -->
+      @if (unit.MeleeWeapons.Any())
+        {
+       <div class="mb-4">
+                  <h3 class="subtitle is-6 has-text-weight-bold">Melee Weapons</h3>
+           <div class="table-container">
+           <table class="table is-fullwidth is-size-7">
+       <thead>
+ <tr>
+       <th>Weapon</th>
+                  <th>A</th>
+         <th>WS</th>
+    <th>S</th>
+      <th>AP</th>
+     <th>D</th>
+     </tr>
+          </thead>
+        <tbody>
+          @foreach (var weapon in unit.MeleeWeapons)
+       {
+     <tr>
+         <td class="has-text-weight-bold">@weapon.Name</td>
+       <td>@weapon.Attacks</td>
+          <td>@weapon.WeaponSkill</td>
+    <td>@weapon.Strength</td>
+ <td>@weapon.ArmorPenetration</td>
+ <td>@weapon.Damage</td>
+            </tr>
+               }
+       </tbody>
+       </table>
+              </div>
+         </div>
+                }
+
+    <!-- Abilities -->
+@if (unit.Abilities.Any())
+       {
+           <div class="mb-4">
+ <h3 class="subtitle is-6 has-text-weight-bold">Abilities</h3>
+            @foreach (var ability in unit.Abilities)
+             {
+ <div class="mb-3">
+  <p class="has-text-weight-bold is-size-7">@ability.Name</p>
+     <p class="is-size-7">@ability.Description</p>
+     </div>
+       }
+        </div>
+      }
+
+        <!-- Wargear Options -->
+        @if (unit.WargearOptions.Any())
+   {
+   <div class="mb-4">
+    <h3 class="subtitle is-6 has-text-weight-bold">Wargear Options</h3>
+        @foreach (var option in unit.WargearOptions)
+     {
+       <div class="mb-3">
+                  <p class="has-text-weight-bold is-size-7">@option.Name</p>
+     <p class="is-size-7">@option.Description</p>
+             @if (option.SelectionLimit != null)
+       {
+        <p class="is-size-7 has-text-grey">Limit: @option.SelectionLimit</p>
+            }
+     </div>
+   }
+         </div>
+           }
+            </div>
+    }
+            </div>
+           }
+      </div>
+              </div>
+     }
+  </div>
+  }
+</div>
+
+@code {
+    [Parameter]
+    public string? ListId { get; set; }
+
+    private UserList? currentList;
+    private List<Unit>? allUnits;
+    private bool isLoading = true;
+    private HashSet<string> expandedUnits = new();
+    private Dictionary<string, List<ListEntry>>? unitsByCategory;
+
+    protected override async Task OnInitializedAsync()
+    {
+  if (string.IsNullOrWhiteSpace(ListId))
+     {
+     NavigationManager.NavigateTo("/lists");
+        return;
+        }
+
+        await LoadListAndUnits();
+    }
+
+    private async Task LoadListAndUnits()
+    {
+     try
+        {
+            isLoading = true;
+    
+            // Load all lists and find the one we need
+       var lists = await ListStorageService.GetAllListsAsync();
+    currentList = lists?.FirstOrDefault(l => l.Id == ListId);
+
+       // Load all units for detailed information
+         allUnits = await DatasheetService.GetAllUnitsAsync();
+
+  // Group units by category with custom order
+  if (currentList != null && allUnits != null)
+      {
+         unitsByCategory = OrganizeUnitsByCategory(currentList);
+            }
+
+     if (currentList == null)
+  {
+   NavigationManager.NavigateTo("/lists");
+    }
+     }
+catch (Exception ex)
+        {
+        Console.WriteLine($"Error loading list details: {ex.Message}");
+        }
+     finally
+        {
+         isLoading = false;
+ }
+    }
+
+    private Dictionary<string, List<ListEntry>> OrganizeUnitsByCategory(UserList list)
+    {
+   // Define custom category order
+  var categoryOrder = new[]
+        {
+  "Characters",
+ "Battleline",
+    "Dedicated Transports",
+          "Fortifications",
+    "Other"
+        };
+
+  unitsByCategory = new Dictionary<string, List<ListEntry>>();
+
+  foreach (var entry in list.Entries)
+       {
+ var unit = allUnits?.FirstOrDefault(u => u.Id == entry.UnitId);
+    if (unit != null)
+    {
+   var category = unit.Category ?? "Other";
+     
+    if (!unitsByCategory.ContainsKey(category))
+    {
+      unitsByCategory[category] = new List<ListEntry>();
+   }
+      
+   unitsByCategory[category].Add(entry);
+   }
+       }
+
+        // Sort the dictionary by category order
+        var sortedCategories = unitsByCategory
+    .OrderBy(x =>
+      {
+    var index = System.Array.IndexOf(categoryOrder, x.Key);
+  return index >= 0 ? index : categoryOrder.Length;
+ })
+   .ToDictionary(x => x.Key, x => x.Value);
+
+  return sortedCategories;
+    }
+
+    private void ToggleExpanded(string entryId)
+    {
+ if (expandedUnits.Contains(entryId))
+        {
+        expandedUnits.Remove(entryId);
+        }
+   else
+        {
+  expandedUnits.Add(entryId);
+    }
+    }
+}

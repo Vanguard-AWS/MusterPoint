@@ -1,0 +1,558 @@
+# MusterPoint AI Development Guidelines
+
+## Project Overview
+MusterPoint is a Warhammer 40K army list builder using Blazor WebAssembly (.NET 9) with a MongoDB backend. This file provides strict guidelines for AI-assisted development to maintain code quality and consistency.
+
+---
+
+## 1. CSS & Styling Framework
+
+### Primary Framework: Bulma
+- **Always use Bulma** (https://bulma.io/) as the primary CSS framework
+- Bulma version: 1.0+
+- Use Bulma components for all UI elements (buttons, forms, cards, etc.)
+- Leverage Bulma's utility classes for spacing, sizing, and layout
+
+### CSS Class-Based Only
+- **NEVER use inline styles** (style attribute)
+- **NEVER use <style> blocks** in Razor components
+- **ALWAYS use CSS classes** referencing external stylesheets
+- Store all component-specific styles in `.razor.css` files
+- Store global styles in `/wwwroot/app.css`
+
+### CSS Organization
+```
+MusterPoint/
+??? wwwroot/
+?   ??? app.css      # Global styles
+??? Components/
+    ??? MyComponent.razor.css      # Component-specific styles
+```
+
+### Example - CORRECT ?
+```razor
+@* MyComponent.razor *@
+<div class="my-component">
+    <h1 class="title is-3">Hello</h1>
+    <button class="button is-primary">Click me</button>
+</div>
+
+@* MyComponent.razor.css *@
+.my-component {
+    padding: 2rem;
+    background-color: #f5f5f5;
+}
+
+.my-component .title {
+    margin-bottom: 1rem;
+}
+```
+
+### Example - WRONG ?
+```razor
+@* DON'T DO THIS *@
+<div style="padding: 2rem; background-color: #f5f5f5;">
+    <h1 style="font-size: 2rem; margin-bottom: 1rem;">Hello</h1>
+    <button style="background-color: blue; color: white; padding: 0.5rem;">Click me</button>
+</div>
+
+<style>
+    .my-component { padding: 2rem; }
+</style>
+```
+
+---
+
+## 2. Solid Coding Principles (SOLID)
+
+### S - Single Responsibility Principle
+- Each class/service should have **one reason to change**
+- Services should handle one domain concern
+- Example:
+  - `AuthenticationService` ? handles auth logic only
+  - `UserRepository` ? handles user data access only
+  - `JwtTokenService` ? handles JWT token operations only
+
+### O - Open/Closed Principle
+- Classes should be **open for extension, closed for modification**
+- Use interfaces/abstractions for extensibility
+- Example:
+  ```csharp
+  public interface IUserRepository
+  {
+      Task<User> GetUserByIdAsync(int id);
+      Task CreateUserAsync(User user);
+  }
+  
+  public class UserRepository : IUserRepository { ... }
+  ```
+
+### L - Liskov Substitution Principle
+- Derived classes must be substitutable for base classes
+- Respect contracts defined by interfaces
+- Don't violate expected behavior in implementations
+
+### I - Interface Segregation Principle
+- Clients should not depend on interfaces they don't use
+- Create focused, specific interfaces
+- Example:
+  ```csharp
+  public interface IReadRepository<T>
+  {
+      Task<T> GetByIdAsync(int id);
+  }
+  
+  public interface IWriteRepository<T>
+  {
+      Task CreateAsync(T entity);
+      Task UpdateAsync(T entity);
+  }
+  ```
+
+### D - Dependency Inversion Principle
+- Depend on abstractions (interfaces), not concrete implementations
+- Use dependency injection throughout
+- Example:
+  ```csharp
+  public class ListsController : ControllerBase
+  {
+      private readonly IListStorageService _listService; // Interface, not concrete
+      
+      public ListsController(IListStorageService listService)
+      {
+  _listService = listService;
+}
+  }
+  ```
+
+---
+
+## 3. Clean Architecture
+
+### Layered Structure
+```
+MusterPoint/
+??? Controllers/    # API endpoints (thin layer)
+??? Services/   # Business logic
+??? Models/         # Domain entities
+??? Data/            # Data access (repositories)
+??? Components/        # UI components (Blazor)
+
+MusterPoint.Client/
+??? Pages/        # Blazor pages
+??? Services/             # Client-side services
+??? Models/ # Client DTOs/models
+??? Components/           # Reusable Razor components
+```
+
+### Separation of Concerns
+- **Controllers**: Route requests, delegate to services
+- **Services**: Implement business logic, coordinate repositories
+- **Repositories**: Data access only
+- **Models**: Plain data carriers (entities, DTOs)
+- **Components**: UI rendering only (no business logic)
+
+### Data Flow
+```
+Client ? Controller ? Service ? Repository ? Database
+         (routing)   (logic)    (data)
+```
+
+### Rules
+1. **Never put business logic in controllers** - Controllers should only route and delegate
+2. **Never put data access in services** - Services use repositories for data
+3. **Never put business logic in components** - Components should call services
+4. **Never reference controllers from services** - Services are independent
+5. **Never put SQL/MongoDB queries in services** - Queries belong in repositories
+
+---
+
+## 4. Blazor Component Guidelines
+
+### Component Structure
+```razor
+@page "/path"
+@using Namespace
+@inject ServiceType ServiceName
+
+<Component>
+    <!-- Template HTML using Bulma classes only -->
+</Component>
+
+@code {
+ // Properties
+    private string? variable;
+    
+    // Lifecycle methods
+    protected override async Task OnInitializedAsync() { }
+    
+    // Event handlers
+    private async Task HandleEvent() { }
+}
+```
+
+### Rules for Components
+- Use Bulma classes exclusively for styling
+- Keep components as presentation layer only
+- Call injected services for logic
+- Always use proper async/await patterns
+- Use parameter binding instead of code-behind logic
+
+### Example - CORRECT ?
+```razor
+@page "/lists"
+@inject ListStorageService ListService
+@rendermode InteractiveWebAssembly
+
+<div class="container mt-5">
+    <div class="columns">
+     <div class="column">
+            <h1 class="title">My Lists</h1>
+    @foreach (var list in lists)
+   {
+  <div class="box">
+   <h2 class="subtitle">@list.Name</h2>
+        <button class="button is-small" @onclick="() => DeleteList(list.Id)">
+     Delete
+   </button>
+     </div>
+      }
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<UserList> lists = new();
+    
+    protected override async Task OnInitializedAsync()
+    {
+ lists = await ListService.GetAllListsAsync();
+    }
+    
+    private async Task DeleteList(string id)
+    {
+        await ListService.DeleteListAsync(id);
+        lists = await ListService.GetAllListsAsync();
+    }
+}
+```
+
+---
+
+## 5. C# Coding Standards
+
+### Naming Conventions
+```csharp
+// Classes
+public class UserAuthenticationService { }
+
+// Interfaces (prefix with I)
+public interface IUserRepository { }
+
+// Private fields (leading underscore, camelCase)
+private readonly ILogger _logger;
+private string _username;
+
+// Properties (PascalCase)
+public string Username { get; set; }
+public int UserId { get; set; }
+
+// Methods (PascalCase)
+public async Task<User> GetUserByIdAsync(int id) { }
+public void LogError(string message) { }
+
+// Local variables (camelCase)
+var userName = "John";
+```
+
+### Code Organization
+```csharp
+public class MyService
+{
+    // 1. Constants
+    private const int DefaultTimeout = 30;
+    
+    // 2. Fields
+    private readonly ILogger _logger;
+    private readonly IRepository _repository;
+    
+    // 3. Constructor
+    public MyService(ILogger logger, IRepository repository)
+{
+        _logger = logger;
+        _repository = repository;
+    }
+    
+    // 4. Public methods
+    public async Task<T> GetDataAsync(int id) { }
+    
+    // 5. Private methods
+    private void ValidateInput(string input) { }
+}
+```
+
+### Async/Await
+- Always use async/await for I/O operations
+- Method names ending in `Async` for async methods
+- Never use `.Result` or `.Wait()` - use `await`
+- Use `CancellationToken` for long-running operations
+
+### Exception Handling
+```csharp
+try
+{
+    var result = await _repository.GetAsync(id);
+    _logger.LogInformation($"Retrieved item {id}");
+    return result;
+}
+catch (ArgumentException ex)
+{
+    _logger.LogError($"Invalid argument: {ex.Message}");
+    throw;
+}
+catch (Exception ex)
+{
+    _logger.LogError($"Unexpected error: {ex.Message}");
+    throw;
+}
+```
+
+---
+
+## 6. API Design
+
+### RESTful Endpoints
+```csharp
+[ApiController]
+[Route("api/[controller]")]
+[Authorize]
+public class ItemsController : ControllerBase
+{
+    // GET /api/items
+    [HttpGet]
+    public async Task<ActionResult<List<Item>>> GetAll() { }
+    
+    // GET /api/items/{id}
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Item>> GetById(int id) { }
+    
+    // POST /api/items
+    [HttpPost]
+    public async Task<ActionResult<Item>> Create(CreateItemRequest request) { }
+    
+    // PUT /api/items/{id}
+    [HttpPut("{id}")]
+    public async Task<ActionResult> Update(int id, UpdateItemRequest request) { }
+    
+ // DELETE /api/items/{id}
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> Delete(int id) { }
+}
+```
+
+### Response Format
+```csharp
+// Success
+return Ok(item);
+
+// Errors
+return BadRequest(new { message = "Invalid input" });
+return NotFound(new { message = "Item not found" });
+return Unauthorized();
+return StatusCode(500, new { message = "Internal error" });
+```
+
+---
+
+## 7. Testing Guidelines
+
+### Unit Test Structure
+```csharp
+public class AuthenticationServiceTests
+{
+private readonly IUserRepository _userRepository;
+  private readonly AuthenticationService _service;
+    
+    public AuthenticationServiceTests()
+    {
+        _userRepository = Substitute.For<IUserRepository>();
+   _service = new AuthenticationService(_userRepository);
+  }
+    
+    [Fact]
+    public async Task RegisterAsync_WithValidInput_CreatesUser()
+    {
+    // Arrange
+  var username = "testuser";
+        
+ // Act
+   var result = await _service.RegisterAsync(username, "password");
+        
+  // Assert
+        Assert.True(result.Success);
+        await _userRepository.Received().CreateUserAsync(Arg.Any<User>());
+    }
+}
+```
+
+---
+
+## 8. Documentation Standards
+
+### XML Comments
+```csharp
+/// <summary>
+/// Retrieves a user by their unique identifier.
+/// </summary>
+/// <param name="userId">The ID of the user to retrieve</param>
+/// <returns>The user object if found; null otherwise</returns>
+/// <exception cref="ArgumentException">Thrown when userId is invalid</exception>
+public async Task<User?> GetUserByIdAsync(int userId)
+{
+    // ...
+}
+```
+
+### Inline Comments
+- Explain WHY, not WHAT
+- Keep comments up-to-date with code
+- Remove commented-out code
+
+```csharp
+// GOOD: Explains business logic
+// Skip validation for system-generated requests
+if (!isSystemRequest)
+{
+    ValidateInput(input);
+}
+
+// BAD: States the obvious
+// Set the username to username
+_username = username;
+```
+
+---
+
+## 9. Git & Version Control
+
+### Commit Messages
+```
+[FEATURE] Add JWT token validation
+[BUG FIX] Resolve MongoDB connection timeout
+[REFACTOR] Clean up authentication service
+[DOCS] Update API documentation
+[CHORE] Update dependencies
+```
+
+### Branch Naming
+```
+feature/add-list-builder
+bugfix/fix-auth-token-expiry
+refactor/clean-service-layer
+```
+
+---
+
+## 10. Security
+
+### Required Practices
+- Never commit secrets (passwords, keys, connection strings)
+- Always validate and sanitize user input
+- Use parameterized queries (LINQ to MongoDB)
+- Implement proper authentication on protected endpoints
+- Use HTTPS in production
+- Hash passwords with strong algorithms
+- Validate JWT tokens on protected routes
+
+### Example - CORRECT ?
+```csharp
+// Protected endpoint
+[HttpGet]
+[Authorize]
+public async Task<ActionResult<UserList>> GetList(string id)
+{
+    var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    var list = await _listService.GetListByIdAsync(id, userId);
+    return Ok(list);
+}
+```
+
+---
+
+## 11. MongoDB & Data Access
+
+### Repository Pattern
+```csharp
+public interface IUserRepository
+{
+    Task<User?> GetUserByIdAsync(int id);
+    Task<User?> GetUserByUsernameAsync(string username);
+    Task<User> CreateUserAsync(User user);
+    Task UpdateUserAsync(User user);
+}
+
+public class UserRepository : IUserRepository
+{
+    private readonly IMongoCollection<User> _usersCollection;
+
+    public async Task<User> CreateUserAsync(User user)
+    {
+  user.Id = GenerateId();
+        user.CreatedAt = DateTime.UtcNow;
+   await _usersCollection.InsertOneAsync(user);
+        return user;
+    }
+}
+```
+
+### Rules
+- All queries through repositories only
+- Use LINQ (LINQ to MongoDB) not raw queries
+- Always use async patterns
+- Log data operations appropriately
+
+---
+
+## 12. Checklist Before Committing
+
+- [ ] No inline styles (style attributes)
+- [ ] All styling uses Bulma classes or `.razor.css` files
+- [ ] SOLID principles followed
+- [ ] Clean architecture layers respected
+- [ ] Async/await used correctly
+- [ ] Proper exception handling implemented
+- [ ] Code is documented with XML comments
+- [ ] No hardcoded secrets or passwords
+- [ ] Unit tests pass
+- [ ] Build succeeds with no warnings
+- [ ] Git commit message is descriptive
+
+---
+
+## Questions for AI Assistants
+
+When implementing features, ask yourself:
+1. Does this follow SOLID principles?
+2. Are secrets/sensitive data exposed?
+3. Are we using only Bulma classes for styling?
+4. Is business logic in the right layer?
+5. Are we using async/await correctly?
+6. Is the code testable and maintainable?
+7. Are we following the architecture diagram?
+8. Is this the simplest solution that works?
+
+---
+
+## Useful Resources
+
+- **Bulma Documentation**: https://bulma.io/
+- **ASP.NET Core Best Practices**: https://docs.microsoft.com/aspnet/core
+- **Blazor Documentation**: https://docs.microsoft.com/aspnet/core/blazor
+- **MongoDB C# Driver**: https://docs.mongodb.com/drivers/csharp
+- **SOLID Principles**: https://en.wikipedia.org/wiki/SOLID
+- **Clean Architecture**: https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
+
+---
+
+**Last Updated**: 2024
+**Project**: MusterPoint - Warhammer 40K Army List Builder

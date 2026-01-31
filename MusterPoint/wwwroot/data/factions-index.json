@@ -1,0 +1,10 @@
+{
+  "factions": [
+    {
+      "id": "space-marines",
+      "name": "Space Marines",
+      "path": "/data/factions/space-marines.json"
+    }
+  ],
+  "description": "Central index for all faction unit data. Each faction has its own JSON file for easy management and scalability."
+}

@@ -1,0 +1,19 @@
+@using MusterPoint.Client.Services
+@inject AuthService AuthService
+@inject NavigationManager NavigationManager
+@rendermode InteractiveWebAssembly
+
+<button class="button is-danger" @onclick="HandleLogout" title="Sign out of your account">
+    <span class="icon">
+        <i class="fas fa-sign-out-alt"></i>
+</span>
+    <span>Sign Out</span>
+</button>
+
+@code {
+  private async Task HandleLogout()
+    {
+        await AuthService.LogoutAsync();
+   NavigationManager.NavigateTo("/", replace: true);
+    }
+}

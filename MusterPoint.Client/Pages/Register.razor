@@ -1,0 +1,182 @@
+@page "/register"
+@using MusterPoint.Client.Models.Authentication
+@using MusterPoint.Client.Services
+@inject AuthService AuthService
+@inject NavigationManager NavigationManager
+@rendermode InteractiveWebAssembly
+
+<PageTitle>Register - MusterPoint</PageTitle>
+
+@if (isCheckingAuth)
+{
+    <div style="display: flex; align-items: center; justify-content: center; height: 100vh;">
+    <div style="text-align: center;">
+       <div class="loading-spinner"></div>
+ <p style="margin-top: 1rem; font-size: 1.1rem;">Checking authentication...</p>
+        </div>
+    </div>
+}
+else
+{
+    <div class="register-container">
+    <div class="register-wrapper">
+ <div class="register-box">
+  <h1 class="title is-3 has-text-centered mb-5">Create Account</h1>
+
+  @if (!string.IsNullOrEmpty(errorMessage))
+{
+  <div class="notification is-danger">
+  <button class="delete" @onclick="() => errorMessage = string.Empty"></button>
+    @errorMessage
+ </div>
+    }
+
+ @if (!string.IsNullOrEmpty(successMessage))
+   {
+  <div class="notification is-success">
+    <button class="delete" @onclick="() => successMessage = string.Empty"></button>
+  @successMessage
+      </div>
+  }
+
+  <form @onsubmit="HandleRegister">
+    <div class="field">
+    <label class="label">Username</label>
+   <div class="control">
+    <input type="text" class="input" id="username" @bind="username" required placeholder="Choose a username" />
+    </div>
+         </div>
+
+    <div class="field">
+  <label class="label">Email</label>
+  <div class="control">
+    <input type="email" class="input" id="email" @bind="email" required placeholder="your@email.com" />
+</div>
+ </div>
+
+      <div class="field">
+ <label class="label">Password</label>
+   <div class="control">
+       <input type="password" class="input" id="password" @bind="password" required placeholder="At least 8 characters" />
+ </div>
+  <p class="help">Password must be at least 8 characters long</p>
+  </div>
+
+    <div class="field">
+     <label class="label">Confirm Password</label>
+<div class="control">
+    <input type="password" class="input" id="confirmPassword" @bind="confirmPassword" required placeholder="Re-enter your password" />
+   </div>
+       </div>
+
+ <div class="field is-grouped is-grouped-centered mt-6">
+   <div class="control">
+<button type="submit" class="button is-success" disabled="@isLoading">
+           @if (isLoading)
+  {
+    <span class="icon">
+   <i class="fas fa-spinner fa-spin"></i>
+     </span>
+      <span>Creating Account...</span>
+  }
+   else
+     {
+       <span>Register</span>
+         }
+   </button>
+    </div>
+   </div>
+   </form>
+
+      <div class="has-text-centered mt-4">
+    <p>Already have an account? <NavLink href="/login" class="has-text-primary">Sign in here</NavLink></p>
+   </div>
+      }
+  </div>
+ </div>
+</div>
+}
+
+@code {
+  private string username = string.Empty;
+    private string email = string.Empty;
+    private string password = string.Empty;
+    private string confirmPassword = string.Empty;
+    private string errorMessage = string.Empty;
+    private string successMessage = string.Empty;
+private bool isLoading = false;
+    private bool isCheckingAuth = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+  // Check if user is already authenticated
+        isCheckingAuth = true;
+   try
+  {
+    var isAuthenticated = await AuthService.IsAuthenticatedAsync();
+      if (isAuthenticated)
+       {
+  // User already logged in, redirect to lists immediately
+NavigationManager.NavigateTo("/lists", replace: true);
+         // Don't show the register page
+  return;
+ }
+        }
+    catch (Exception ex)
+      {
+  errorMessage = $"Error checking authentication: {ex.Message}";
+        }
+        finally
+        {
+   isCheckingAuth = false;
+    }
+    }
+
+    private async Task HandleRegister()
+    {
+   if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(email) ||
+   string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(confirmPassword))
+        {
+   errorMessage = "All fields are required";
+ return;
+  }
+
+ if (password != confirmPassword)
+ {
+     errorMessage = "Passwords do not match";
+         return;
+   }
+
+    if (password.Length < 8)
+ {
+ errorMessage = "Password must be at least 8 characters";
+     return;
+        }
+
+   isLoading = true;
+
+        try
+        {
+var response = await AuthService.RegisterAsync(username, email, password, confirmPassword);
+
+       if (response.Success)
+       {
+     successMessage = "Registration successful! Redirecting to login...";
+ await Task.Delay(2000);
+     NavigationManager.NavigateTo("/login");
+  }
+   else
+  {
+ errorMessage = response.Message;
+   }
+     }
+  catch (Exception ex)
+    {
+ errorMessage = $"An error occurred: {ex.Message}";
+        }
+    finally
+     {
+  isLoading = false;
+      }
+    }
+}

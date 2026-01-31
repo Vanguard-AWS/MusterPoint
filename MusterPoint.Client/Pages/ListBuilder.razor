@@ -1,0 +1,121 @@
+@page "/listbuilder"
+@page "/listbuilder/{listId}"
+@using MusterPoint.Client.Models
+@using MusterPoint.Client.Services
+@inject ListStorageService ListStorageService
+@inject NavigationManager NavigationManager
+@rendermode InteractiveWebAssembly
+
+<PageTitle>Create List - MusterPoint</PageTitle>
+
+<div class="list-setup-container">
+    @if (currentStep == ListSetupStep.SelectFaction)
+    {
+      <SelectFactionStep SelectedFaction="selectedFaction" OnFactionSelected="HandleFactionSelected" />
+    }
+    else if (currentStep == ListSetupStep.ConfigureList)
+    {
+        <ConfigureListStep 
+         SelectedFaction="@selectedFaction"
+       ListName="@listName"
+      SelectedDetachment="@selectedDetachment"
+   SelectedGameSize="@selectedGameSize"
+     OnListNameChanged="HandleListNameChanged"
+   OnDetachmentChanged="HandleDetachmentChanged"
+   OnGameSizeChanged="HandleGameSizeChanged"
+    OnBack="() => currentStep = ListSetupStep.SelectFaction"
+      OnContinue="() => currentStep = ListSetupStep.BuildList" />
+    }
+    else if (currentStep == ListSetupStep.BuildList)
+    {
+<BuildListStep 
+   ListName="@listName"
+  SelectedFaction="@selectedFaction"
+   SelectedDetachment="@selectedDetachment"
+        PointsLimit="@selectedGameSize"
+  ListId="@ListId"
+       OnBack="() => currentStep = ListSetupStep.ConfigureList"
+  OnSave="HandleSaveList" />
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string? ListId { get; set; }
+
+    private enum ListSetupStep
+    {
+        SelectFaction,
+     ConfigureList,
+        BuildList
+    }
+
+    private ListSetupStep currentStep = ListSetupStep.SelectFaction;
+    private string selectedFaction = string.Empty;
+    private string selectedDetachment = string.Empty;
+    private string listName = string.Empty;
+    private int selectedGameSize = 2000;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Don't load lists during prerendering - wait for OnAfterRenderAsync
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+     if (firstRender && !string.IsNullOrWhiteSpace(ListId))
+        {
+       await LoadListForEditing(ListId);
+            StateHasChanged();
+}
+    }
+
+  private async Task LoadListForEditing(string listId)
+  {
+        try
+        {
+  var savedLists = await ListStorageService.GetAllListsAsync();
+          var listToEdit = savedLists?.FirstOrDefault(l => l.Id == listId);
+ 
+  if (listToEdit != null)
+        {
+       selectedFaction = listToEdit.Faction;
+    selectedDetachment = listToEdit.Detachment;
+ listName = listToEdit.Name;
+     currentStep = ListSetupStep.BuildList;
+ }
+        }
+        catch (Exception ex)
+   {
+    Console.WriteLine($"Error loading list: {ex.Message}");
+      }
+    }
+
+    private void HandleFactionSelected(string faction)
+    {
+        selectedFaction = faction;
+        selectedDetachment = string.Empty;
+        currentStep = ListSetupStep.ConfigureList;
+        StateHasChanged();
+    }
+
+    private void HandleListNameChanged(string name)
+    {
+        listName = name;
+    }
+
+    private void HandleDetachmentChanged(string detachment)
+    {
+    selectedDetachment = detachment;
+    }
+
+    private void HandleGameSizeChanged(int size)
+    {
+        selectedGameSize = size;
+    }
+
+    private async Task HandleSaveList()
+  {
+        NavigationManager.NavigateTo("/lists");
+ }
+}

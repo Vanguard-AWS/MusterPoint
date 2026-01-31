@@ -1,7 +1,149 @@
 ﻿@page "/"
+@using MusterPoint.Client.Services
+@inject AuthService AuthService
+@inject ListStorageService ListStorageService
+@inject NavigationManager NavigationManager
 
-<PageTitle>Home</PageTitle>
+<PageTitle>MusterPoint - Warhammer 40K Army List Builder</PageTitle>
 
-<h1>Hello, world!</h1>
+@if (isChecking)
+{
+    <div style="display: flex; align-items: center; justify-content: center; height: 100vh;">
+    <div style="text-align: center;">
+    <div class="loading-spinner"></div>
+ <p style="margin-top: 1rem; font-size: 1.1rem;">Loading...</p>
+        </div>
+    </div>
+}
+else if (!isAuthenticated)
+{
+    <section class="hero is-fullheight is-bold home-hero">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+     <!-- Main Logo/Title -->
+          <div class="mb-6">
+    <h1 class="title is-1 home-title">
+     <span class="home-title-accent">Muster</span>Point
+ </h1>
+      <p class="subtitle is-4 home-subtitle">
+     Build Your Perfect Warhammer 40K Army
+     </p>
+     </div>
 
-Welcome to your new app.
+        <!-- Description -->
+            <div class="columns is-centered mb-6">
+        <div class="column is-8-desktop is-10-tablet">
+<p class="is-size-5 home-description">
+  MusterPoint is your ultimate companion for building and managing Warhammer 40K army lists.
+         Create competitive rosters, organize your units, and perfect your strategy with ease.
+        </p>
+         </div>
+        </div>
+
+         <!-- Call-to-Action Buttons -->
+            <div class="buttons is-centered mt-6">
+    <a href="/login" class="button is-primary is-large">
+         <span class="icon">
+  <i class="fas fa-sign-in-alt"></i>
+          </span>
+              <span>Sign In</span>
+     </a>
+    <a href="/register" class="button is-info is-large is-outlined">
+        <span class="icon">
+       <i class="fas fa-user-plus"></i>
+          </span>
+        <span>Register</span>
+ </a>
+            </div>
+
+            <!-- Features Section -->
+            <div class="mt-6 pt-6">
+  <hr class="home-divider" />
+        <p class="is-size-6 has-text-grey mb-5">Why choose MusterPoint?</p>
+
+           <div class="columns is-centered is-multiline">
+          <div class="column is-3-desktop is-5-tablet">
+       <div class="home-feature">
+  <div class="icon is-large mb-3">
+             <i class="fas fa-list fa-2x has-text-primary"></i>
+          </div>
+                     <h3 class="is-size-6 has-text-weight-bold mb-2">Easy List Building</h3>
+     <p class="is-size-7 has-text-grey">Create and customize your army lists with an intuitive
+      interface</p>
+           </div>
+        </div>
+
+        <div class="column is-3-desktop is-5-tablet">
+     <div class="home-feature">
+      <div class="icon is-large mb-3">
+     <i class="fas fa-floppy-disk fa-2x has-text-info"></i>
+                 </div>
+      <h3 class="is-size-6 has-text-weight-bold mb-2">Cloud Sync</h3>
+        <p class="is-size-7 has-text-grey">Your lists are securely saved and accessible anywhere</p>
+          </div>
+    </div>
+
+           <div class="column is-3-desktop is-5-tablet">
+          <div class="home-feature">
+       <div class="icon is-large mb-3">
+           <i class="fas fa-chart-bar fa-2x has-text-success"></i>
+   </div>
+     <h3 class="is-size-6 has-text-weight-bold mb-2">Smart Analysis</h3>
+          <p class="is-size-7 has-text-grey">Get insights into your army composition and points</p>
+     </div>
+     </div>
+     </div>
+   </div>
+        </div>
+    </div>
+</section>
+}
+
+@code {
+    private bool isAuthenticated = false;
+    private bool isChecking = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+  isAuthenticated = await AuthService.IsAuthenticatedAsync();
+
+            // If authenticated, redirect immediately
+            if (isAuthenticated)
+ {
+    try
+              {
+          var userLists = await ListStorageService.GetAllListsAsync();
+
+           // If user has lists, navigate to /lists
+   if (userLists != null && userLists.Any())
+ {
+             NavigationManager.NavigateTo("/lists", replace: true);
+  }
+         // If no lists, navigate to /listbuilder to create one
+    else
+      {
+  NavigationManager.NavigateTo("/listbuilder", replace: true);
+        }
+  }
+          catch (Exception ex)
+      {
+    Console.WriteLine($"Error fetching lists: {ex.Message}");
+  // If there's an error, still redirect to lists
+        NavigationManager.NavigateTo("/lists", replace: true);
+     }
+          return; // Don't show the home page
+        }
+      }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error checking authentication: {ex.Message}");
+     isAuthenticated = false;
+        }
+     finally
+     {
+ isChecking = false;
+      }
+    }
+}

@@ -1,0 +1,115 @@
+@namespace MusterPoint.Client.Pages
+
+<div class="faction-selector-container">
+    <h1 class="title is-2 mb-6">Select Your Faction</h1>
+
+    <div class="faction-grid">
+        <!-- Imperium -->
+     <div class="faction-section">
+            <h2 class="title is-4 has-text-primary">Imperium</h2>
+         <div class="faction-options">
+        @foreach (var faction in ImperiumFactions)
+     {
+            <button class="faction-card @(SelectedFaction == faction ? "is-selected" : "")" 
+             @onclick="() => SelectFaction(faction)">
+            <span class="faction-name">@faction</span>
+       </button>
+        }
+            </div>
+        </div>
+
+        <!-- Chaos -->
+        <div class="faction-section">
+      <h2 class="title is-4 has-text-danger">Chaos</h2>
+<div class="faction-options">
+   @foreach (var faction in ChaosFactions)
+                {
+         <button class="faction-card @(SelectedFaction == faction ? "is-selected" : "")" 
+   @onclick="() => SelectFaction(faction)">
+  <span class="faction-name">@faction</span>
+</button>
+       }
+   </div>
+        </div>
+
+        <!-- Xenos -->
+      <div class="faction-section">
+      <h2 class="title is-4 has-text-warning">Xenos</h2>
+      <div class="faction-options">
+          @foreach (var faction in XenosFactions)
+          {
+                  <button class="faction-card @(SelectedFaction == faction ? "is-selected" : "")" 
+        @onclick="() => SelectFaction(faction)">
+            <span class="faction-name">@faction</span>
+                    </button>
+    }
+            </div>
+  </div>
+    </div>
+
+    <div class="level mt-6">
+        <div class="level-left"></div>
+        <div class="level-right">
+     <button class="button is-primary is-large" disabled="@(string.IsNullOrEmpty(SelectedFaction))" @onclick="HandleContinue">
+       <span class="icon">
+         <i class="fas fa-arrow-right"></i>
+       </span>
+             <span>Continue</span>
+           </button>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string SelectedFaction { get; set; } = string.Empty;
+
+  [Parameter]
+    public EventCallback<string> OnFactionSelected { get; set; }
+
+    private List<string> ImperiumFactions = new()
+    {
+        "Adepta Sororitas",
+      "Adeptus Custodes",
+  "Adeptus Mechanicus",
+        "Adeptus Titanicus",
+  "Astra Militarum",
+        "Grey Knights",
+        "Imperial Agents",
+  "Imperial Knights",
+"Space Marines"
+    };
+
+  private List<string> ChaosFactions = new()
+  {
+   "Chaos Daemons",
+   "Chaos Knights",
+  "Chaos Space Marines",
+"Death Guard",
+    "Emperor's Children",
+        "Thousand Sons",
+        "World Eaters"
+    };
+
+    private List<string> XenosFactions = new()
+    {
+        "Aeldari",
+     "Drukhari",
+    "Genestealer Cults",
+        "Leagues of Votann",
+        "Necrons",
+        "Orks",
+  "T'au Empire",
+        "Tyranids"
+    };
+
+    private async Task SelectFaction(string faction)
+    {
+        SelectedFaction = faction;
+ }
+
+    private async Task HandleContinue()
+    {
+        await OnFactionSelected.InvokeAsync(SelectedFaction);
+    }
+}
