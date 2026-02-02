@@ -1,0 +1,6452 @@
+[
+  {
+    "id": "aggressor-squad",
+    "name": "Aggressor Squad",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "IMPERIUM", "GRAVIS", "AGGRESSOR SQUAD" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 95,
+    "minSize": 3,
+    "maxSize": 6,
+    "unitComposition": [
+      {
+        "role": "Aggressor Sergeant",
+        "count": 1
+      },
+      {
+        "role": "Aggressors",
+        "count": "2-5"
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Aggressor",
+        "movement": "5\"",
+        "toughness": 6,
+        "save": "3+",
+        "wounds": 3,
+        "leadership": "6+",
+        "objectiveControl": 1
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Auto Boltstorm Gauntlets",
+        "range": "18\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "twin-linked"
+      },
+      {
+        "name": "Flamestorm Gauntlets",
+        "range": "12\"",
+        "attacks": "D6+1",
+        "ballisticSkill": "N/A",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "ignores cover, torrent, twin-linked"
+      },
+      {
+        "name": "Fragstorm Grenade Launcher",
+        "range": "18\"",
+        "attacks": "D6",
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "blast"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Twin Power Fists",
+        "attacks": 3,
+        "weaponSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -2,
+        "damage": 2,
+        "special": "twin-linked"
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Close-quarters Firepower",
+        "description": "Each time a model in this unit makes a ranged attack that targets the closest eligible target, improve the Armour Penetration characteristic of that attack by 1.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Upgrade Ranged Weapons",
+        "description": "All models in this unit can each have their flamestorm gauntlets replaced with 1 auto boltstorm gauntlets and 1 fragstorm grenade launcher.",
+        "options": [ "Auto Boltstorm Gauntlets and Fragstorm Grenade Launcher" ],
+        "pointsCost": 0
+      }
+    ]
+  },
+  {
+    "id": "assault-intercessors-with-jump-packs",
+    "name": "Assault Intercessors With Jump Packs",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "GRENADES", "JUMP PACK", "FLY", "IMPERIUM", "TACTICUS", "ASSAULT INTERCESSORS WITH JUMP PACKS" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 90,
+    "minSize": 5,
+    "maxSize": 10,
+    "unitComposition": [
+      {
+        "role": "Assault Intercessor Sergeant with Jump Pack",
+        "count": 1
+      },
+      {
+        "role": "Assault Intercessors with Jump Packs",
+        "count": "4-9"
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Assault Intercessor with Jump Pack",
+        "movement": "12\"",
+        "toughness": 4,
+        "save": "3+",
+        "wounds": 2,
+        "leadership": "6+",
+        "objectiveControl": 1
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Hand Flamer",
+        "range": "12\"",
+        "attacks": "D6",
+        "ballisticSkill": "N/A",
+        "strength": 3,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "pistol",
+        "special": "ignores cover, torrent"
+      },
+      {
+        "name": "Heavy Bolt Pistol",
+        "range": "18\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -1,
+        "damage": 1,
+        "type": "pistol"
+      },
+      {
+        "name": "Plasma Pistol - Standard",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 7,
+        "armorPenetration": -2,
+        "damage": 1,
+        "type": "pistol"
+      },
+      {
+        "name": "Plasma Pistol - Supercharge",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -3,
+        "damage": 2,
+        "type": "pistol",
+        "special": "hazardous"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Astartes Chainsword",
+        "attacks": 4,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -1,
+        "damage": 1
+      },
+      {
+        "name": "Power Weapon",
+        "attacks": 4,
+        "weaponSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -2,
+        "damage": 1
+      },
+      {
+        "name": "Power Fist",
+        "attacks": 3,
+        "weaponSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -2,
+        "damage": 2
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deep Strike",
+        "description": "Deep Strike",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Hammer of Wrath",
+        "description": "Each time this unit ends a Charge move, select one enemy unit within Engagement Range of it, then roll one D6 for each model in this unit that is within Engagement Range of that enemy unit: for each 4+, that enemy unit suffers 1 mortal wound.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Upgrade Ranged Weapon",
+        "description": "For every 5 models in this unit, 1 Assault Intercessor with Jump Pack's heavy bolt pistol can be replaced with 1 plasma pistol.",
+        "selectionLimit": "per 5 models",
+        "pointsCost": 0
+      },
+      {
+        "name": "Upgrade Sergeant Melee Weapon",
+        "description": "The Assault Intercessor Sergeant with Jump Pack's Astartes chainsword can be replaced with one of the following: 1 power weapon, 1 power fist",
+        "options": [ "Power Weapon", "Power Fist" ],
+        "pointsCost": 0
+      },
+      {
+        "name": "Upgrade Sergeant Ranged Weapon",
+        "description": "The Assault Intercessor Sergeant with Jump Pack's heavy bolt pistol can be replaced with one of the following: 1 hand flamer, 1 plasma pistol",
+        "options": [ "Hand Flamer", "Plasma Pistol - Standard" ],
+        "pointsCost": 0
+      }
+    ]
+  },
+  {
+    "id": "ballistus-dreadnought",
+    "name": "Ballistus Dreadnought",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "WALKER", "IMPERIUM", "DREADNOUGHT", "BALLISTUS DREADNOUGHT" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 150,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Ballistus Dreadnought",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Ballistus Dreadnought",
+        "movement": "8\"",
+        "toughness": 10,
+        "save": "2+",
+        "wounds": 12,
+        "leadership": "6+",
+        "objectiveControl": 4
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Ballistus Missile Launcher - Frag",
+        "range": "48\"",
+        "attacks": "2D6",
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "blast"
+      },
+      {
+        "name": "Ballistus Missile Launcher - Krak",
+        "range": "48\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 10,
+        "armorPenetration": -2,
+        "damage": "D6",
+        "type": ""
+      },
+      {
+        "name": "Ballistus Lascannon",
+        "range": "48\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 12,
+        "armorPenetration": -3,
+        "damage": "D6+1",
+        "type": ""
+      },
+      {
+        "name": "Twin Storm Bolter",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "twin-linked, rapid fire 2"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Armoured Feet",
+        "attacks": 5,
+        "weaponSkill": "3+",
+        "strength": 7,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D3",
+        "description": "Deadly Demise D3",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Ballistus Strike",
+        "description": "Each time this model makes a ranged attack that targets a unit that is not Below Half-strength, you can re-roll the Hit roll.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [],
+    "damageStates": [
+      {
+        "wounds": "1-4",
+        "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll."
+      }
+    ]
+  },
+  {
+    "id": "bladeguard-veteran-squad",
+    "name": "Bladeguard Veteran Squad",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "GRENADES", "IMPERIUM", "TACTICUS", "BLADEGUARD VETERAN SQUAD" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 80,
+    "minSize": 3,
+    "maxSize": 6,
+    "unitComposition": [
+      {
+        "role": "Bladeguard Veteran Sergeant",
+        "count": 1
+      },
+      {
+        "role": "Bladeguard Veterans",
+        "count": "2-5"
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Bladeguard Veteran",
+        "movement": "6\"",
+        "toughness": 4,
+        "save": "3+",
+        "wounds": 3,
+        "leadership": "6+",
+        "objectiveControl": 1,
+        "invulnerableSave": "4+"
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Heavy bolt pistol",
+        "range": "18\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -1,
+        "damage": 1,
+        "type": "pistol"
+      },
+      {
+        "name": "Neo-volkite pistol",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": 0,
+        "damage": 2,
+        "type": "pistol",
+        "special": "devastating wounds"
+      },
+      {
+        "name": "Plasma pistol � standard",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 7,
+        "armorPenetration": -2,
+        "damage": 1,
+        "type": "pistol"
+      },
+      {
+        "name": "Plasma pistol � supercharge",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -3,
+        "damage": 2,
+        "type": "pistol",
+        "special": "hazardous"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Master-crafted power weapon",
+        "attacks": 4,
+        "weaponSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -2,
+        "damage": 2
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Bladeguard",
+        "description": "At the start of the Fight phase, you can select one of the following abilities to apply to models in this unit until the end of the phase: Swords of the Chapter: Each time a model in this unit makes a melee attack, re-roll a Hit roll of 1. Shields of the Chapter: Each time an invulnerable saving throw is made for a model in this unit, re-roll a saving throw of 1.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Sergeant Ranged Weapon",
+        "description": "The Bladeguard Veteran Sergeant's heavy bolt pistol can be replaced with one of the following: 1 neo-volkite pistol, 1 plasma pistol",
+        "options": [ "Neo-volkite pistol", "Plasma pistol � standard" ],
+        "pointsCost": 0
+      }
+    ]
+  },
+  {
+    "id": "brutalis-dreadnought",
+    "name": "Brutalis Dreadnought",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "WALKER", "IMPERIUM", "DREADNOUGHT", "BRUTALIS DREADNOUGHT" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 160,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Brutalis Dreadnought",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Brutalis Dreadnought",
+        "movement": "8\"",
+        "toughness": 10,
+        "save": "2+",
+        "wounds": 12,
+        "leadership": "6+",
+        "objectiveControl": 4
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Brutalis bolt rifles",
+        "range": "24\"",
+        "attacks": 4,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -1,
+        "damage": 1,
+        "type": "",
+        "special": "twin-linked"
+      },
+      {
+        "name": "Twin heavy bolter",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "sustained hits 1, twin-linked"
+      },
+      {
+        "name": "Twin Icarus ironhail heavy stubber",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "anti-fly 4+, rapid fire 3, twin-linked"
+      },
+      {
+        "name": "Twin multi-melta",
+        "range": "18\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -4,
+        "damage": "D6",
+        "type": "",
+        "special": "melta 2, twin-linked"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Brutalis fists",
+        "attacks": 6,
+        "weaponSkill": "3+",
+        "strength": 12,
+        "armorPenetration": -2,
+        "damage": 3,
+        "special": "twin-linked"
+      },
+      {
+        "name": "Brutalis talons � strike",
+        "attacks": 6,
+        "weaponSkill": "3+",
+        "strength": 12,
+        "armorPenetration": -2,
+        "damage": 3,
+        "special": "twin-linked"
+      },
+      {
+        "name": "Brutalis talons � sweep",
+        "attacks": 10,
+        "weaponSkill": "3+",
+        "strength": 7,
+        "armorPenetration": -2,
+        "damage": 1,
+        "special": "twin-linked"
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D3",
+        "description": "Deadly Demise D3",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Brutalis Charge",
+        "description": "Each time this model ends a Charge move, select one enemy unit within Engagement Range of it and roll one D6: on a 2-3, that enemy unit suffers D3 mortal wounds; on a 4-5, that enemy unit suffers 3 mortal wounds; on a 6, that enemy unit suffers D3+3 mortal wounds.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Twin Heavy Bolter",
+        "description": "This model's twin heavy bolter can be replaced with 1 twin multi-melta.",
+        "options": [ "Twin multi-melta" ],
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Melee Weapons",
+        "description": "This model's Brutalis fists and Brutalis bolt rifles can be replaced with 1 Brutalis talons.",
+        "options": [ "Brutalis talons � strike" ],
+        "pointsCost": 0
+      }
+    ],
+    "damageStates": [
+      {
+        "wounds": "1-4",
+        "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll."
+      }
+    ]
+  },
+  {
+    "id": "centurion-assault-squad",
+    "name": "Centurion Assault Squad",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "IMPERIUM", "CENTURION", "CENTURION ASSAULT SQUAD" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 150,
+    "minSize": 3,
+    "maxSize": 6,
+    "unitComposition": [
+      {
+        "role": "Assault Centurion Sergeant",
+        "count": 1
+      },
+      {
+        "role": "Assault Centurions",
+        "count": "2-5"
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Assault Centurion",
+        "movement": "4\"",
+        "toughness": 7,
+        "save": "2+",
+        "wounds": 4,
+        "leadership": "6+",
+        "objectiveControl": 2
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Centurion bolters",
+        "range": "24\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 3, twin-linked"
+      },
+      {
+        "name": "Twin flamer",
+        "range": "12\"",
+        "attacks": "D6",
+        "ballisticSkill": "N/A",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "ignores cover, torrent, twin-linked"
+      },
+      {
+        "name": "Twin meltagun",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -4,
+        "damage": "D6",
+        "type": "",
+        "special": "melta 2, twin-linked"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Siege drills",
+        "attacks": 3,
+        "weaponSkill": "3+",
+        "strength": 10,
+        "armorPenetration": -2,
+        "damage": 3,
+        "special": "twin-linked"
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Annihilator Protocols",
+        "description": "Melee weapons equipped by models in this unit have the [SUSTAINED HITS 2] ability when targeting MONSTER, VEHICLE or FORTIFICATION units.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Flamer",
+        "description": "Any number of models can each have their twin flamer replaced with 1 twin meltagun.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Centurion Bolters",
+        "description": "Any number of models can each have their Centurion bolters replaced with 1 Centurion assault launcher.",
+        "pointsCost": 0
+      }
+    ],
+    "wargearAbilities": [
+      {
+        "name": "Centurion Assault Launcher",
+        "description": "The bearer has the Grenades keyword."
+      }
+    ]
+  },
+  {
+    "id": "centurion-devastator-squad",
+    "name": "Centurion Devastator Squad",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "IMPERIUM", "CENTURION", "CENTURION DEVASTATOR SQUAD" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 175,
+    "minSize": 3,
+    "maxSize": 6,
+    "unitComposition": [
+      {
+        "role": "Devastator Centurion Sergeant",
+        "count": 1
+      },
+      {
+        "role": "Devastator Centurions",
+        "count": "2-5"
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Devastator Centurion",
+        "movement": "4\"",
+        "toughness": 7,
+        "save": "2+",
+        "wounds": 4,
+        "leadership": "6+",
+        "objectiveControl": 2
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Centurion bolters",
+        "range": "24\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 3, twin-linked"
+      },
+      {
+        "name": "Centurion missile launcher",
+        "range": "36\"",
+        "attacks": "D3",
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -2,
+        "damage": "D3",
+        "type": "",
+        "special": "blast"
+      },
+      {
+        "name": "Grav-cannon",
+        "range": "24\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 6,
+        "armorPenetration": -1,
+        "damage": 3,
+        "type": "",
+        "special": "anti-vehicle 2+"
+      },
+      {
+        "name": "Twin heavy bolter",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "sustained hits 1, twin-linked"
+      },
+      {
+        "name": "Twin lascannon",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 12,
+        "armorPenetration": -3,
+        "damage": "D6+1",
+        "type": "",
+        "special": "twin-linked"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Centurion fists",
+        "attacks": 3,
+        "weaponSkill": "4+",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 2
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Decimator Protocols",
+        "description": "Each time a model in this unit makes a ranged attack, re-roll a Hit roll of 1. If the target of that attack is an enemy unit within range of an objective marker, you can re-roll the Hit roll instead.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Centurion Bolters",
+        "description": "Any number of models can each have their Centurion bolters replaced with 1 Centurion missile launcher.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Grav-cannon",
+        "description": "Any number of models can each have their grav-cannon replaced with one of the following: 1 twin heavy bolter, 1 twin lascannon",
+        "options": [ "Twin heavy bolter", "Twin lascannon" ],
+        "pointsCost": 0
+      }
+    ]
+  },
+  {
+    "id": "company-heroes",
+    "name": "Company Heroes",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "GRENADES", "IMPERIUM", "TACTICUS", "COMPANY HEROES" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 105,
+    "minSize": 4,
+    "maxSize": 4,
+    "unitComposition": [
+      {
+        "role": "Ancient",
+        "count": 1
+      },
+      {
+        "role": "Company Champion",
+        "count": 1
+      },
+      {
+        "role": "Company Veterans",
+        "count": 2
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Company Heroes",
+        "movement": "6\"",
+        "toughness": 4,
+        "save": "3+",
+        "wounds": 4,
+        "leadership": "6+",
+        "objectiveControl": 1
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Bolt Pistol",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "pistol"
+      },
+      {
+        "name": "Bolt rifle",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -1,
+        "damage": 1,
+        "type": ""
+      },
+      {
+        "name": "Master-crafted bolt rifle",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "2+",
+        "strength": 4,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "devastating wounds, rapid fire 1"
+      },
+      {
+        "name": "Master-crafted heavy bolter",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 3,
+        "type": "",
+        "special": "sustained hits 2"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Close combat weapon",
+        "attacks": 5,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1
+      },
+      {
+        "name": "Master-crafted power weapon",
+        "attacks": 6,
+        "weaponSkill": "2+",
+        "strength": 5,
+        "armorPenetration": -2,
+        "damage": 2,
+        "special": "precision"
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Astartes Banner",
+        "description": "While this unit contains an Ancient, add 1 to the Objective Control characteristic of models in this unit.",
+        "type": "unit"
+      },
+      {
+        "name": "Command Squad",
+        "description": "While a CHARACTER model is leading this unit, each time an attack targets this unit, subtract 1 from the Wound roll.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [],
+    "notes": "You must attach one CAPTAIN or CHAPTER MASTER model to this unit. If this is not possible, this unit does not take part in the battle and counts as having been destroyed."
+  },
+  {
+    "id": "desolation-squad",
+    "name": "Desolation Squad",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "GRENADES", "IMPERIUM", "TACTICUS", "DESOLATION SQUAD" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 200,
+    "minSize": 5,
+    "maxSize": 5,
+    "unitComposition": [
+      {
+        "role": "Desolation Sergeant",
+        "count": 1
+      },
+      {
+        "role": "Desolation Marines",
+        "count": 4
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Desolation Marine",
+        "movement": "6\"",
+        "toughness": 4,
+        "save": "3+",
+        "wounds": 2,
+        "leadership": "6+",
+        "objectiveControl": 1
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Bolt pistol",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "pistol"
+      },
+      {
+        "name": "Castellan launcher",
+        "range": "36\"",
+        "attacks": "D3",
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "blast, indirect fire"
+      },
+      {
+        "name": "Superfrag rocket launcher",
+        "range": "48\"",
+        "attacks": "D6+1",
+        "ballisticSkill": "4+",
+        "strength": 5,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "blast"
+      },
+      {
+        "name": "Superkrak rocket launcher",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "4+",
+        "strength": 10,
+        "armorPenetration": -2,
+        "damage": "D6+1",
+        "type": ""
+      },
+      {
+        "name": "Vengor launcher",
+        "range": "48\"",
+        "attacks": "D6",
+        "ballisticSkill": "2+",
+        "strength": 7,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "blast, indirect fire"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Close combat weapon",
+        "attacks": 3,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Targeter Optics",
+        "description": "Each time this unit Remains Stationary, until the start of your next Movement phase, ranged weapons equipped by models in this unit have the [IGNORES COVER] ability.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Rocket Launcher",
+        "description": "All of the models in this unit can each have their superfrag rocket launcher replaced with 1 superkrak rocket launcher.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Sergeant Weapon",
+        "description": "The Desolation Sergeant's superfrag rocket launcher or superkrak rocket launcher can be replaced with 1 vengor launcher.",
+        "pointsCost": 0
+      }
+    ]
+  },
+  {
+    "id": "devastator-squad",
+    "name": "Devastator Squad",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "GRENADES", "IMPERIUM", "DEVASTATOR SQUAD" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 120,
+    "minSize": 5,
+    "maxSize": 10,
+    "unitComposition": [
+      {
+        "role": "Devastator Sergeant",
+        "count": 1
+      },
+      {
+        "role": "Devastator Marines",
+        "count": "4-9"
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Devastator Marine",
+        "movement": "6\"",
+        "toughness": 4,
+        "save": "3+",
+        "wounds": 2,
+        "leadership": "6+",
+        "objectiveControl": 1
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Bolt pistol",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "pistol"
+      },
+      {
+        "name": "Boltgun",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": ""
+      },
+      {
+        "name": "Combi-weapon",
+        "range": "24\"",
+        "attacks": 1,
+        "ballisticSkill": "4+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "anti-infantry 4+, devastating wounds, rapid fire 1"
+      },
+      {
+        "name": "Grav-cannon",
+        "range": "24\"",
+        "attacks": 3,
+        "ballisticSkill": "4+",
+        "strength": 6,
+        "armorPenetration": -1,
+        "damage": 3,
+        "type": "",
+        "special": "anti-vehicle 2+"
+      },
+      {
+        "name": "Grav-pistol",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "pistol",
+        "special": "anti-vehicle 2+"
+      },
+      {
+        "name": "Heavy bolter",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "4+",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "sustained hits 1"
+      },
+      {
+        "name": "Lascannon",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "4+",
+        "strength": 12,
+        "armorPenetration": -3,
+        "damage": "D6+1",
+        "type": ""
+      },
+      {
+        "name": "Missile launcher � frag",
+        "range": "48\"",
+        "attacks": "D6",
+        "ballisticSkill": "4+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "blast"
+      },
+      {
+        "name": "Missile launcher � krak",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "4+",
+        "strength": 9,
+        "armorPenetration": -2,
+        "damage": "D6",
+        "type": ""
+      },
+      {
+        "name": "Multi-melta",
+        "range": "18\"",
+        "attacks": 2,
+        "ballisticSkill": "4+",
+        "strength": 9,
+        "armorPenetration": -4,
+        "damage": "D6",
+        "type": "",
+        "special": "melta 2"
+      },
+      {
+        "name": "Plasma cannon � standard",
+        "range": "36\"",
+        "attacks": "D3",
+        "ballisticSkill": "4+",
+        "strength": 7,
+        "armorPenetration": -2,
+        "damage": 1,
+        "type": "",
+        "special": "blast"
+      },
+      {
+        "name": "Plasma cannon � supercharge",
+        "range": "36\"",
+        "attacks": "D3",
+        "ballisticSkill": "4+",
+        "strength": 8,
+        "armorPenetration": -3,
+        "damage": 2,
+        "type": "",
+        "special": "blast, hazardous"
+      },
+      {
+        "name": "Plasma pistol � standard",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 7,
+        "armorPenetration": -2,
+        "damage": 1,
+        "type": "pistol"
+      },
+      {
+        "name": "Plasma pistol � supercharge",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -3,
+        "damage": 2,
+        "type": "pistol",
+        "special": "hazardous"
+      },
+      {
+        "name": "Storm bolter",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 2"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Astartes chainsword",
+        "attacks": 4,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -1,
+        "damage": 1
+      },
+      {
+        "name": "Close combat weapon",
+        "attacks": 2,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1
+      },
+      {
+        "name": "Power fist",
+        "attacks": 2,
+        "weaponSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -2,
+        "damage": 2
+      },
+      {
+        "name": "Power weapon",
+        "attacks": 3,
+        "weaponSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -2,
+        "damage": 1
+      },
+      {
+        "name": "Thunder hammer",
+        "attacks": 2,
+        "weaponSkill": "4+",
+        "strength": 8,
+        "armorPenetration": -2,
+        "damage": 2,
+        "special": "devastating wounds"
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Signum",
+        "description": "Each time this unit Remains Stationary, until the start of your next Movement phase, ranged weapons equipped by models in this unit have the [IGNORES COVER] ability.",
+        "type": "unit"
+      },
+      {
+        "name": "Armorium Cherub",
+        "description": "Once per battle, after making a Hit roll for a model in this unit, you can change that roll to an unmodified 6.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Heavy Weapon",
+        "description": "Up to 4 Devastator Marines can each have their boltgun replaced with one of the following: 1 grav-cannon, 1 heavy bolter, 1 lascannon, 1 missile launcher, 1 multi-melta, 1 plasma cannon",
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Sergeant Weapons",
+        "description": "The Devastator Sergeant's bolt pistol and boltgun can be replaced with two different weapons from the following list: 1 Astartes chainsword, 1 bolt pistol, 1 boltgun, 1 combi-weapon, 1 grav-pistol, 1 plasma pistol, 1 power fist, 1 power weapon, 1 thunder hammer",
+        "pointsCost": 0
+      }
+    ]
+  },
+  {
+    "id": "dreadnought",
+    "name": "Dreadnought",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "WALKER", "SMOKE", "IMPERIUM", "DREADNOUGHT" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 135,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Dreadnought",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Dreadnought",
+        "movement": "6\"",
+        "toughness": 9,
+        "save": "2+",
+        "wounds": 8,
+        "leadership": "6+",
+        "objectiveControl": 3
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Assault cannon",
+        "range": "24\"",
+        "attacks": 6,
+        "ballisticSkill": "3+",
+        "strength": 6,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "devastating wounds"
+      },
+      {
+        "name": "Heavy flamer",
+        "range": "12\"",
+        "attacks": "D6",
+        "ballisticSkill": "N/A",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 1,
+        "type": "",
+        "special": "ignores cover, torrent"
+      },
+      {
+        "name": "Heavy plasma cannon � standard",
+        "range": "36\"",
+        "attacks": "D3",
+        "ballisticSkill": "3+",
+        "strength": 7,
+        "armorPenetration": -2,
+        "damage": 2,
+        "type": "",
+        "special": "blast"
+      },
+      {
+        "name": "Heavy plasma cannon � supercharge",
+        "range": "36\"",
+        "attacks": "D3",
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -3,
+        "damage": 3,
+        "type": "",
+        "special": "blast, hazardous"
+      },
+      {
+        "name": "Missile launcher � frag",
+        "range": "48\"",
+        "attacks": "D6",
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "blast"
+      },
+      {
+        "name": "Missile launcher � krak",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -2,
+        "damage": "D6",
+        "type": ""
+      },
+      {
+        "name": "Multi-melta",
+        "range": "18\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -4,
+        "damage": "D6",
+        "type": "",
+        "special": "melta 2"
+      },
+      {
+        "name": "Storm bolter",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 2"
+      },
+      {
+        "name": "Twin lascannon",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 12,
+        "armorPenetration": -3,
+        "damage": "D6+1",
+        "type": "",
+        "special": "twin-linked"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Close combat weapon",
+        "attacks": 5,
+        "weaponSkill": "3+",
+        "strength": 6,
+        "armorPenetration": 0,
+        "damage": 1
+      },
+      {
+        "name": "Dreadnought combat weapon",
+        "attacks": 5,
+        "weaponSkill": "3+",
+        "strength": 12,
+        "armorPenetration": -2,
+        "damage": 3
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise 1",
+        "description": "Deadly Demise 1",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Wisdom of the Ancients",
+        "description": "While a friendly ADEPTUS ASTARTES INFANTRY unit is within 6\" of this model, each time a model in that unit makes an attack, re-roll a Hit roll of 1.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Assault Cannon",
+        "description": "This model's assault cannon can be replaced with one of the following: 1 heavy plasma cannon, 1 multi-melta, 1 twin lascannon",
+        "options": [ "Heavy plasma cannon � standard", "Multi-melta", "Twin lascannon" ],
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Melee Weapons",
+        "description": "This model's Dreadnought combat weapon and storm bolter can be replaced with one of the following: 1 missile launcher and 1 close combat weapon, 1 heavy flamer and 1 Dreadnought combat weapon",
+        "pointsCost": 0
+      }
+    ]
+  },
+  {
+    "id": "eliminator-squad",
+    "name": "Eliminator Squad",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "GRENADES", "IMPERIUM", "PHOBOS", "ELIMINATOR SQUAD" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 85,
+    "minSize": 3,
+    "maxSize": 3,
+    "unitComposition": [
+      {
+        "role": "Eliminator Sergeant",
+        "count": 1
+      },
+      {
+        "role": "Eliminators",
+        "count": 2
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Eliminator",
+        "movement": "6\"",
+        "toughness": 4,
+        "save": "3+",
+        "wounds": 2,
+        "leadership": "6+",
+        "objectiveControl": 1
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Bolt pistol",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "pistol"
+      },
+      {
+        "name": "Bolt sniper rifle",
+        "range": "36\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -2,
+        "damage": 3,
+        "type": "",
+        "special": "precision"
+      },
+      {
+        "name": "Instigator bolt carbine",
+        "range": "24\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -2,
+        "damage": 2,
+        "type": "",
+        "special": "precision"
+      },
+      {
+        "name": "Las fusil",
+        "range": "36\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -3,
+        "damage": "D6",
+        "type": ""
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Close combat weapon",
+        "attacks": 3,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Infiltrators",
+        "description": "Infiltrators",
+        "type": "core"
+      },
+      {
+        "name": "Stealth",
+        "description": "Stealth",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Reposition Under Covering Fire",
+        "description": "In your Shooting phase, after this unit has shot, if it contains an Eliminator Sergeant equipped with an instigator bolt carbine, this unit can make a Normal move. If it does so, until the end of the turn, this unit is not eligible to declare a charge.",
+        "type": "unit"
+      },
+      {
+        "name": "Mark the Target",
+        "description": "Each time this unit Remains Stationary, until the start of your next Movement phase, ranged weapons equipped by models in this unit have the [DEVASTATING WOUNDS] ability.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Sergeant Weapon",
+        "description": "The Eliminator Sergeant's bolt sniper rifle can be replaced with one of the following: 1 instigator bolt carbine, 1 las fusil",
+        "options": [ "Instigator bolt carbine", "Las fusil" ],
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Other Eliminators",
+        "description": "All Eliminators in this unit can each have their bolt sniper rifle replaced with 1 las fusil.",
+        "pointsCost": 0
+      }
+    ]
+  },
+  {
+    "id": "eradicator-squad",
+    "name": "Eradicator Squad",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "GRENADES", "IMPERIUM", "GRAVIS", "ERADICATOR SQUAD" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 90,
+    "minSize": 3,
+    "maxSize": 6,
+    "unitComposition": [
+      {
+        "role": "Eradicator Sergeant",
+        "count": 1
+      },
+      {
+        "role": "Eradicators",
+        "count": "2-5"
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Eradicator",
+        "movement": "5\"",
+        "toughness": 6,
+        "save": "3+",
+        "wounds": 3,
+        "leadership": "6+",
+        "objectiveControl": 1
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Bolt pistol",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "pistol"
+      },
+      {
+        "name": "Melta rifle",
+        "range": "18\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -4,
+        "damage": "D6",
+        "type": "",
+        "special": "melta 2"
+      },
+      {
+        "name": "Multi-melta",
+        "range": "18\"",
+        "attacks": 2,
+        "ballisticSkill": "4+",
+        "strength": 9,
+        "armorPenetration": -4,
+        "damage": "D6",
+        "type": "",
+        "special": "melta 2"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Close combat weapon",
+        "attacks": 3,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Total Obliteration",
+        "description": "Each time a ranged attack made by a model in this unit targets a MONSTER or VEHICLE model, you can re-roll the Hit roll, you can re-roll the Wound roll and you can re-roll the Damage roll.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Melta Rifle",
+        "description": "For every 3 models in this unit, 1 Eradicator's melta rifle can be replaced with 1 multi-melta.",
+        "selectionLimit": "per 3 models",
+        "pointsCost": 0
+      }
+    ]
+  },
+  {
+    "id": "firestrike-servo-turrets",
+    "name": "Firestrike Servo-turrets",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "ARTILLERY", "VEHICLE", "IMPERIUM", "FIRESTRIKE SERVO-TURRETS" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 75,
+    "minSize": 1,
+    "maxSize": 2,
+    "unitComposition": [
+      {
+        "role": "Firestrike Servo-turrets",
+        "count": "1-2"
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Firestrike Servo-turret",
+        "movement": "3\"",
+        "toughness": 6,
+        "save": "2+",
+        "wounds": 6,
+        "leadership": "6+",
+        "objectiveControl": 2
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Twin Firestrike autocannon",
+        "range": "48\"",
+        "attacks": 3,
+        "ballisticSkill": "2+",
+        "strength": 9,
+        "armorPenetration": -1,
+        "damage": 3,
+        "type": "",
+        "special": "twin-linked"
+      },
+      {
+        "name": "Twin Firestrike las-talon",
+        "range": "36\"",
+        "attacks": 2,
+        "ballisticSkill": "2+",
+        "strength": 10,
+        "armorPenetration": -3,
+        "damage": "D6+1",
+        "type": "",
+        "special": "twin-linked"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Close combat weapon",
+        "attacks": 3,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Sentinel Protocols",
+        "description": "Each time you select this unit for the Fire Overwatch Stratagem, hits are scored on unmodified Hit rolls of 4+ when resolving that Stratagem.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Las-talon",
+        "description": "Any number of models can each have their twin Firestrike las-talon replaced with 1 twin Firestrike autocannon.",
+        "pointsCost": 0
+      }
+    ]
+  },
+  {
+    "id": "gladiator-lancer",
+    "name": "Gladiator Lancer",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "SMOKE", "IMPERIUM", "GLADIATOR LANCER" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 160,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Gladiator Lancer",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Gladiator Lancer",
+        "movement": "10\"",
+        "toughness": 10,
+        "save": "3+",
+        "wounds": 12,
+        "leadership": "6+",
+        "objectiveControl": 3
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Fragstorm grenade launcher",
+        "range": "18\"",
+        "attacks": "D6",
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "blast"
+      },
+      {
+        "name": "Icarus rocket pod",
+        "range": "24\"",
+        "attacks": "D3",
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "anti-fly 2+"
+      },
+      {
+        "name": "Ironhail heavy stubber",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 3"
+      },
+      {
+        "name": "Lancer laser destroyer",
+        "range": "72\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 14,
+        "armorPenetration": -4,
+        "damage": "D6+3",
+        "type": "",
+        "special": "heavy"
+      },
+      {
+        "name": "Storm bolter",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 2"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Armoured hull",
+        "attacks": 3,
+        "weaponSkill": "4+",
+        "strength": 6,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D3",
+        "description": "Deadly Demise D3",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Aquilon Optics",
+        "description": "Each time this model is selected to shoot, you can re-roll one Hit roll, you can re-roll one Wound roll and you can re-roll one Damage roll when resolving those attacks.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Storm Bolters",
+        "description": "This model's 2 storm bolters can be replaced with 2 fragstorm grenade launchers.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Ironhail Heavy Stubber",
+        "description": "This model can be equipped with 1 ironhail heavy stubber.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Icarus Rocket Pod",
+        "description": "This model can be equipped with 1 Icarus rocket pod.",
+        "pointsCost": 0
+      }
+    ],
+    "damageStates": [
+      {
+        "wounds": "1-4",
+        "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll."
+      }
+    ]
+  },
+  {
+    "id": "gladiator-reaper",
+    "name": "Gladiator Reaper",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "SMOKE", "IMPERIUM", "GLADIATOR REAPER" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 160,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Gladiator Reaper",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Gladiator Reaper",
+        "movement": "10\"",
+        "toughness": 10,
+        "save": "3+",
+        "wounds": 12,
+        "leadership": "6+",
+        "objectiveControl": 3
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Icarus rocket pod",
+        "range": "24\"",
+        "attacks": "D3",
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "anti-fly 2+"
+      },
+      {
+        "name": "Ironhail heavy stubber",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 3"
+      },
+      {
+        "name": "Tempest bolter",
+        "range": "24\"",
+        "attacks": 4,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -1,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 4"
+      },
+      {
+        "name": "Twin heavy onslaught gatling cannon",
+        "range": "24\"",
+        "attacks": 12,
+        "ballisticSkill": "3+",
+        "strength": 6,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "devastating wounds, twin-linked"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Armoured hull",
+        "attacks": 3,
+        "weaponSkill": "4+",
+        "strength": 6,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D3",
+        "description": "Deadly Demise D3",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Rotating Death",
+        "description": "This model's twin heavy onslaught gatling cannon has the [SUSTAINED HITS 2] ability when targeting INFANTRY units.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Add Ironhail Heavy Stubber",
+        "description": "This model can be equipped with 1 ironhail heavy stubber.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Icarus Rocket Pod",
+        "description": "This model can be equipped with 1 Icarus rocket pod.",
+        "pointsCost": 0
+      }
+    ],
+    "damageStates": [
+      {
+        "wounds": "1-4",
+        "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll."
+      }
+    ]
+  },
+  {
+    "id": "gladiator-valiant",
+    "name": "Gladiator Valiant",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "SMOKE", "IMPERIUM", "GLADIATOR VALIANT" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 150,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Gladiator Valiant",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Gladiator Valiant",
+        "movement": "10\"",
+        "toughness": 10,
+        "save": "3+",
+        "wounds": 12,
+        "leadership": "6+",
+        "objectiveControl": 3
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Icarus rocket pod",
+        "range": "24\"",
+        "attacks": "D3",
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "anti-fly 2+"
+      },
+      {
+        "name": "Ironhail heavy stubber",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 3"
+      },
+      {
+        "name": "Multi-melta",
+        "range": "18\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -4,
+        "damage": "D6",
+        "type": "",
+        "special": "melta 2"
+      },
+      {
+        "name": "Twin las-talon",
+        "range": "36\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 10,
+        "armorPenetration": -3,
+        "damage": "D6+1",
+        "type": "",
+        "special": "twin-linked"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Armoured hull",
+        "attacks": 3,
+        "weaponSkill": "4+",
+        "strength": 6,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D3",
+        "description": "Deadly Demise D3",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Ferocious Assault",
+        "description": "Each time this model makes an attack with its twin las-talon that targets the closest eligible MONSTER or VEHICLE unit, add 1 to the Hit roll.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Add Ironhail Heavy Stubber",
+        "description": "This model can be equipped with 1 ironhail heavy stubber.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Icarus Rocket Pod",
+        "description": "This model can be equipped with 1 Icarus rocket pod.",
+        "pointsCost": 0
+      }
+    ],
+    "damageStates": [
+      {
+        "wounds": "1-4",
+        "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll."
+      }
+    ]
+  },
+  {
+    "id": "hellblaster-squad",
+    "name": "Hellblaster Squad",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "GRENADES", "IMPERIUM", "TACTICUS", "HELLBLASTER SQUAD" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 110,
+    "minSize": 5,
+    "maxSize": 10,
+    "unitComposition": [
+      {
+        "role": "Hellblaster Sergeant",
+        "count": 1
+      },
+      {
+        "role": "Hellblasters",
+        "count": "4-9"
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Hellblaster",
+        "movement": "6\"",
+        "toughness": 4,
+        "save": "3+",
+        "wounds": 2,
+        "leadership": "6+",
+        "objectiveControl": 1
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Bolt pistol",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "pistol"
+      },
+      {
+        "name": "Plasma incinerator � standard",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 7,
+        "armorPenetration": -2,
+        "damage": 1,
+        "type": "",
+        "special": "assault, heavy"
+      },
+      {
+        "name": "Plasma incinerator � supercharge",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -3,
+        "damage": 2,
+        "type": "",
+        "special": "assault, hazardous, heavy"
+      },
+      {
+        "name": "Plasma pistol � standard",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 7,
+        "armorPenetration": -2,
+        "damage": 1,
+        "type": "pistol"
+      },
+      {
+        "name": "Plasma pistol � supercharge",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -3,
+        "damage": 2,
+        "type": "pistol",
+        "special": "hazardous"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Close combat weapon",
+        "attacks": 3,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "For the Chapter!",
+        "description": "Each time a model in this unit is destroyed, roll one D6: on a 3+, do not remove it from play. The destroyed model can shoot after the attacking model's unit has finished making its attacks, and is then removed from play. When resolving these attacks, any Hazardous tests taken for that attack are automatically passed.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Sergeant Ranged Weapon",
+        "description": "The Hellblaster Sergeant's bolt pistol can be replaced with 1 plasma pistol.",
+        "pointsCost": 0
+      }
+    ]
+  },
+  {
+    "id": "inceptor-squad",
+    "name": "Inceptor Squad",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "JUMP PACK", "FLY", "IMPERIUM", "GRAVIS", "INCEPTOR SQUAD" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 120,
+    "minSize": 3,
+    "maxSize": 6,
+    "unitComposition": [
+      {
+        "role": "Inceptor Sergeant",
+        "count": 1
+      },
+      {
+        "role": "Inceptors",
+        "count": "2-5"
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Inceptor",
+        "movement": "10\"",
+        "toughness": 6,
+        "save": "3+",
+        "wounds": 3,
+        "leadership": "6+",
+        "objectiveControl": 1
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Assault bolters",
+        "range": "18\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "assault, pistol, sustained hits 2, twin-linked"
+      },
+      {
+        "name": "Plasma exterminators � standard",
+        "range": "18\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 7,
+        "armorPenetration": -2,
+        "damage": 2,
+        "type": "",
+        "special": "assault, pistol, twin-linked"
+      },
+      {
+        "name": "Plasma exterminators � supercharge",
+        "range": "18\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -3,
+        "damage": 3,
+        "type": "",
+        "special": "assault, hazardous, pistol, twin-linked"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Close combat weapon",
+        "attacks": 3,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deep Strike",
+        "description": "Deep Strike",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Meteoric Descent",
+        "description": "In your Movement phase, when this unit is set up on the battlefield using the Deep Strike ability, it can perform a meteoric descent. If it does, this unit can be set up anywhere on the battlefield that is more than 6\" horizontally away from all enemy units, but until the end of the turn, it is not eligible to declare a charge.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Assault Bolters",
+        "description": "All models in this unit can each have their assault bolters replaced with 1 plasma exterminators.",
+        "pointsCost": 0
+      }
+    ]
+  },
+  {
+    "id": "incursor-squad",
+    "name": "Incursor Squad",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "GRENADES", "SMOKE", "IMPERIUM", "PHOBOS", "INCURSOR SQUAD" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 80,
+    "minSize": 5,
+    "maxSize": 10,
+    "unitComposition": [
+      {
+        "role": "Incursor Sergeant",
+        "count": 1
+      },
+      {
+        "role": "Incursors",
+        "count": "4-9"
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Incursor",
+        "movement": "6\"",
+        "toughness": 4,
+        "save": "3+",
+        "wounds": 2,
+        "leadership": "6+",
+        "objectiveControl": 1
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Bolt pistol",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "pistol"
+      },
+      {
+        "name": "Occulus bolt carbine",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "assault, ignores cover"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Paired combat blades",
+        "attacks": 3,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -1,
+        "damage": 1,
+        "special": "sustained hits 1"
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Scouts 6\"",
+        "description": "Scouts 6\"",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Multi-spectrum Array",
+        "description": "In your Shooting phase, after this unit has shot, select one enemy unit that was hit by one or more attacks made by this unit this phase. Until the end of the phase, each time a friendly ADEPTUS ASTARTES unit makes an attack that targets that enemy unit, add 1 to the Hit roll.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Add Haywire Mine",
+        "description": "One Incursor can be equipped with 1 haywire mine.",
+        "pointsCost": 0
+      }
+    ],
+    "wargearAbilities": [
+      {
+        "name": "Haywire Mine",
+        "description": "Once per battle, at the start of any phase, you can select one enemy unit within 3\" of the bearer and roll one D6: on a 2+, that enemy unit suffers D3 mortal wounds, or 2D3 mortal wounds instead if it is a VEHICLE unit."
+      }
+    ]
+  },
+  {
+    "id": "infernus-squad",
+    "name": "Infernus Squad",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "GRENADES", "IMPERIUM", "TACTICUS", "INFERNUS SQUAD" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 90,
+    "minSize": 5,
+    "maxSize": 10,
+    "unitComposition": [
+      {
+        "role": "Infernus Sergeant",
+        "count": 1
+      },
+      {
+        "role": "Infernus Marines",
+        "count": "4-9"
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Infernus Marine",
+        "movement": "6\"",
+        "toughness": 4,
+        "save": "3+",
+        "wounds": 2,
+        "leadership": "6+",
+        "objectiveControl": 1
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Bolt pistol",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "pistol"
+      },
+      {
+        "name": "Pyreblaster",
+        "range": "12\"",
+        "attacks": "D6",
+        "ballisticSkill": "N/A",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 1,
+        "type": "",
+        "special": "ignores cover, torrent"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Close combat weapon",
+        "attacks": 3,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Incendiary Terror",
+        "description": "In your Shooting phase, after this unit has shot, you can select one enemy INFANTRY unit hit by one or more of those attacks made with a pyreblaster. That enemy unit must take a Battle-shock test, subtracting 1 from that test.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": []
+  },
+  {
+    "id": "infiltrator-squad",
+    "name": "Infiltrator Squad",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "GRENADES", "SMOKE", "IMPERIUM", "PHOBOS", "INFILTRATOR SQUAD" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 100,
+    "minSize": 5,
+    "maxSize": 10,
+    "unitComposition": [
+      {
+        "role": "Infiltrator Sergeant",
+        "count": 1
+      },
+      {
+        "role": "Infiltrators",
+        "count": "4-9"
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Infiltrator",
+        "movement": "6\"",
+        "toughness": 4,
+        "save": "3+",
+        "wounds": 2,
+        "leadership": "6+",
+        "objectiveControl": 1
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Bolt pistol",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "pistol"
+      },
+      {
+        "name": "Marksman bolt carbine",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "heavy"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Close combat weapon",
+        "attacks": 3,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Infiltrators",
+        "description": "Infiltrators",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Omni-scramblers",
+        "description": "Enemy units that are set up on the battlefield from Reserves cannot be set up within 12\" of this unit.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Add Helix Gauntlet",
+        "description": "1 Infiltrator can be equipped with 1 helix gauntlet.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Infiltrator Comms Array",
+        "description": "1 Infiltrator can be equipped with 1 Infiltrator comms array.",
+        "pointsCost": 0
+      }
+    ],
+    "wargearAbilities": [
+      {
+        "name": "Helix Gauntlet",
+        "description": "Models in the bearer's unit have the Feel No Pain 6+ ability."
+      },
+      {
+        "name": "Infiltrator Comms Array",
+        "description": "Each time you target the bearer's unit with a Stratagem, roll one D6: on a 5+, you gain 1CP."
+      }
+    ]
+  },
+  {
+    "id": "invader-atv",
+    "name": "Invader ATV",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "MOUNTED", "GRENADES", "IMPERIUM", "INVADER ATV" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 60,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Invader ATV",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Invader ATV",
+        "movement": "12\"",
+        "toughness": 5,
+        "save": "3+",
+        "wounds": 8,
+        "leadership": "6+",
+        "objectiveControl": 2
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Bolt pistol",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "pistol"
+      },
+      {
+        "name": "Multi-melta",
+        "range": "18\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -4,
+        "damage": "D6",
+        "type": "",
+        "special": "melta 2"
+      },
+      {
+        "name": "Onslaught gatling cannon",
+        "range": "24\"",
+        "attacks": 8,
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "devastating wounds"
+      },
+      {
+        "name": "Twin bolt rifle",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -1,
+        "damage": 1,
+        "type": "",
+        "special": "twin-linked"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Close combat weapon",
+        "attacks": 5,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Outrider Escort",
+        "description": "Once per turn, in your opponent's Shooting phase, when another friendly ADEPTUS ASTARTES MOUNTED unit within 6\" of this model is selected as the target of an attack, one model from your army with this ability can use it. If it does, after that enemy unit has finished making its attacks, that model can shoot as if it were your Shooting phase, but when resolving those attacks it can only target that enemy unit (and only if it is an eligible target).",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Onslaught Gatling Cannon",
+        "description": "This model's onslaught gatling cannon can be replaced with 1 multi-melta.",
+        "pointsCost": 0
+      }
+    ]
+  },
+  {
+    "id": "invictor-tactical-warsuit",
+    "name": "Invictor Tactical Warsuit",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "WALKER", "IMPERIUM", "PHOBOS", "INVICTOR TACTICAL WARSUIT" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 125,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Invictor Tactical Warsuit",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Invictor Tactical Warsuit",
+        "movement": "8\"",
+        "toughness": 8,
+        "save": "3+",
+        "wounds": 12,
+        "leadership": "6+",
+        "objectiveControl": 4
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Fragstorm grenade launcher",
+        "range": "18\"",
+        "attacks": "D6",
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "blast"
+      },
+      {
+        "name": "Heavy bolter",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "sustained hits 1"
+      },
+      {
+        "name": "Incendium cannon",
+        "range": "12\"",
+        "attacks": "D6+3",
+        "ballisticSkill": "N/A",
+        "strength": 6,
+        "armorPenetration": -1,
+        "damage": 1,
+        "type": "",
+        "special": "ignores cover, torrent"
+      },
+      {
+        "name": "Twin ironhail autocannon",
+        "range": "48\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -1,
+        "damage": 3,
+        "type": "",
+        "special": "twin-linked"
+      },
+      {
+        "name": "Twin ironhail heavy stubber",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 3, twin-linked"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Invictor fist",
+        "attacks": 5,
+        "weaponSkill": "3+",
+        "strength": 14,
+        "armorPenetration": -2,
+        "damage": 3
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D3",
+        "description": "Deadly Demise D3",
+        "type": "core"
+      },
+      {
+        "name": "Scouts 8\"",
+        "description": "Scouts 8\"",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Combat Support",
+        "description": "Once per turn, in your opponent's Shooting phase, when a friendly ADEPTUS ASTARTES PHOBOS INFANTRY unit within 6\" of this model is selected as the target of an attack, one model from your army with this ability can use it. If it does, after that enemy unit has finished making its attacks, that model can shoot as if it were your Shooting phase, but when resolving those attacks it can only target that enemy unit (and only if it is an eligible target).",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Incendium Cannon",
+        "description": "This model's incendium cannon can be replaced with 1 twin ironhail autocannon.",
+        "pointsCost": 0
+      }
+    ],
+    "damageStates": [
+      {
+        "wounds": "1-4",
+        "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll."
+      }
+    ]
+  },
+  {
+    "id": "land-raider",
+    "name": "Land Raider",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "SMOKE", "TRANSPORT", "IMPERIUM", "LAND RAIDER" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 220,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Land Raider",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Land Raider",
+        "movement": "10\"",
+        "toughness": 12,
+        "save": "2+",
+        "wounds": 16,
+        "leadership": "6+",
+        "objectiveControl": 5
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Godhammer lascannon",
+        "range": "48\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 12,
+        "armorPenetration": -3,
+        "damage": "D6+1",
+        "type": ""
+      },
+      {
+        "name": "Hunter-killer missile",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "2+",
+        "strength": 14,
+        "armorPenetration": -3,
+        "damage": "D6",
+        "type": "",
+        "special": "one shot"
+      },
+      {
+        "name": "Multi-melta",
+        "range": "18\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -4,
+        "damage": "D6",
+        "type": "",
+        "special": "melta 2"
+      },
+      {
+        "name": "Storm bolter",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 2"
+      },
+      {
+        "name": "Twin heavy bolter",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "sustained hits 1, twin-linked"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Armoured tracks",
+        "attacks": 6,
+        "weaponSkill": "4+",
+        "strength": 8,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D6",
+        "description": "Deadly Demise D6",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Assault Ramp",
+        "description": "Each time a unit disembarks from this model after it has made a Normal move, that unit is still eligible to declare a charge this turn.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Add Hunter-killer Missile",
+        "description": "This model can be equipped with 1 hunter-killer missile.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Multi-melta",
+        "description": "This model can be equipped with 1 multi-melta.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Storm Bolter",
+        "description": "This model can be equipped with 1 storm bolter.",
+        "pointsCost": 0
+      }
+    ],
+    "damageStates": [
+      {
+        "wounds": "1-5",
+        "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll."
+      }
+    ],
+    "transport": {
+      "capacity": 12,
+      "notes": "Each JUMP PACK, WULFEN, GRAVIS or TERMINATOR model takes up the space of 2 models and each CENTURION model takes up the space of 3 models."
+    }
+  },
+  {
+    "id": "land-raider-crusader",
+    "name": "Land Raider Crusader",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "SMOKE", "GRENADES", "TRANSPORT", "IMPERIUM", "LAND RAIDER", "LAND RAIDER CRUSADER" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 220,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Land Raider Crusader",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Land Raider Crusader",
+        "movement": "12\"",
+        "toughness": 12,
+        "save": "2+",
+        "wounds": 16,
+        "leadership": "6+",
+        "objectiveControl": 5
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Hurricane bolter",
+        "range": "24\"",
+        "attacks": 6,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 6, twin-linked"
+      },
+      {
+        "name": "Hunter-killer missile",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "2+",
+        "strength": 14,
+        "armorPenetration": -3,
+        "damage": "D6",
+        "type": "",
+        "special": "one shot"
+      },
+      {
+        "name": "Multi-melta",
+        "range": "18\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -4,
+        "damage": "D6",
+        "type": "",
+        "special": "melta 2"
+      },
+      {
+        "name": "Storm bolter",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 2"
+      },
+      {
+        "name": "Twin assault cannon",
+        "range": "24\"",
+        "attacks": 6,
+        "ballisticSkill": "3+",
+        "strength": 6,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "devastating wounds, twin-linked"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Armoured tracks",
+        "attacks": 6,
+        "weaponSkill": "4+",
+        "strength": 8,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D6",
+        "description": "Deadly Demise D6",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Assault Ramp",
+        "description": "Each time a unit disembarks from this model after it has made a Normal move, that unit is still eligible to declare a charge this turn.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Add Hunter-killer Missile",
+        "description": "This model can be equipped with 1 hunter-killer missile.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Multi-melta",
+        "description": "This model can be equipped with 1 multi-melta.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Storm Bolter",
+        "description": "This model can be equipped with 1 storm bolter.",
+        "pointsCost": 0
+      }
+    ],
+    "damageStates": [
+      {
+        "wounds": "1-5",
+        "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll."
+      }
+    ],
+    "transport": {
+      "capacity": 16,
+      "notes": "Each JUMP PACK, WULFEN, GRAVIS or TERMINATOR model takes up the space of 2 models and each CENTURION model takes up the space of 3 models."
+    }
+  },
+  {
+    "id": "land-raider-redeemer",
+    "name": "Land Raider Redeemer",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "SMOKE", "GRENADES", "TRANSPORT", "IMPERIUM", "LAND RAIDER", "LAND RAIDER REDEEMER" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 270,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Land Raider Redeemer",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Land Raider Redeemer",
+        "movement": "12\"",
+        "toughness": 12,
+        "save": "2+",
+        "wounds": 16,
+        "leadership": "6+",
+        "objectiveControl": 5
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Flamestorm cannon",
+        "range": "12\"",
+        "attacks": "D6+3",
+        "ballisticSkill": "N/A",
+        "strength": 6,
+        "armorPenetration": -2,
+        "damage": 2,
+        "type": "",
+        "special": "ignores cover, torrent"
+      },
+      {
+        "name": "Hunter-killer missile",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "2+",
+        "strength": 14,
+        "armorPenetration": -3,
+        "damage": "D6",
+        "type": "",
+        "special": "one shot"
+      },
+      {
+        "name": "Multi-melta",
+        "range": "18\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -4,
+        "damage": "D6",
+        "type": "",
+        "special": "melta 2"
+      },
+      {
+        "name": "Storm bolter",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 2"
+      },
+      {
+        "name": "Twin assault cannon",
+        "range": "24\"",
+        "attacks": 6,
+        "ballisticSkill": "3+",
+        "strength": 6,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "devastating wounds, twin-linked"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Armoured tracks",
+        "attacks": 6,
+        "weaponSkill": "4+",
+        "strength": 8,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D6",
+        "description": "Deadly Demise D6",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Assault Ramp",
+        "description": "Each time a unit disembarks from this model after it has made a Normal move, that unit is still eligible to declare a charge this turn.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Add Hunter-killer Missile",
+        "description": "This model can be equipped with 1 hunter-killer missile.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Multi-melta",
+        "description": "This model can be equipped with 1 multi-melta.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Storm Bolter",
+        "description": "This model can be equipped with 1 storm bolter.",
+        "pointsCost": 0
+      }
+    ],
+    "damageStates": [
+      {
+        "wounds": "1-5",
+        "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll."
+      }
+    ],
+    "transport": {
+      "capacity": 14,
+      "notes": "Each JUMP PACK, WULFEN, GRAVIS or TERMINATOR model takes up the space of 2 models and each CENTURION model takes up the space of 3 models."
+    }
+  },
+  {
+    "id": "outrider-squad",
+    "name": "Outrider Squad",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "MOUNTED", "GRENADES", "IMPERIUM", "OUTRIDER SQUAD" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 80,
+    "minSize": 3,
+    "maxSize": 6,
+    "unitComposition": [
+      {
+        "role": "Outrider Sergeant",
+        "count": 1
+      },
+      {
+        "role": "Outriders",
+        "count": "2-5"
+      },
+      {
+        "role": "Invader ATV",
+        "count": "0-1"
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Outrider",
+        "movement": "12\"",
+        "toughness": 5,
+        "save": "3+",
+        "wounds": 4,
+        "leadership": "6+",
+        "objectiveControl": 2
+      },
+      {
+        "name": "Invader ATV",
+        "movement": "12\"",
+        "toughness": 5,
+        "save": "3+",
+        "wounds": 8,
+        "leadership": "6+",
+        "objectiveControl": 2
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Bolt pistol",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "pistol"
+      },
+      {
+        "name": "Heavy bolt pistol",
+        "range": "18\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -1,
+        "damage": 1,
+        "type": "pistol"
+      },
+      {
+        "name": "Multi-melta",
+        "range": "18\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -4,
+        "damage": "D6",
+        "type": "",
+        "special": "melta 2"
+      },
+      {
+        "name": "Onslaught gatling cannon",
+        "range": "24\"",
+        "attacks": 8,
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "devastating wounds"
+      },
+      {
+        "name": "Twin bolt rifle",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -1,
+        "damage": 1,
+        "type": "",
+        "special": "twin-linked"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Astartes chainsword",
+        "attacks": 4,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -1,
+        "damage": 1
+      },
+      {
+        "name": "Close combat weapon",
+        "attacks": 5,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Thunderous Impact",
+        "description": "Each time a model in this unit makes a melee attack, if this unit made a Charge move this turn, improve the Strength and Damage characteristics of that attack by 1.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Onslaught Gatling Cannon",
+        "description": "An Invader ATV's onslaught gatling cannon can be replaced with 1 multi-melta.",
+        "pointsCost": 0
+      }
+    ]
+  },
+  {
+    "id": "predator-annihilator",
+    "name": "Predator Annihilator",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "SMOKE", "IMPERIUM", "PREDATOR ANNIHILATOR" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 135,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Predator Annihilator",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Predator Annihilator",
+        "movement": "10\"",
+        "toughness": 10,
+        "save": "3+",
+        "wounds": 11,
+        "leadership": "6+",
+        "objectiveControl": 3
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Predator twin lascannon",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 14,
+        "armorPenetration": -3,
+        "damage": "D6+1",
+        "type": "",
+        "special": "twin-linked"
+      },
+      {
+        "name": "Heavy bolter",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "sustained hits 1"
+      },
+      {
+        "name": "Hunter-killer missile",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "2+",
+        "strength": 14,
+        "armorPenetration": -3,
+        "damage": "D6",
+        "type": "",
+        "special": "one shot"
+      },
+      {
+        "name": "Lascannon",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 12,
+        "armorPenetration": -3,
+        "damage": "D6+1",
+        "type": ""
+      },
+      {
+        "name": "Storm bolter",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 2"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Armoured tracks",
+        "attacks": 3,
+        "weaponSkill": "4+",
+        "strength": 6,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D3",
+        "description": "Deadly Demise D3",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Annihilator",
+        "description": "Each time a ranged attack made by this model is allocated to a MONSTER or VEHICLE model, you can re-roll the Damage roll.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Twin Lascannon",
+        "description": "This model can be equipped with one of the following: 2 heavy bolters, 2 lascannons",
+        "options": [ "2 Heavy bolters", "2 Lascannons" ],
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Hunter-killer Missile",
+        "description": "This model can be equipped with 1 hunter-killer missile.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Storm Bolter",
+        "description": "This model can be equipped with 1 storm bolter.",
+        "pointsCost": 0
+      }
+    ],
+    "damageStates": [
+      {
+        "wounds": "1-4",
+        "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll."
+      }
+    ]
+  },
+  {
+    "id": "predator-destructor",
+    "name": "Predator Destructor",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "SMOKE", "IMPERIUM", "PREDATOR DESTRUCTOR" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 140,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Predator Destructor",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Predator Destructor",
+        "movement": "10\"",
+        "toughness": 10,
+        "save": "3+",
+        "wounds": 11,
+        "leadership": "6+",
+        "objectiveControl": 3
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Heavy bolter",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "sustained hits 1"
+      },
+      {
+        "name": "Hunter-killer missile",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "2+",
+        "strength": 14,
+        "armorPenetration": -3,
+        "damage": "D6",
+        "type": "",
+        "special": "one shot"
+      },
+      {
+        "name": "Lascannon",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 12,
+        "armorPenetration": -3,
+        "damage": "D6+1",
+        "type": ""
+      },
+      {
+        "name": "Predator autocannon",
+        "range": "48\"",
+        "attacks": 4,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -1,
+        "damage": 3,
+        "type": "",
+        "special": "rapid fire 2"
+      },
+      {
+        "name": "Storm bolter",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 2"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Armoured tracks",
+        "attacks": 3,
+        "weaponSkill": "4+",
+        "strength": 6,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D3",
+        "description": "Deadly Demise D3",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Destructor",
+        "description": "Each time this model makes a ranged attack that targets an INFANTRY unit, improve the Armour Penetration characteristic of that attack by 1.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Autocannon",
+        "description": "This model can be equipped with one of the following: 2 heavy bolters, 2 lascannons",
+        "options": [ "2 Heavy bolters", "2 Lascannons" ],
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Hunter-killer Missile",
+        "description": "This model can be equipped with 1 hunter-killer missile.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Storm Bolter",
+        "description": "This model can be equipped with 1 storm bolter.",
+        "pointsCost": 0
+      }
+    ],
+    "damageStates": [
+      {
+        "wounds": "1-4",
+        "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll."
+      }
+    ]
+  },
+  {
+    "id": "redemptor-dreadnought",
+    "name": "Redemptor Dreadnought",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "WALKER", "IMPERIUM", "DREADNOUGHT", "REDEMPTOR DREADNOUGHT" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 195,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Redemptor Dreadnought",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Redemptor Dreadnought",
+        "movement": "8\"",
+        "toughness": 10,
+        "save": "2+",
+        "wounds": 12,
+        "leadership": "6+",
+        "objectiveControl": 4
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Heavy flamer",
+        "range": "12\"",
+        "attacks": "D6",
+        "ballisticSkill": "N/A",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 1,
+        "type": "",
+        "special": "ignores cover, torrent"
+      },
+      {
+        "name": "Heavy onslaught gatling cannon",
+        "range": "24\"",
+        "attacks": 12,
+        "ballisticSkill": "3+",
+        "strength": 6,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "devastating wounds"
+      },
+      {
+        "name": "Icarus rocket pod",
+        "range": "24\"",
+        "attacks": "D3",
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "anti-fly 2+"
+      },
+      {
+        "name": "Macro plasma incinerator � standard",
+        "range": "36\"",
+        "attacks": "D6+1",
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -3,
+        "damage": 2,
+        "type": "",
+        "special": "blast"
+      },
+      {
+        "name": "Macro plasma incinerator � supercharge",
+        "range": "36\"",
+        "attacks": "D6+1",
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -4,
+        "damage": 3,
+        "type": "",
+        "special": "blast, hazardous"
+      },
+      {
+        "name": "Onslaught gatling cannon",
+        "range": "24\"",
+        "attacks": 8,
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "devastating wounds"
+      },
+      {
+        "name": "Twin fragstorm grenade launcher",
+        "range": "18\"",
+        "attacks": "D6",
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "blast, twin-linked"
+      },
+      {
+        "name": "Twin storm bolter",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 2, twin-linked"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Redemptor fist",
+        "attacks": 5,
+        "weaponSkill": "3+",
+        "strength": 12,
+        "armorPenetration": -2,
+        "damage": 3
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D3",
+        "description": "Deadly Demise D3",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Duty Eternal",
+        "description": "Each time an attack is allocated to this model, subtract 1 from the Damage characteristic of that attack.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Add Icarus Rocket Pod",
+        "description": "This model can be equipped with 1 Icarus rocket pod.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Heavy Flamer",
+        "description": "This model's heavy flamer can be replaced with 1 onslaught gatling cannon.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Heavy Onslaught Gatling Cannon",
+        "description": "This model's heavy onslaught gatling cannon can be replaced with 1 macro plasma incinerator.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Twin Fragstorm Grenade Launcher",
+        "description": "This model's twin fragstorm grenade launcher can be replaced with 1 twin storm bolter.",
+        "pointsCost": 0
+      }
+    ],
+    "damageStates": [
+      {
+        "wounds": "1-4",
+        "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll."
+      }
+    ]
+  },
+  {
+    "id": "reiver-squad",
+    "name": "Reiver Squad",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "GRENADES", "SMOKE", "IMPERIUM", "PHOBOS", "REIVER SQUAD" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 80,
+    "minSize": 5,
+    "maxSize": 10,
+    "unitComposition": [
+      {
+        "role": "Reiver Sergeant",
+        "count": 1
+      },
+      {
+        "role": "Reivers",
+        "count": "4-9"
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Reiver",
+        "movement": "6\"",
+        "toughness": 4,
+        "save": "3+",
+        "wounds": 2,
+        "leadership": "6+",
+        "objectiveControl": 1
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Bolt carbine",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "precision"
+      },
+      {
+        "name": "Special issue bolt pistol",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -1,
+        "damage": 1,
+        "type": "pistol",
+        "special": "precision"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Close combat weapon",
+        "attacks": 3,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1
+      },
+      {
+        "name": "Combat knife",
+        "attacks": 4,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -1,
+        "damage": 1,
+        "special": "precision"
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Scouts 6\"",
+        "description": "Scouts 6\"",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Fearsome Assault",
+        "description": "At the start of the Fight phase, each enemy unit within Engagement Range of one or more units with this ability must take a Battle-shock test, subtracting 1 from that test.",
+        "type": "unit"
+      },
+      {
+        "name": "Terror Troops",
+        "description": "While an enemy unit (excluding MONSTERS and VEHICLES) is within 3\" of one or more units with this ability, subtract 1 from the Objective Control characteristic of models in that enemy unit.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Melee Weapons",
+        "description": "All models in this unit can each have their combat knife replaced with 1 bolt carbine and 1 close combat weapon.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Sergeant Melee Weapon",
+        "description": "If the Reiver Sergeant is equipped with 1 bolt carbine, it can be equipped with 1 combat knife.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Reiver Grav-chute",
+        "description": "All models in this unit can each be equipped with 1 Reiver grav-chute.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Grapnel Launcher",
+        "description": "All models in this unit can each be equipped with 1 grapnel launcher.",
+        "pointsCost": 0
+      }
+    ],
+    "wargearAbilities": [
+      {
+        "name": "Grapnel Launcher",
+        "description": "Each time the bearer's unit makes a Normal, Advance, Fall Back or Charge move, ignore any vertical distance when determining the total distance the bearer can be moved during that move."
+      },
+      {
+        "name": "Reiver Grav-chute",
+        "description": "The bearer has the Deep Strike ability."
+      }
+    ]
+  },
+  {
+    "id": "repulsor",
+    "name": "Repulsor",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "SMOKE", "TRANSPORT", "IMPERIUM", "REPULSOR" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 180,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Repulsor",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Repulsor",
+        "movement": "10\"",
+        "toughness": 12,
+        "save": "3+",
+        "wounds": 16,
+        "leadership": "6+",
+        "objectiveControl": 5
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Heavy onslaught gatling cannon",
+        "range": "24\"",
+        "attacks": 12,
+        "ballisticSkill": "3+",
+        "strength": 6,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "devastating wounds"
+      },
+      {
+        "name": "Hunter-slayer missile",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "2+",
+        "strength": 14,
+        "armorPenetration": -3,
+        "damage": "D6",
+        "type": "",
+        "special": "indirect fire, one shot"
+      },
+      {
+        "name": "Las-talon",
+        "range": "36\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 10,
+        "armorPenetration": -3,
+        "damage": "D6+1",
+        "type": ""
+      },
+      {
+        "name": "Repulsor defensive array",
+        "range": "24\"",
+        "attacks": 18,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": ""
+      },
+      {
+        "name": "Twin heavy bolter",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "sustained hits 1, twin-linked"
+      },
+      {
+        "name": "Twin lascannon",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 12,
+        "armorPenetration": -3,
+        "damage": "D6+1",
+        "type": "",
+        "special": "twin-linked"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Armoured hull",
+        "attacks": 6,
+        "weaponSkill": "4+",
+        "strength": 8,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D6",
+        "description": "Deadly Demise D6",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Emergency Combat Embarkation",
+        "description": "Once per turn, in your opponent's Charge phase, after an enemy unit has selected targets for its charge but before it makes a Charge move, you can select one ADEPTUS ASTARTES unit from your army that was selected as a target of that charge. Provided that unit is not within Engagement Range of one or more enemy units and every model in that unit is within 3\" of this TRANSPORT, it can embark within this TRANSPORT. The charging unit can then select new targets for its charge.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Twin Heavy Bolter",
+        "description": "This model's twin heavy bolter can be replaced with 1 twin lascannon.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Heavy Onslaught Gatling Cannon",
+        "description": "This model's heavy onslaught gatling cannon can be replaced with 1 las-talon.",
+        "pointsCost": 0
+      }
+    ],
+    "damageStates": [
+      {
+        "wounds": "1-5",
+        "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll."
+      }
+    ],
+    "transport": {
+      "capacity": 14,
+      "notes": "Each JUMP PACK, WULFEN, GRAVIS or TERMINATOR model takes up the space of 2 models and each CENTURION model takes up the space of 3 models."
+    }
+  },
+  {
+    "id": "repulsor-executioner",
+    "name": "Repulsor Executioner",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "SMOKE", "TRANSPORT", "IMPERIUM", "REPULSOR EXECUTIONER" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 220,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Repulsor Executioner",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Repulsor Executioner",
+        "movement": "10\"",
+        "toughness": 12,
+        "save": "3+",
+        "wounds": 16,
+        "leadership": "6+",
+        "objectiveControl": 5
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Heavy laser destroyer",
+        "range": "72\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 16,
+        "armorPenetration": -4,
+        "damage": "D6+4",
+        "type": "",
+        "special": "heavy"
+      },
+      {
+        "name": "Heavy onslaught gatling cannon",
+        "range": "24\"",
+        "attacks": 12,
+        "ballisticSkill": "3+",
+        "strength": 6,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "devastating wounds"
+      },
+      {
+        "name": "Icarus rocket pod",
+        "range": "24\"",
+        "attacks": "D3",
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "anti-fly 2+"
+      },
+      {
+        "name": "Ironhail heavy stubber",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 3"
+      },
+      {
+        "name": "Macro plasma incinerator � standard",
+        "range": "36\"",
+        "attacks": "D6+1",
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -3,
+        "damage": 2,
+        "type": "",
+        "special": "blast"
+      },
+      {
+        "name": "Macro plasma incinerator � supercharge",
+        "range": "36\"",
+        "attacks": "D6+1",
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -4,
+        "damage": 3,
+        "type": "",
+        "special": "blast, hazardous"
+      },
+      {
+        "name": "Repulsor Executioner defensive array",
+        "range": "24\"",
+        "attacks": 10,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": ""
+      },
+      {
+        "name": "Twin heavy bolter",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "sustained hits 1, twin-linked"
+      },
+      {
+        "name": "Twin Icarus ironhail heavy stubber",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "anti-fly 4+, rapid fire 3, twin-linked"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Armoured hull",
+        "attacks": 6,
+        "weaponSkill": "4+",
+        "strength": 8,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D6",
+        "description": "Deadly Demise D6",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Executioner",
+        "description": "Each time this model makes an attack that targets a unit that is Below Half-strength, add 1 to the Hit roll.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Macro Plasma Incinerator",
+        "description": "This model's macro plasma incinerator can be replaced with 1 heavy laser destroyer.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Ironhail Heavy Stubber",
+        "description": "This model can be equipped with 1 ironhail heavy stubber.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Icarus Rocket Pod",
+        "description": "This model can be equipped with 1 Icarus rocket pod.",
+        "pointsCost": 0
+      }
+    ],
+    "damageStates": [
+      {
+        "wounds": "1-5",
+        "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll."
+      }
+    ],
+    "transport": {
+      "capacity": 7,
+      "notes": "Each JUMP PACK, WULFEN, GRAVIS or TERMINATOR model takes up the space of 2 models and each CENTURION model takes up the space of 3 models."
+    }
+  },
+  {
+    "id": "scout-squad",
+    "name": "Scout Squad",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "GRENADES", "SMOKE", "IMPERIUM", "SCOUT SQUAD" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 70,
+    "minSize": 5,
+    "maxSize": 10,
+    "unitComposition": [
+      {
+        "role": "Scout Sergeant",
+        "count": 1
+      },
+      {
+        "role": "Scouts",
+        "count": "4-9"
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Scout",
+        "movement": "6\"",
+        "toughness": 4,
+        "save": "4+",
+        "wounds": 2,
+        "leadership": "6+",
+        "objectiveControl": 1
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Astartes shotgun",
+        "range": "18\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "assault"
+      },
+      {
+        "name": "Bolt pistol",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "pistol"
+      },
+      {
+        "name": "Boltgun",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": ""
+      },
+      {
+        "name": "Heavy bolter",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "4+",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "sustained hits 1"
+      },
+      {
+        "name": "Missile launcher � frag",
+        "range": "48\"",
+        "attacks": "D6",
+        "ballisticSkill": "4+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "blast"
+      },
+      {
+        "name": "Missile launcher � krak",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "4+",
+        "strength": 9,
+        "armorPenetration": -2,
+        "damage": "D6",
+        "type": ""
+      },
+      {
+        "name": "Scout sniper rifle",
+        "range": "36\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -2,
+        "damage": 2,
+        "type": "",
+        "special": "precision"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Astartes chainsword",
+        "attacks": 4,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -1,
+        "damage": 1
+      },
+      {
+        "name": "Close combat weapon",
+        "attacks": 2,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1
+      },
+      {
+        "name": "Combat knife",
+        "attacks": 3,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -1,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Infiltrators",
+        "description": "Infiltrators",
+        "type": "core"
+      },
+      {
+        "name": "Scouts 6\"",
+        "description": "Scouts 6\"",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Guerrilla Tactics",
+        "description": "At the end of your opponent's turn, if this unit is more than 6\" away from all enemy models, you can remove this unit from the battlefield and place it into Strategic Reserves.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Sergeant Ranged Weapon",
+        "description": "The Scout Sergeant's boltgun can be replaced with 1 Astartes chainsword.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Ranged Weapons",
+        "description": "Any number of models can each have their boltgun replaced with one of the following: 1 Astartes shotgun, 1 combat knife",
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Heavy Weapon (Sniper)",
+        "description": "For every 5 models in this unit, 1 Scout's boltgun can be replaced with 1 Scout sniper rifle.",
+        "selectionLimit": "per 5 models",
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Heavy Weapon",
+        "description": "For every 5 models in this unit, 1 Scout's boltgun can be replaced with one of the following: 1 heavy bolter, 1 missile launcher",
+        "selectionLimit": "per 5 models",
+        "pointsCost": 0
+      }
+    ]
+  },
+  {
+    "id": "sternguard-veteran-squad",
+    "name": "Sternguard Veteran Squad",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "GRENADES", "IMPERIUM", "TACTICUS", "STERNGUARD VETERAN SQUAD" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 100,
+    "minSize": 5,
+    "maxSize": 10,
+    "unitComposition": [
+      {
+        "role": "Sternguard Veteran Sergeant",
+        "count": 1
+      },
+      {
+        "role": "Sternguard Veterans",
+        "count": "4-9"
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Sternguard Veteran",
+        "movement": "6\"",
+        "toughness": 4,
+        "save": "3+",
+        "wounds": 2,
+        "leadership": "6+",
+        "objectiveControl": 1
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Combi-weapon",
+        "range": "24\"",
+        "attacks": 1,
+        "ballisticSkill": "4+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "anti-infantry 4+, devastating wounds, rapid fire 1"
+      },
+      {
+        "name": "Pyrecannon",
+        "range": "12\"",
+        "attacks": "D6+1",
+        "ballisticSkill": "N/A",
+        "strength": 6,
+        "armorPenetration": -1,
+        "damage": 1,
+        "type": "",
+        "special": "ignores cover, torrent"
+      },
+      {
+        "name": "Sternguard bolt pistol",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "pistol",
+        "special": "devastating wounds"
+      },
+      {
+        "name": "Sternguard bolt rifle",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -1,
+        "damage": 1,
+        "type": "",
+        "special": "assault, devastating wounds, rapid fire 1"
+      },
+      {
+        "name": "Sternguard heavy bolter",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "4+",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "devastating wounds, sustained hits 1"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Astartes chainsword",
+        "attacks": 6,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -1,
+        "damage": 1
+      },
+      {
+        "name": "Close combat weapon",
+        "attacks": 4,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1
+      },
+      {
+        "name": "Power weapon",
+        "attacks": 5,
+        "weaponSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -2,
+        "damage": 1
+      },
+      {
+        "name": "Power fist",
+        "attacks": 4,
+        "weaponSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -2,
+        "damage": 2
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Sternguard Focus",
+        "description": "Each time a model in this unit makes an attack that targets your Oath of Moment target, you can re-roll the Wound roll.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Sergeant Ranged Weapon",
+        "description": "The Sternguard Veteran Sergeant's Sternguard bolt rifle can be replaced with one of the following: 1 Astartes chainsword, 1 combi-weapon, 1 power weapon, 1 power fist, 1 Astartes chainsword and 1 Sternguard bolt rifle, 1 power weapon and 1 Sternguard bolt rifle, 1 power fist and 1 Sternguard bolt rifle",
+        "options": [ "Astartes chainsword", "Combi-weapon", "Power weapon", "Power fist", "Astartes chainsword and Sternguard bolt rifle", "Power weapon and Sternguard bolt rifle", "Power fist and Sternguard bolt rifle" ],
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Ranged Weapons",
+        "description": "Any number of Sternguard Veterans can each have their Sternguard bolt rifle replaced with 1 combi-weapon.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Heavy Weapon",
+        "description": "For every 5 models in this unit, 1 Sternguard Veteran's Sternguard bolt rifle can be replaced with one of the following: 1 pyrecannon, 1 Sternguard heavy bolter",
+        "selectionLimit": "per 5 models",
+        "options": [ "Pyrecannon", "Sternguard heavy bolter" ],
+        "pointsCost": 0
+      }
+    ]
+  },
+  {
+    "id": "storm-speeder-hailstrike",
+    "name": "Storm Speeder Hailstrike",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "FLY", "IMPERIUM", "STORM SPEEDER HAILSTRIKE" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 115,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Storm Speeder Hailstrike",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Storm Speeder Hailstrike",
+        "movement": "14\"",
+        "toughness": 9,
+        "save": "3+",
+        "wounds": 11,
+        "leadership": "6+",
+        "objectiveControl": 3
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Fragstorm grenade launcher",
+        "range": "18\"",
+        "attacks": "D6",
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "blast"
+      },
+      {
+        "name": "Onslaught gatling cannon",
+        "range": "24\"",
+        "attacks": 8,
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "devastating wounds"
+      },
+      {
+        "name": "Twin ironhail heavy stubber",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 3, twin-linked"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Close combat weapon",
+        "attacks": 4,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D3",
+        "description": "Deadly Demise D3",
+        "type": "core"
+      },
+      {
+        "name": "Deep Strike",
+        "description": "Deep Strike",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Hailstrike",
+        "description": "Each time this model has shot, select one enemy unit (excluding MONSTERS and VEHICLES) hit by one or more of those attacks. Until the end of the phase, each time a friendly ADEPTUS ASTARTES unit makes a ranged attack that targets that enemy unit, improve the Armour Penetration characteristic of that attack by 1. The same enemy unit can only be affected by this ability once per phase.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": []
+  },
+  {
+    "id": "storm-speeder-hammerstrike",
+    "name": "Storm Speeder Hammerstrike",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "FLY", "IMPERIUM", "STORM SPEEDER HAMMERSTRIKE" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 125,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Storm Speeder Hammerstrike",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Storm Speeder Hammerstrike",
+        "movement": "14\"",
+        "toughness": 9,
+        "save": "3+",
+        "wounds": 11,
+        "leadership": "6+",
+        "objectiveControl": 3
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Hammerstrike missile launcher",
+        "range": "36\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -3,
+        "damage": "D6",
+        "type": ""
+      },
+      {
+        "name": "Krakstorm grenade launcher",
+        "range": "18\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -1,
+        "damage": "D3",
+        "type": ""
+      },
+      {
+        "name": "Melta destroyer",
+        "range": "18\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -4,
+        "damage": "D6",
+        "type": "",
+        "special": "melta 2"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Close combat weapon",
+        "attacks": 4,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D3",
+        "description": "Deadly Demise D3",
+        "type": "core"
+      },
+      {
+        "name": "Deep Strike",
+        "description": "Deep Strike",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Hammerstrike",
+        "description": "Each time this model has shot, select one enemy unit that was hit by one or more attacks made by this model this phase. Until the end of the phase, that enemy unit cannot have the Benefit of Cover.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": []
+  },
+  {
+    "id": "storm-speeder-thunderstrike",
+    "name": "Storm Speeder Thunderstrike",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "FLY", "IMPERIUM", "STORM SPEEDER THUNDERSTRIKE" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 135,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Storm Speeder Thunderstrike",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Storm Speeder Thunderstrike",
+        "movement": "14\"",
+        "toughness": 9,
+        "save": "3+",
+        "wounds": 11,
+        "leadership": "6+",
+        "objectiveControl": 3
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Stormfury missiles",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "2+",
+        "strength": 12,
+        "armorPenetration": -3,
+        "damage": "D6+1",
+        "type": ""
+      },
+      {
+        "name": "Thunderstrike las-talon",
+        "range": "36\"",
+        "attacks": 2,
+        "ballisticSkill": "2+",
+        "strength": 9,
+        "armorPenetration": -3,
+        "damage": "D6+1",
+        "type": ""
+      },
+      {
+        "name": "Twin Icarus rocket pod",
+        "range": "24\"",
+        "attacks": "D3",
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "anti-fly 2+, twin-linked"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Close combat weapon",
+        "attacks": 4,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D3",
+        "description": "Deadly Demise D3",
+        "type": "core"
+      },
+      {
+        "name": "Deep Strike",
+        "description": "Deep Strike",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Thunderstrike",
+        "description": "Each time this model has shot, select one enemy MONSTER or VEHICLE unit that was hit by one or more attacks made by this model this phase. Until the end of the phase, each time a friendly ADEPTUS ASTARTES unit makes a ranged attack that targets that enemy unit, add 1 to the Wound roll.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": []
+  },
+  {
+    "id": "stormhawk-interceptor",
+    "name": "Stormhawk Interceptor",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "FLY", "AIRCRAFT", "IMPERIUM", "SMOKE", "STORMHAWK INTERCEPTOR" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 155,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Stormhawk Interceptor",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Stormhawk Interceptor",
+        "movement": "20+\"",
+        "toughness": 9,
+        "save": "3+",
+        "wounds": 10,
+        "leadership": "6+",
+        "objectiveControl": 0
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Icarus stormcannon",
+        "range": "48\"",
+        "attacks": 6,
+        "ballisticSkill": "3+",
+        "strength": 7,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "anti-fly 2+"
+      },
+      {
+        "name": "Las-talon",
+        "range": "36\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 10,
+        "armorPenetration": -3,
+        "damage": "D6+1",
+        "type": ""
+      },
+      {
+        "name": "Skyhammer missile launcher",
+        "range": "48\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -1,
+        "damage": "D3",
+        "type": "",
+        "special": "anti-fly 2+"
+      },
+      {
+        "name": "Twin assault cannon",
+        "range": "24\"",
+        "attacks": 6,
+        "ballisticSkill": "3+",
+        "strength": 6,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "devastating wounds, twin-linked"
+      },
+      {
+        "name": "Twin heavy bolter",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "sustained hits 1, twin-linked"
+      },
+      {
+        "name": "Typhoon missile launcher � frag",
+        "range": "48\"",
+        "attacks": "2D6",
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "blast"
+      },
+      {
+        "name": "Typhoon missile launcher � krak",
+        "range": "48\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -2,
+        "damage": "D6",
+        "type": ""
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Armoured hull",
+        "attacks": 3,
+        "weaponSkill": "4+",
+        "strength": 6,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D3",
+        "description": "Deadly Demise D3",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Interceptor",
+        "description": "Each time this model makes a ranged attack that targets a unit that can Fly, add 1 to the Hit roll.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Skyhammer Missile Launcher",
+        "description": "This model's skyhammer missile launcher can be replaced with one of the following: 1 twin heavy bolter, 1 typhoon missile launcher",
+        "options": [ "Twin heavy bolter", "Typhoon missile launcher" ],
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Las-talon",
+        "description": "This model's las-talon can be replaced with 1 Icarus stormcannon.",
+        "pointsCost": 0
+      }
+    ]
+  },
+  {
+    "id": "stormraven-gunship",
+    "name": "Stormraven Gunship",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "FLY", "AIRCRAFT", "TRANSPORT", "IMPERIUM", "STORMRAVEN GUNSHIP" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 280,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Stormraven Gunship",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Stormraven Gunship",
+        "movement": "20+\"",
+        "toughness": 10,
+        "save": "3+",
+        "wounds": 14,
+        "leadership": "6+",
+        "objectiveControl": 0
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Hurricane bolter",
+        "range": "24\"",
+        "attacks": 6,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 6, twin-linked"
+      },
+      {
+        "name": "Stormstrike missile launcher",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 10,
+        "armorPenetration": -2,
+        "damage": 3,
+        "type": ""
+      },
+      {
+        "name": "Twin assault cannon",
+        "range": "24\"",
+        "attacks": 6,
+        "ballisticSkill": "3+",
+        "strength": 6,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "devastating wounds, twin-linked"
+      },
+      {
+        "name": "Twin heavy bolter",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "sustained hits 1, twin-linked"
+      },
+      {
+        "name": "Twin heavy plasma cannon � standard",
+        "range": "36\"",
+        "attacks": "D3",
+        "ballisticSkill": "3+",
+        "strength": 7,
+        "armorPenetration": -2,
+        "damage": 2,
+        "type": "",
+        "special": "blast, twin-linked"
+      },
+      {
+        "name": "Twin heavy plasma cannon � supercharge",
+        "range": "36\"",
+        "attacks": "D3",
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -3,
+        "damage": 3,
+        "type": "",
+        "special": "blast, hazardous, twin-linked"
+      },
+      {
+        "name": "Twin lascannon",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 12,
+        "armorPenetration": -3,
+        "damage": "D6+1",
+        "type": "",
+        "special": "twin-linked"
+      },
+      {
+        "name": "Twin multi-melta",
+        "range": "18\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -4,
+        "damage": "D6",
+        "type": "",
+        "special": "melta 2, twin-linked"
+      },
+      {
+        "name": "Typhoon missile launcher � frag",
+        "range": "48\"",
+        "attacks": "2D6",
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "blast"
+      },
+      {
+        "name": "Typhoon missile launcher � krak",
+        "range": "48\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -2,
+        "damage": "D6",
+        "type": ""
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Armoured hull",
+        "attacks": 6,
+        "weaponSkill": "4+",
+        "strength": 8,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D6",
+        "description": "Deadly Demise D6",
+        "type": "core"
+      },
+      {
+        "name": "Hover",
+        "description": "Hover",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Armoured Resilience",
+        "description": "Each time an attack is allocated to this model, subtract 1 from the Damage characteristic of that attack.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Twin Assault Cannon",
+        "description": "This model's twin assault cannon can be replaced with one of the following: 1 twin heavy plasma cannon, 1 twin lascannon",
+        "options": [ "Twin heavy plasma cannon � standard", "Twin lascannon" ],
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Typhoon Missile Launcher",
+        "description": "This model's typhoon missile launcher can be replaced with one of the following: 1 twin heavy bolter, 1 twin multi-melta",
+        "options": [ "Twin heavy bolter", "Twin multi-melta" ],
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Hurricane Bolters",
+        "description": "This model can be equipped with 2 hurricane bolters.",
+        "pointsCost": 0
+      }
+    ],
+    "damageStates": [
+      {
+        "wounds": "1-5",
+        "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll."
+      }
+    ],
+    "transport": {
+      "capacity": 12,
+      "notes": "This model can transport 12 ADEPTUS ASTARTES INFANTRY models and 1 DREADNOUGHT model. Each JUMP PACK, WULFEN, GRAVIS or TERMINATOR model takes up the space of 2 models and each CENTURION model takes up the space of 3 models."
+    }
+  },
+  {
+    "id": "stormtalon-gunship",
+    "name": "Stormtalon Gunship",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "FLY", "AIRCRAFT", "IMPERIUM", "STORMTALON GUNSHIP" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 165,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Stormtalon Gunship",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Stormtalon Gunship",
+        "movement": "20+\"",
+        "toughness": 8,
+        "save": "3+",
+        "wounds": 10,
+        "leadership": "6+",
+        "objectiveControl": 0
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Skyhammer missile launcher",
+        "range": "48\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -1,
+        "damage": "D3",
+        "type": "",
+        "special": "anti-fly 2+, twin-linked"
+      },
+      {
+        "name": "Twin assault cannon",
+        "range": "24\"",
+        "attacks": 6,
+        "ballisticSkill": "3+",
+        "strength": 6,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "devastating wounds, twin-linked"
+      },
+      {
+        "name": "Twin heavy bolter",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "sustained hits 1, twin-linked"
+      },
+      {
+        "name": "Twin lascannon",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 12,
+        "armorPenetration": -3,
+        "damage": "D6+1",
+        "type": "",
+        "special": "twin-linked"
+      },
+      {
+        "name": "Typhoon missile launcher � frag",
+        "range": "48\"",
+        "attacks": "2D6",
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "blast"
+      },
+      {
+        "name": "Typhoon missile launcher � krak",
+        "range": "48\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -2,
+        "damage": "D6",
+        "type": ""
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Armoured hull",
+        "attacks": 3,
+        "weaponSkill": "4+",
+        "strength": 6,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D3",
+        "description": "Deadly Demise D3",
+        "type": "core"
+      },
+      {
+        "name": "Hover",
+        "description": "Hover",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Strafing Run",
+        "description": "Each time this model makes a ranged attack that targets a unit that cannot Fly, add 1 to the Hit roll.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Skyhammer Missile Launcher",
+        "description": "This model's skyhammer missile launcher can be replaced with one of the following: 1 twin heavy bolter, 1 twin lascannon, 1 typhoon missile launcher",
+        "options": [ "Twin heavy bolter", "Twin lascannon", "Typhoon missile launcher" ],
+        "pointsCost": 0
+      }
+    ]
+  },
+  {
+    "id": "suppressor-squad",
+    "name": "Suppressor Squad",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "GRENADES", "SMOKE", "JUMP PACK", "FLY", "IMPERIUM", "SUPPRESSOR SQUAD" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 75,
+    "minSize": 3,
+    "maxSize": 3,
+    "unitComposition": [
+      {
+        "role": "Suppressor Sergeant",
+        "count": 1
+      },
+      {
+        "role": "Suppressors",
+        "count": 2
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Suppressor",
+        "movement": "12\"",
+        "toughness": 4,
+        "save": "3+",
+        "wounds": 2,
+        "leadership": "6+",
+        "objectiveControl": 1
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Accelerator autocannon",
+        "range": "48\"",
+        "attacks": 3,
+        "ballisticSkill": "4+",
+        "strength": 8,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "heavy"
+      },
+      {
+        "name": "Bolt pistol",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "pistol"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Close combat weapon",
+        "attacks": 3,
+        "weaponSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deep Strike",
+        "description": "Deep Strike",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Suppression Fire",
+        "description": "In your Shooting phase, after this unit has shot, select one enemy unit hit by one or more of those attacks made with an accelerator autocannon. Until the start of your next turn, while this unit is on the battlefield, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": []
+  },
+  {
+    "id": "terminator-assault-squad",
+    "name": "Terminator Assault Squad",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "IMPERIUM", "TERMINATORS", "TERMINATOR ASSAULT SQUAD" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 180,
+    "minSize": 5,
+    "maxSize": 10,
+    "unitComposition": [
+      {
+        "role": "Assault Terminator Sergeant",
+        "count": 1
+      },
+      {
+        "role": "Assault Terminators",
+        "count": "4-9"
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Assault Terminator",
+        "movement": "5\"",
+        "toughness": 5,
+        "save": "2+",
+        "wounds": 3,
+        "leadership": "6+",
+        "objectiveControl": 1,
+        "invulnerableSave": "4+"
+      }
+    ],
+    "rangedWeapons": [],
+    "meleeWeapons": [
+      {
+        "name": "Thunder hammer",
+        "attacks": 3,
+        "weaponSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -2,
+        "damage": 2,
+        "special": "devastating wounds"
+      },
+      {
+        "name": "Twin lightning claws",
+        "attacks": 6,
+        "weaponSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -2,
+        "damage": 1,
+        "special": "twin-linked"
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deep Strike",
+        "description": "Deep Strike",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Teleport Homer",
+        "description": "At the start of the battle, you can set up one Teleport Homer token for this unit anywhere on the battlefield that is not in your opponent's deployment zone. If you do, once per battle, you can target this unit with the Rapid Ingress Stratagem for 0CP, but when resolving that Stratagem, you must set this unit up within 3\" horizontally of that token and not within 9\" horizontally of any enemy models. That token is then removed.",
+        "type": "unit"
+      },
+      {
+        "name": "Terminatus Assault",
+        "description": "At the start of the Fight phase, each enemy unit within Engagement Range of this unit must take a Battle-shock test.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Melee Weapons",
+        "description": "Any number of models can each have their thunder hammer and storm shield replaced with 1 twin lightning claws.",
+        "pointsCost": 0
+      }
+    ],
+    "wargearAbilities": [
+      {
+        "name": "Storm Shield",
+        "description": "The bearer has a Wounds characteristic of 4."
+      }
+    ]
+  },
+  {
+    "id": "terminator-squad",
+    "name": "Terminator Squad",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "IMPERIUM", "TERMINATOR", "TERMINATOR SQUAD" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 170,
+    "minSize": 5,
+    "maxSize": 10,
+    "unitComposition": [
+      {
+        "role": "Terminator Sergeant",
+        "count": 1
+      },
+      {
+        "role": "Terminators",
+        "count": "4-9"
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Terminator",
+        "movement": "5\"",
+        "toughness": 5,
+        "save": "2+",
+        "wounds": 3,
+        "leadership": "6+",
+        "objectiveControl": 1,
+        "invulnerableSave": "4+"
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Assault cannon",
+        "range": "24\"",
+        "attacks": 6,
+        "ballisticSkill": "3+",
+        "strength": 6,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "devastating wounds"
+      },
+      {
+        "name": "Cyclone missile launcher � frag",
+        "range": "36\"",
+        "attacks": "2D6",
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "blast"
+      },
+      {
+        "name": "Cyclone missile launcher � krak",
+        "range": "36\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -2,
+        "damage": "D6",
+        "type": ""
+      },
+      {
+        "name": "Heavy flamer",
+        "range": "12\"",
+        "attacks": "D6",
+        "ballisticSkill": "N/A",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 1,
+        "type": "",
+        "special": "ignores cover, torrent"
+      },
+      {
+        "name": "Storm bolter",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 2"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Chainfist",
+        "attacks": 3,
+        "weaponSkill": "4+",
+        "strength": 8,
+        "armorPenetration": -2,
+        "damage": 2,
+        "special": "anti-vehicle 3+"
+      },
+      {
+        "name": "Power fist",
+        "attacks": 3,
+        "weaponSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -2,
+        "damage": 2
+      },
+      {
+        "name": "Power weapon",
+        "attacks": 4,
+        "weaponSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -2,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deep Strike",
+        "description": "Deep Strike",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Teleport Homer",
+        "description": "At the start of the battle, you can set up one Teleport Homer token for this unit anywhere on the battlefield that is not in your opponent's deployment zone. If you do, once per battle, you can target this unit with the Rapid Ingress Stratagem for 0CP, but when resolving that Stratagem, you must set this unit up within 3\" of that token and not within 9\" of any enemy models. That token is then removed.",
+        "type": "unit"
+      },
+      {
+        "name": "Fury of the First",
+        "description": "Each time a model in this unit makes an attack that targets your Oath of Moment target, add 1 to the Hit roll.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Heavy Weapon",
+        "description": "For every 5 models in this unit, 1 Terminator's storm bolter can be replaced with one of the following: 1 assault cannon, 1 heavy flamer, 1 cyclone missile launcher and 1 storm bolter",
+        "selectionLimit": "per 5 models",
+        "options": [ "Assault cannon", "Heavy flamer", "Cyclone missile launcher and Storm bolter" ],
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Melee Weapon",
+        "description": "Any number of models can each have their power fist replaced with 1 chainfist.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Sergeant Melee Weapon",
+        "description": "The Terminator Sergeant's power fist can be replaced with 1 power weapon.",
+        "pointsCost": 0
+      }
+    ]
+  },
+  {
+    "id": "vanguard-veteran-squad-with-jump-packs",
+    "name": "Vanguard Veteran Squad With Jump Packs",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "INFANTRY", "GRENADES", "JUMP PACK", "FLY", "IMPERIUM", "VANGUARD VETERAN SQUAD", "VANGUARD VETERAN SQUAD WITH JUMP PACKS" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 100,
+    "minSize": 5,
+    "maxSize": 10,
+    "unitComposition": [
+      {
+        "role": "Vanguard Veteran Sergeant with Jump Pack",
+        "count": 1
+      },
+      {
+        "role": "Vanguard Veterans with Jump Packs",
+        "count": "4-9"
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Vanguard Veteran with Jump Pack",
+        "movement": "12\"",
+        "toughness": 4,
+        "save": "3+",
+        "wounds": 2,
+        "leadership": "6+",
+        "objectiveControl": 1
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Bolt pistol",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "pistol"
+      },
+      {
+        "name": "Grav-pistol",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": -1,
+        "damage": 1,
+        "type": "pistol",
+        "special": "anti-vehicle 2+"
+      },
+      {
+        "name": "Hand flamer",
+        "range": "12\"",
+        "attacks": "D6",
+        "ballisticSkill": "N/A",
+        "strength": 3,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "pistol",
+        "special": "ignores cover, torrent"
+      },
+      {
+        "name": "Inferno pistol",
+        "range": "6\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -4,
+        "damage": "D3",
+        "type": "pistol",
+        "special": "melta 2"
+      },
+      {
+        "name": "Plasma pistol � standard",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 7,
+        "armorPenetration": -2,
+        "damage": 1,
+        "type": "pistol"
+      },
+      {
+        "name": "Plasma pistol � supercharge",
+        "range": "12\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -3,
+        "damage": 2,
+        "type": "pistol",
+        "special": "hazardous"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Vanguard Veteran weapon",
+        "attacks": 4,
+        "weaponSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deep Strike",
+        "description": "Deep Strike",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Vanguard Assault",
+        "description": "Each time this unit ends a Charge move, until the end of the turn, melee weapons equipped by models in this unit have the [LETHAL HITS] ability.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Bolt Pistol",
+        "description": "Any number of models can each have their bolt pistol replaced with one of the following: 1 storm shield, 1 grav-pistol, 1 hand flamer, 1 inferno pistol, 1 plasma pistol",
+        "options": [ "Storm shield", "Grav-pistol", "Hand flamer", "Inferno pistol", "Plasma pistol � standard" ],
+        "pointsCost": 0
+      }
+    ],
+    "wargearAbilities": [
+      {
+        "name": "Storm Shield",
+        "description": "The bearer has a 4+ invulnerable save."
+      }
+    ]
+  },
+  {
+    "id": "vindicator",
+    "name": "Vindicator",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "SMOKE", "IMPERIUM", "VINDICATOR" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 185,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Vindicator",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Vindicator",
+        "movement": "9\"",
+        "toughness": 11,
+        "save": "2+",
+        "wounds": 11,
+        "leadership": "6+",
+        "objectiveControl": 3
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Demolisher cannon",
+        "range": "24\"",
+        "attacks": "D6+3",
+        "ballisticSkill": "3+",
+        "strength": 14,
+        "armorPenetration": -3,
+        "damage": "D6",
+        "type": "",
+        "special": "blast"
+      },
+      {
+        "name": "Hunter-killer missile",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "2+",
+        "strength": 14,
+        "armorPenetration": -3,
+        "damage": "D6",
+        "type": "",
+        "special": "one shot"
+      },
+      {
+        "name": "Storm bolter",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 2"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Armoured tracks",
+        "attacks": 3,
+        "weaponSkill": "4+",
+        "strength": 6,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D3",
+        "description": "Deadly Demise D3",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Siege Shield",
+        "description": "When making ranged attacks with its demolisher cannon, this model can target enemy units within Engagement Range of it (provided no other friendly units are also within Engagement Range of that enemy unit). In addition, when making ranged attacks, this model does not suffer the penalty to its Hit rolls for being within Engagement Range of one or more enemy units.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Add Hunter-killer Missile",
+        "description": "This model can be equipped with 1 hunter-killer missile.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Storm Bolter",
+        "description": "This model can be equipped with 1 storm bolter.",
+        "pointsCost": 0
+      }
+    ],
+    "damageStates": [
+      {
+        "wounds": "1-4",
+        "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll."
+      }
+    ]
+  },
+  {
+    "id": "whirlwind",
+    "name": "Whirlwind",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "SMOKE", "IMPERIUM", "WHIRLWIND" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 190,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Whirlwind",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Whirlwind",
+        "movement": "10\"",
+        "toughness": 10,
+        "save": "3+",
+        "wounds": 11,
+        "leadership": "6+",
+        "objectiveControl": 3
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Hunter-killer missile",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "2+",
+        "strength": 14,
+        "armorPenetration": -3,
+        "damage": "D6",
+        "type": "",
+        "special": "one shot"
+      },
+      {
+        "name": "Storm bolter",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 2"
+      },
+      {
+        "name": "Whirlwind vengeance launcher",
+        "range": "72\"",
+        "attacks": "D6+3",
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -2,
+        "damage": 2,
+        "type": "",
+        "special": "blast, indirect fire"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Armoured tracks",
+        "attacks": 3,
+        "weaponSkill": "4+",
+        "strength": 6,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D3",
+        "description": "Deadly Demise D3",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Pinning Bombardment",
+        "description": "In your Shooting phase, after this model has shot, if one or more of those attacks made with its Whirlwind vengeance launcher scored a hit against an enemy INFANTRY unit, that unit must take a Battle-shock test.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Add Hunter-killer Missile",
+        "description": "This model can be equipped with 1 hunter-killer missile.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Storm Bolter",
+        "description": "This model can be equipped with 1 storm bolter.",
+        "pointsCost": 0
+      }
+    ],
+    "damageStates": [
+      {
+        "wounds": "1-4",
+        "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll."
+      }
+    ]
+  },
+  {
+    "id": "astraeus",
+    "name": "Astraeus",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "TITANIC", "IMPERIUM", "ASTRAEUS" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 525,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Astraeus",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Astraeus",
+        "movement": "10\"",
+        "toughness": 12,
+        "save": "2+",
+        "wounds": 24,
+        "leadership": "6+",
+        "objectiveControl": 8,
+        "invulnerableSave": "5+ (ranged attacks only)"
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Astraeus las-ripper",
+        "range": "36\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 12,
+        "armorPenetration": -3,
+        "damage": "D6+1",
+        "type": ""
+      },
+      {
+        "name": "Ironhail heavy stubber",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 3"
+      },
+      {
+        "name": "Plasma eradicator � standard",
+        "range": "36\"",
+        "attacks": "D6",
+        "ballisticSkill": "3+",
+        "strength": 7,
+        "armorPenetration": -2,
+        "damage": 2,
+        "type": "",
+        "special": "blast"
+      },
+      {
+        "name": "Plasma eradicator � supercharge",
+        "range": "36\"",
+        "attacks": "D6",
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -3,
+        "damage": 3,
+        "type": "",
+        "special": "blast, hazardous"
+      },
+      {
+        "name": "Storm bolter",
+        "range": "24\"",
+        "attacks": 2,
+        "ballisticSkill": "3+",
+        "strength": 4,
+        "armorPenetration": 0,
+        "damage": 1,
+        "type": "",
+        "special": "rapid fire 2"
+      },
+      {
+        "name": "Twin heavy bolter",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "sustained hits 1, twin-linked"
+      },
+      {
+        "name": "Twin lascannon",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 12,
+        "armorPenetration": -3,
+        "damage": "D6+1",
+        "type": "",
+        "special": "twin-linked"
+      },
+      {
+        "name": "Twin macro-accelerator cannon",
+        "range": "72\"",
+        "attacks": 12,
+        "ballisticSkill": "3+",
+        "strength": 9,
+        "armorPenetration": -1,
+        "damage": 3,
+        "type": "",
+        "special": "sustained hits 1, twin-linked"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Armoured hull",
+        "attacks": 6,
+        "weaponSkill": "4+",
+        "strength": 8,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D6+2",
+        "description": "Deadly Demise D6+2",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Suppression Fire",
+        "description": "In your Shooting phase, after this model has shot, select one enemy unit hit by one or more attacks made with its twin macro-accelerator cannon this phase. Until the start of your next turn, while this model is on the battlefield, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Astraeus Las-rippers",
+        "description": "This model's 2 Astraeus las-rippers can be replaced with 2 plasma eradicators.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Twin Heavy Bolter",
+        "description": "This model's twin heavy bolter can be replaced with 1 twin lascannon.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Add Ironhail Heavy Stubber",
+        "description": "This model can be equipped with 1 ironhail heavy stubber.",
+        "pointsCost": 0
+      }
+    ],
+    "damageStates": [
+      {
+        "wounds": "1-8",
+        "description": "While this model has 1-8 wounds remaining, subtract 4 from its Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll."
+      }
+    ]
+  },
+  {
+    "id": "thunderhawk-gunship",
+    "name": "Thunderhawk Gunship",
+    "faction": "Space Marines",
+    "category": "",
+    "keywords": [ "VEHICLE", "TITANIC", "FLY", "AIRCRAFT", "TRANSPORT", "IMPERIUM", "THUNDERHAWK GUNSHIP" ],
+    "factionKeywords": [ "ADEPTUS ASTARTES" ],
+    "basePoints": 840,
+    "minSize": 1,
+    "maxSize": 1,
+    "unitComposition": [
+      {
+        "role": "Thunderhawk Gunship",
+        "count": 1
+      }
+    ],
+    "profiles": [
+      {
+        "name": "Thunderhawk Gunship",
+        "movement": "20+\"",
+        "toughness": 12,
+        "save": "2+",
+        "wounds": 30,
+        "leadership": "6+",
+        "objectiveControl": 0
+      }
+    ],
+    "rangedWeapons": [
+      {
+        "name": "Hellstrike missile battery",
+        "range": "72\"",
+        "attacks": 4,
+        "ballisticSkill": "3+",
+        "strength": 8,
+        "armorPenetration": -2,
+        "damage": 3,
+        "type": "",
+        "special": "anti-fly 4+"
+      },
+      {
+        "name": "Lascannon",
+        "range": "48\"",
+        "attacks": 1,
+        "ballisticSkill": "3+",
+        "strength": 12,
+        "armorPenetration": -3,
+        "damage": "D6+1",
+        "type": ""
+      },
+      {
+        "name": "Thunderhawk heavy cannon",
+        "range": "48\"",
+        "attacks": "D6+6",
+        "ballisticSkill": "3+",
+        "strength": 10,
+        "armorPenetration": -2,
+        "damage": 3,
+        "type": "",
+        "special": "blast"
+      },
+      {
+        "name": "Turbo-laser destructor",
+        "range": "96\"",
+        "attacks": "D3+1",
+        "ballisticSkill": "3+",
+        "strength": 20,
+        "armorPenetration": -4,
+        "damage": "D6+6",
+        "type": "",
+        "special": "blast"
+      },
+      {
+        "name": "Twin heavy bolter",
+        "range": "36\"",
+        "attacks": 3,
+        "ballisticSkill": "3+",
+        "strength": 5,
+        "armorPenetration": -1,
+        "damage": 2,
+        "type": "",
+        "special": "sustained hits 1, twin-linked"
+      }
+    ],
+    "meleeWeapons": [
+      {
+        "name": "Armoured hull",
+        "attacks": 6,
+        "weaponSkill": "4+",
+        "strength": 8,
+        "armorPenetration": 0,
+        "damage": 1
+      }
+    ],
+    "abilities": [
+      {
+        "name": "Deadly Demise D6+2",
+        "description": "Deadly Demise D6+2",
+        "type": "core"
+      },
+      {
+        "name": "Hover",
+        "description": "Hover",
+        "type": "core"
+      },
+      {
+        "name": "Oath of Moment",
+        "description": "Oath of Moment",
+        "type": "faction"
+      },
+      {
+        "name": "Aerial Assault",
+        "description": "Each time a unit with the Deep Strike ability disembarks from this model after it has made a Normal move, that unit is still eligible to declare a charge this turn.",
+        "type": "unit"
+      }
+    ],
+    "wargearOptions": [
+      {
+        "name": "Replace Thunderhawk Heavy Cannon",
+        "description": "This model's Thunderhawk heavy cannon can be replaced with 1 turbo-laser destructor.",
+        "pointsCost": 0
+      },
+      {
+        "name": "Replace Thunderhawk Cluster Bombs",
+        "description": "This model's Thunderhawk cluster bombs can be replaced with 1 hellstrike missile battery.",
+        "pointsCost": 0
+      }
+    ],
+    "wargearAbilities": [
+      {
+        "name": "Thunderhawk Cluster Bombs",
+        "description": "Each time the bearer ends a Normal move, you can select one enemy unit it moved over during that move and roll six D6: for each 3+, that unit suffers 1 mortal wound."
+      }
+    ],
+    "damageStates": [
+      {
+        "wounds": "1-10",
+        "description": "While this model has 1-10 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll."
+      }
+    ],
+    "transport": {
+      "capacity": 30,
+      "notes": "This model has a transport capacity of 30 ADEPTUS ASTARTES INFANTRY or ADEPTUS ASTARTES MOUNTED models. Each JUMP PACK, WULFEN, GRAVIS or TERMINATOR model takes up the space of 2 models. Each CENTURION model takes up the space of 3 models. Each MOUNTED model takes up the space of 4 models."
+    }
+  }
+]

@@ -48,42 +48,64 @@ public class DatasheetService
     public async Task<List<Unit>> GetAllUnitsAsync()
     {
     if (_unitsCache != null)
-       return _unitsCache.Values.ToList();
+   return _unitsCache.Values.ToList();
 
-        _unitsCache = new();
+_unitsCache = new();
 
+ try
+   {
+    // Load faction index
+         var factionPaths = await LoadFactionIndexAsync();
+
+   // Load units from each faction's modular unit files
+            foreach (var (factionName, factionIndexPath) in factionPaths)
+   {
+            try
+      {
+         // Load the faction's unit index (e.g., /data/factions/space-marines/index.json)
+           var factionUnitIndex = await _httpClient.GetFromJsonAsync<FactionUnitIndex>(factionIndexPath);
+
+      if (factionUnitIndex?.Units != null)
+   {
+           // Get the directory path from the faction index path
+            var factionDir = factionIndexPath.Substring(0, factionIndexPath.LastIndexOf('/'));
+
+// Load each unit category file referenced in the index
+          foreach (var unitRef in factionUnitIndex.Units)
+           {
         try
-{
-      // Load faction index
-            var factionPaths = await LoadFactionIndexAsync();
+   {
+       // Construct the full path to the category file
+                 var categoryPath = $"{factionDir}/{unitRef.Ref}";
+ var units = await _httpClient.GetFromJsonAsync<List<Unit>>(categoryPath);
 
-         // Load units from each faction file
-  foreach (var (factionName, path) in factionPaths)
-       {
-         try
+           if (units != null)
            {
-      var units = await _httpClient.GetFromJsonAsync<List<Unit>>(path);
-        
-      if (units != null)
-     {
-  foreach (var unit in units)
-           {
-                 _unitsCache[unit.Id] = unit;
-       }
-         }
-    }
-      catch (Exception ex)
+          foreach (var unit in units)
+            {
+      _unitsCache[unit.Id] = unit;
+              }
+          }
+          }
+ catch (Exception ex)
     {
-      Console.WriteLine($"Error loading faction {factionName}: {ex.Message}");
-         }
-       }
+            Console.WriteLine($"Error loading unit category {unitRef.Ref}: {ex.Message}");
    }
-        catch (Exception ex)
-    {
-       Console.WriteLine($"Error loading datasheets: {ex.Message}");
+      }
+                }
+        }
+          catch (Exception ex)
+ {
+    Console.WriteLine($"Error loading faction {factionName}: {ex.Message}");
+         }
+       }
+        }
+     catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading datasheets: {ex.Message}");
         }
 
-        return _unitsCache.Values.ToList();
+    return _unitsCache.Values.ToList();
     }
 
     public async Task<Unit?> GetUnitByIdAsync(string unitId)
@@ -139,4 +161,18 @@ public class FactionEntry
     public string Id { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
     public string Path { get; set; } = string.Empty;
+}
+
+/// <summary>
+/// Model for faction unit index deserialization (e.g., data/factions/space-marines/index.json)
+/// </summary>
+public class FactionUnitIndex
+{
+    public string Faction { get; set; } = string.Empty;
+    public List<UnitRef>? Units { get; set; }
+}
+
+public class UnitRef
+{
+    public string Ref { get; set; } = string.Empty;
 }

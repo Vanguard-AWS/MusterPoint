@@ -99,13 +99,13 @@
 <div class="box mb-4 warlord-section">
      <h3 class="title is-5">Warlord</h3>
      <label class="checkbox">
-<input type="checkbox" @bind="IsWarlordSelected" @bind:event="onchange" />
+<input type="checkbox" @onchange="HandleWarlordToggle" />
        <span class="ml-2">Set as Warlord</span>
    </label>
-         @if (IsWarlordSelected)
+ @if (IsWarlordSelected)
     {
-            <p class="is-size-7 has-text-success mt-2"><i class="fas fa-crown mr-2"></i>This character is your Warlord</p>
-         }
+      <p class="is-size-7 has-text-success mt-2"><i class="fas fa-crown mr-2"></i>This character is your Warlord</p>
+   }
    </div>
     }
 
@@ -340,12 +340,12 @@
     {
         SelectedEnhancementId = enhancementId;
         
-        // Notify parent with enhancement selection
+      // Notify parent with enhancement selection
         if (!string.IsNullOrEmpty(enhancementId))
         {
  var selectedEnhance = AvailableEnhancements.FirstOrDefault(e => e.Id == enhancementId);
       if (selectedEnhance != null)
-            {
+         {
      await OnEnhancementSelected.InvokeAsync((enhancementId, selectedEnhance.Name, selectedEnhance.Points, selectedEnhance.Description));
         }
         }
@@ -355,4 +355,10 @@
   await OnEnhancementSelected.InvokeAsync((string.Empty, string.Empty, 0, string.Empty));
    }
     }
+
+    private async Task HandleWarlordToggle(ChangeEventArgs e)
+  {
+    IsWarlordSelected = (bool)(e.Value ?? false);
+        await OnWarlordSelected.InvokeAsync(IsWarlordSelected);
+  }
 }

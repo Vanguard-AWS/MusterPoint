@@ -4,6 +4,7 @@
 @inject DatasheetService DatasheetService
 @inject ListStorageService ListStorageService
 @inject DetachmentService DetachmentService
+@inject ListValidationService ListValidationService
 @rendermode InteractiveWebAssembly
 
 <div class="build-list-container">
@@ -13,50 +14,50 @@
  </div>
 <div class="level-right">
   <a href="/lists" class="button is-light">
-         <span class="icon">
+  <span class="icon">
   <i class="fas fa-times"></i>
   </span>
       <span>Close</span>
 </a>
-        </div>
+ </div>
     </div>
 
     <div class="info-bar">
         <span class="tag is-info">@SelectedFaction</span>
-        <span class="tag is-success ml-2">@RemainingPoints / @PointsLimit pts</span>
+      <span class="tag is-success ml-2">@(currentList?.CalculateTotalPoints() ?? 0) / @PointsLimit pts</span>
 </div>
 
     <div class="columns mt-5">
-        <!-- Left Column: Available Units -->
+    <!-- Left Column: Available Units -->
  <div class="column is-4">
-          <div class="box">
-    <h2 class="title is-4">Available Units</h2>
+   <div class="box">
+  <h2 class="title is-4">Available Units</h2>
 
   <div class="field mb-4">
      <div class="control">
-      <input type="text" class="input" placeholder="Search units..." @oninput="SearchUnits" />
-       </div>
+    <input type="text" class="input" placeholder="Search units..." @oninput="SearchUnits" />
+     </div>
  </div>
 
    @if (isLoadingDatasheets)
     {
-           <p><em>Loading datasheets...</em></p>
-          }
-      else if (unitsByCategory == null || !unitsByCategory.Any())
+       <p><em>Loading datasheets...</em></p>
+    }
+    else if (unitsByCategory == null || !unitsByCategory.Any())
      {
     <p class="has-text-grey">No units found for @SelectedFaction.</p>
    }
      else
        {
-           <div class="unit-list">
+    <div class="unit-list">
   @foreach (var category in unitsByCategory)
       {
      <div class="unit-category">
-       <button class="unit-category-toggle" @onclick="() => ToggleCategory(category.Key)">
+    <button class="unit-category-toggle" @onclick="() => ToggleCategory(category.Key)">
         <span class="icon">
    <i class="fas @(expandedCategories.Contains(category.Key) ? "fa-chevron-down" : "fa-chevron-right")"></i>
-          </span>
-        <span class="category-name">@category.Key</span>
+</span>
+    <span class="category-name">@category.Key</span>
     </button>
 
         @if (expandedCategories.Contains(category.Key))
@@ -64,22 +65,21 @@
  <div class="category-units">
  @foreach (var unit in category.Value)
      {
-           <div class="box mb-2 unit-card">
+<div class="box mb-2 unit-card">
      <div class="level is-mobile">
  <div class="level-left">
       <div class="unit-card-content" @onclick="() => ShowUnitDetails(unit)" style="cursor: pointer; flex: 1;">
-      <p class="has-text-weight-bold">@unit.Name</p>
+    <p class="has-text-weight-bold">@unit.Name</p>
 <p class="is-size-7 has-text-grey">@unit.BasePoints pts</p>
      </div>
      </div>
-          <div class="level-right">
+        <div class="level-right">
           <button class="button is-primary is-small"
-      @onclick="() => AddUnitToList(unit)"
- disabled="@(RemainingPoints < unit.BasePoints)"
-  title="@(RemainingPoints < unit.BasePoints ? "Not enough points" : "Add unit to list")">
-        Add
+   @onclick="() => AddUnitToList(unit)"
+  title="Add unit to list">
+    Add
          </button>
-          </div>
+     </div>
   </div>
     </div>
    }
@@ -88,78 +88,150 @@
  </div>
    }
   </div>
-      }
+  }
 </div>
  </div>
 
 <!-- Right Column: Current List -->
-        <div class="column is-8">
+     <div class="column is-8">
         <div class="box">
-      @if (currentList == null || !currentList.Entries.Any())
+
+<!-- Validation Alert -->
+@if (validationMessages != null && validationMessages.Any())
+{
+    var errors = validationMessages.Where(m => m.Severity == ListValidationService.ValidationSeverity.Error).ToList();
+    var warnings = validationMessages.Where(m => m.Severity == ListValidationService.ValidationSeverity.Warning).ToList();
+    
+  @if (errors.Any())
+    {
+    <div class="notification is-danger mb-4">
+       <button class="delete" @onclick="() => {}"></button>
+        <h4 class="title is-5 mb-3">
+ <span class="icon mr-2">
+   <i class="fas fa-exclamation-circle"></i>
+     </span>
+         Invalid List
+ </h4>
+ <ul class="ml-4">
+      @foreach (var error in errors)
+     {
+<li class="mb-2">
+   <span>@error.Message</span>
+ </li>
+        }
+      </ul>
+      </div>
+ }
+  else
+    {
+      <div class="notification is-success mb-4">
+  <button class="delete" @onclick="() => {}"></button>
+        <h4 class="title is-5 mb-3">
+       <span class="icon mr-2">
+<i class="fas fa-check-circle"></i>
+      </span>
+   List is Valid ?
+ </h4>
+ </div>
+    }
+
+    @if (warnings.Any())
+    {
+     <div class="notification is-warning mb-4">
+     <button class="delete" @onclick="() => {}"></button>
+  <h4 class="title is-5 mb-3">
+      <span class="icon mr-2">
+   <i class="fas fa-exclamation-triangle"></i>
+ </span>
+    Warnings
+</h4>
+       <ul class="ml-4">
+    @foreach (var warning in warnings)
+    {
+  <li class="mb-2">
+  <span>@warning.Message</span>
+    </li>
+ }
+    </ul>
+      </div>
+    }
+}
+
+    @if (currentList == null || !currentList.Entries.Any())
  {
-     <p class="has-text-grey has-text-centered py-5">No units in this list yet.</p>
-         }
+   <p class="has-text-grey has-text-centered py-5">No units in this list yet.</p>
+    }
    else
-          {
-    <!-- Grouped by Category -->
+     {
+  <!-- Grouped by Category -->
     @foreach (var categoryGroup in entriesByCategory)
     {
-       <div class="list-category-section mb-5">
-         <h3 class="title is-5 mb-3 has-text-primary">
+ <div class="list-category-section mb-5">
+  <h3 class="title is-5 mb-3 has-text-primary">
         <span class="icon mr-2">
      <i class="fas fa-folder"></i>
-          </span>
-        @categoryGroup.Key
+     </span>
+   @categoryGroup.Key
   </h3>
 
-          <div class="table-container">
-      <table class="table is-fullwidth is-striped is-hoverable">
+      <div class="table-container">
+ <table class="table is-fullwidth is-striped is-hoverable">
         <thead>
-        <tr>
-          <th>Unit</th>
-        <th>Model Count</th>
+   <tr>
+     <th>Unit</th>
+   <th>Model Count</th>
  <th>Total</th>
  <th></th>
     </tr>
-      </thead>
-             <tbody>
-     @foreach (var entry in categoryGroup.Value)
+    </thead>
+          <tbody>
+   @foreach (var entry in categoryGroup.Value)
     {
-      var unit = allUnits?.FirstOrDefault(u => u.Id == entry.UnitId);
-       var totalPoints = entry.CalculatePoints();
+    var unit = allUnits?.FirstOrDefault(u => u.Id == entry.UnitId);
+ var totalPoints = entry.CalculatePoints();
 
    <tr>
    <td>
    <div style="cursor: pointer;" @onclick="() => ShowUnitDetailsFromEntry(entry)">
         <p class="has-text-weight-bold has-text-link">@entry.UnitName</p>
     <p class="is-size-7 has-text-grey">@entry.MinSize-@entry.MaxSize models per squad</p>
-     </div>
+  @if (entry.IsWarlord)
+    {
+      <p class="is-size-7 has-text-success"><i class="fas fa-crown mr-1"></i>Warlord</p>
+    }
+    @if (!string.IsNullOrEmpty(entry.EnhancementName))
+    {
+      <p class="is-size-7 has-text-info">
+     <i class="fas fa-star mr-1"></i>@entry.EnhancementName <span class="has-text-grey">+@entry.EnhancementPoints pts</span>
+      </p>
+    }
+ </div>
   </td>
-     <td>
-         <div class="field">
+ <td>
+     <div class="field">
        <div class="control">
       <input type="number" class="input" min="@entry.MinSize" max="@entry.MaxSize" @bind="entry.ModelCount" @bind:event="oninput" @onchange="() => RecalculateTotal()" />
  </div>
      </div>
-               </td>
-           <td>
+      </td>
+       <td>
        <span><strong>@totalPoints</strong></span>
    </td>
    <td>
         <button class="button is-danger is-small" @onclick="() => RemoveFromList(entry.Id)">×</button>
-      </td>
+    </td>
          </tr>
-            }
+         }
     </tbody>
-   </table>
+</table>
             </div>
       </div>
         }
 
-         <div class="notification is-info mt-4">
-         <h5 class="title is-5">Total: <strong>@currentList.CalculateTotalPoints() / @PointsLimit pts</strong></h5>
-        </div>
-         }
+      <div class="notification is-info mt-4">
+   <h5 class="title is-5">Total: <strong>@currentList.CalculateTotalPoints() / @PointsLimit pts</strong></h5>
+   </div>
+   }
 
     <div class="level mt-4">
       <div class="level-left">
@@ -173,13 +245,13 @@
     <div class="level-right">
      <button class="button is-success is-large" @onclick="SaveList">
    <span class="icon">
-        <i class="fas fa-save"></i>
+ <i class="fas fa-save"></i>
     </span>
   <span>Save List</span>
         </button>
-           </div>
-         </div>
-            </div>
+  </div>
+</div>
+       </div>
         </div>
     </div>
 </div>
@@ -189,7 +261,7 @@
     SelectedUnit="selectedUnitForDetails"
     SelectedDetachment="selectedDetachmentData"
     InitialWarlordState="selectedListEntryForEdit?.IsWarlord ?? false"
-    IsOpen="showUnitDetailsModal"
+ IsOpen="showUnitDetailsModal"
     OnEnhancementSelected="HandleEnhancementSelected"
     OnWarlordSelected="HandleWarlordSelected"
     OnClose="CloseUnitDetails" />
@@ -198,8 +270,8 @@
     [Parameter]
     public string ListName { get; set; } = string.Empty;
 
-  [Parameter]
- public string SelectedFaction { get; set; } = string.Empty;
+    [Parameter]
+    public string SelectedFaction { get; set; } = string.Empty;
 
     [Parameter]
     public string SelectedDetachment { get; set; } = string.Empty;
@@ -210,7 +282,7 @@
     [Parameter]
     public string? ListId { get; set; }
 
-    [Parameter]
+  [Parameter]
     public EventCallback OnBack { get; set; }
 
     [Parameter]
@@ -222,321 +294,331 @@
     private Dictionary<string, List<ListEntry>>? entriesByCategory;
     private bool isLoadingDatasheets = true;
     private HashSet<string> expandedCategories = new();
-    private int RemainingPoints => PointsLimit - (currentList?.CalculateTotalPoints() ?? 0);
 
     private Unit? selectedUnitForDetails;
     private bool showUnitDetailsModal = false;
-   private Detachment? selectedDetachmentData;
+    private Detachment? selectedDetachmentData;
     private ListEntry? selectedListEntryForEdit;
+    
+    private List<ListValidationService.ValidationMessage>? validationMessages = new();
 
     protected override async Task OnInitializedAsync()
-  {
+    {
    await LoadUnits();
         await LoadDetachment();
 
-   if (!string.IsNullOrWhiteSpace(ListId))
-     {
-        await LoadListForEditing(ListId);
-     }
-  else
+        if (!string.IsNullOrWhiteSpace(ListId))
+        {
+    await LoadListForEditing(ListId);
+        }
+        else
      {
   currentList = new UserList
     {
 Name = ListName,
-   Faction = SelectedFaction,
-    Detachment = SelectedDetachment,
-     Entries = new()
-   };
-      }
+  Faction = SelectedFaction,
+           Detachment = SelectedDetachment,
+        Entries = new()
+            };
+        }
     }
 
     private async Task LoadUnits()
     {
-    try
- {
-     allUnits = await DatasheetService.GetAllUnitsAsync();
- var factionUnits = allUnits?.Where(u => u.Faction == SelectedFaction).ToList() ?? new();
-
-  unitsByCategory = OrganizeUnitsByCategory(factionUnits);
-
-       if (unitsByCategory?.Any() == true)
- {
-   expandedCategories.Add(unitsByCategory.First().Key);
-      }
-
-   isLoadingDatasheets = false;
- }
-        catch (Exception ex)
+        try
    {
-        Console.WriteLine($"Error loading units: {ex.Message}");
-  isLoadingDatasheets = false;
-}
+            allUnits = await DatasheetService.GetAllUnitsAsync();
+            var factionUnits = allUnits?.Where(u => u.Faction == SelectedFaction).ToList() ?? new();
+
+          unitsByCategory = OrganizeUnitsByCategory(factionUnits);
+
+    isLoadingDatasheets = false;
+  }
+        catch (Exception ex)
+        {
+      Console.WriteLine($"Error loading units: {ex.Message}");
+      isLoadingDatasheets = false;
+        }
     }
 
-    private Dictionary<string, List<Unit>> OrganizeUnitsByCategory(List<Unit> units)
+  private Dictionary<string, List<Unit>> OrganizeUnitsByCategory(List<Unit> units)
     {
-        var categoryOrder = new[] { "Characters", "Battleline", "Dedicated Transports", "Fortifications", "Other" };
+      var categoryOrder = new[] { "Characters", "Battleline", "Dedicated Transports", "Fortifications", "Other" };
 
-var grouped = units.GroupBy(u => u.Category ?? "Other")
+        var grouped = units.GroupBy(u => string.IsNullOrWhiteSpace(u.Category) ? "Other" : u.Category)
   .ToDictionary(g => g.Key, g => g.OrderBy(u => u.Name).ToList());
 
-      var sorted = grouped.OrderBy(x =>
-   {
+        var sorted = grouped.OrderBy(x =>
+        {
      var index = System.Array.IndexOf(categoryOrder, x.Key);
-      return index >= 0 ? index : categoryOrder.Length;
+    return index >= 0 ? index : categoryOrder.Length;
         }).ToDictionary(x => x.Key, x => x.Value);
 
         return sorted;
     }
 
     private async Task LoadListForEditing(string listId)
-    {
-    try
+ {
+     try
         {
-    var savedLists = await ListStorageService.GetAllListsAsync();
-var listToEdit = savedLists?.FirstOrDefault(l => l.Id == listId);
+            var savedLists = await ListStorageService.GetAllListsAsync();
+       var listToEdit = savedLists?.FirstOrDefault(l => l.Id == listId);
 
-    if (listToEdit != null)
-{
-   currentList = new UserList
-         {
- Id = listToEdit.Id,
-         Name = listToEdit.Name,
-    Faction = listToEdit.Faction,
-        Detachment = listToEdit.Detachment,
- Entries = listToEdit.Entries.Select(e => new ListEntry
+      if (listToEdit != null)
+    {
+          currentList = new UserList
         {
-     Id = e.Id,
-     UnitId = e.UnitId,
-   UnitName = e.UnitName,
- ModelCount = e.ModelCount,
-   BasePoints = e.BasePoints,
-       MinSize = e.MinSize,
-            MaxSize = e.MaxSize,
-    SelectedOptions = new(e.SelectedOptions),
-      Enhancement = e.Enhancement,
-     EnhancementPoints = e.EnhancementPoints,
-      EnhancementDescription = e.EnhancementDescription
-   }).ToList()
-         };
+      Id = listToEdit.Id,
+    Name = listToEdit.Name,
+ Faction = listToEdit.Faction,
+       Detachment = listToEdit.Detachment,
+      Entries = listToEdit.Entries.Select(e => new ListEntry
+     {
+      Id = e.Id,
+  UnitId = e.UnitId,
+    UnitName = e.UnitName,
+          ModelCount = e.ModelCount,
+       BasePoints = e.BasePoints,
+  MinSize = e.MinSize,
+           MaxSize = e.MaxSize,
+       SelectedOptions = new(e.SelectedOptions),
+          Enhancement = e.Enhancement,
+   EnhancementName = e.EnhancementName,
+          EnhancementPoints = e.EnhancementPoints,
+   EnhancementDescription = e.EnhancementDescription,
+     IsWarlord = e.IsWarlord
+       }).ToList()
+       };
     OrganizeCurrentListByCategory();
-}
-}
-     catch (Exception ex)
-        {
-  Console.WriteLine($"Error loading list: {ex.Message}");
-    }
+          ValidateCurrentList();
+            }
+ }
+        catch (Exception ex)
+  {
+      Console.WriteLine($"Error loading list: {ex.Message}");
+        }
     }
 
-  private void SearchUnits(ChangeEventArgs e)
-    {
-  var searchTerm = e.Value?.ToString() ?? string.Empty;
+    private void SearchUnits(ChangeEventArgs e)
+{
+   var searchTerm = e.Value?.ToString() ?? string.Empty;
 
         if (string.IsNullOrWhiteSpace(searchTerm))
-   {
-   var factionUnits = allUnits?.Where(u => u.Faction == SelectedFaction).ToList() ?? new();
- unitsByCategory = OrganizeUnitsByCategory(factionUnits);
+      {
+    var factionUnits = allUnits?.Where(u => u.Faction == SelectedFaction).ToList() ?? new();
+            unitsByCategory = OrganizeUnitsByCategory(factionUnits);
         }
- else
-   {
-      var factionUnits = allUnits?.Where(u => u.Faction == SelectedFaction &&
-       u.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList() ?? new();
-   unitsByCategory = OrganizeUnitsByCategory(factionUnits);
-    }
-  }
-
-    private void ToggleCategory(string category)
-    {
-    if (expandedCategories.Contains(category))
-    {
-   expandedCategories.Remove(category);
-    }
         else
-{
-     expandedCategories.Add(category);
+        {
+   var factionUnits = allUnits?.Where(u => u.Faction == SelectedFaction &&
+     u.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList() ?? new();
+            unitsByCategory = OrganizeUnitsByCategory(factionUnits);
+        }
+    }
+
+  private void ToggleCategory(string category)
+    {
+        if (expandedCategories.Contains(category))
+        {
+    expandedCategories.Remove(category);
+        }
+        else
+      {
+            expandedCategories.Add(category);
         }
     }
 
     private void ShowUnitDetails(Unit unit)
     {
-   selectedUnitForDetails = unit;
-   selectedListEntryForEdit = null;
-    showUnitDetailsModal = true;
-  }
-
-  private void ShowUnitDetailsFromEntry(ListEntry entry)
-    {
-var unit = allUnits?.FirstOrDefault(u => u.Id == entry.UnitId);
-     if (unit != null)
-    {
-   selectedUnitForDetails = unit;
-   selectedListEntryForEdit = entry;
- showUnitDetailsModal = true;
-}
+      selectedUnitForDetails = unit;
+     selectedListEntryForEdit = null;
+        showUnitDetailsModal = true;
     }
 
- private async Task HandleEnhancementSelected((string enhancementId, string enhancementName, int enhancementPoints, string enhancementDescription) enhancement)
+    private void ShowUnitDetailsFromEntry(ListEntry entry)
     {
-    // If editing an existing entry, apply the changes immediately
-  if (selectedListEntryForEdit != null)
-  {
-     selectedListEntryForEdit.Enhancement = enhancement.enhancementId;
-    selectedListEntryForEdit.EnhancementName = enhancement.enhancementName;
-    selectedListEntryForEdit.EnhancementPoints = enhancement.enhancementPoints;
- selectedListEntryForEdit.EnhancementDescription = enhancement.enhancementDescription;
-     
-      OrganizeCurrentListByCategory();
-StateHasChanged();
-  }
+        var unit = allUnits?.FirstOrDefault(u => u.Id == entry.UnitId);
+        if (unit != null)
+        {
+         selectedUnitForDetails = unit;
+ selectedListEntryForEdit = entry;
+showUnitDetailsModal = true;
+    }
+    }
+
+    private async Task HandleEnhancementSelected((string enhancementId, string enhancementName, int enhancementPoints, string enhancementDescription) enhancement)
+    {
+        if (selectedListEntryForEdit != null)
+        {
+ selectedListEntryForEdit.Enhancement = enhancement.enhancementId;
+     selectedListEntryForEdit.EnhancementName = enhancement.enhancementName;
+  selectedListEntryForEdit.EnhancementPoints = enhancement.enhancementPoints;
+   selectedListEntryForEdit.EnhancementDescription = enhancement.enhancementDescription;
+        
+     OrganizeCurrentListByCategory();
+  ValidateCurrentList();
+            StateHasChanged();
+        }
     }
 
     private async Task HandleWarlordSelected(bool isWarlord)
-    {
-if (selectedListEntryForEdit != null)
-      {
-  // If setting as warlord, unset all other warlords
-      if (isWarlord && currentList != null)
-    {
-    foreach (var entry in currentList.Entries)
-    {
-        if (entry.Id != selectedListEntryForEdit.Id)
-     {
+ {
+   if (selectedListEntryForEdit != null)
+        {
+            if (isWarlord && currentList != null)
+            {
+                foreach (var entry in currentList.Entries)
+       {
+      if (entry.Id != selectedListEntryForEdit.Id)
+        {
     entry.IsWarlord = false;
-         }
    }
-       }
-       
-  selectedListEntryForEdit.IsWarlord = isWarlord;
-    OrganizeCurrentListByCategory();
-       StateHasChanged();
-         }
+    }
+            }
+
+     selectedListEntryForEdit.IsWarlord = isWarlord;
+     OrganizeCurrentListByCategory();
+            ValidateCurrentList();
+ StateHasChanged();
+        }
     }
 
     private void CloseUnitDetails()
     {
-   showUnitDetailsModal = false;
+        showUnitDetailsModal = false;
         selectedUnitForDetails = null;
-  selectedListEntryForEdit = null;
+        selectedListEntryForEdit = null;
     }
 
     private void AddUnitToList(Unit unit)
     {
         if (currentList == null)
-   currentList = new();
+          currentList = new();
 
-        var newEntry = new ListEntry
-     {
-  UnitId = unit.Id,
-      UnitName = unit.Name,
-   BasePoints = unit.BasePoints,
- MinSize = unit.MinSize,
-      MaxSize = unit.MaxSize,
-         ModelCount = unit.MinSize
-     };
+     var newEntry = new ListEntry
+        {
+            UnitId = unit.Id,
+            UnitName = unit.Name,
+         BasePoints = unit.BasePoints,
+            MinSize = unit.MinSize,
+        MaxSize = unit.MaxSize,
+    ModelCount = unit.MinSize
+  };
 
-  currentList.Entries.Add(newEntry);
-     OrganizeCurrentListByCategory();
+        currentList.Entries.Add(newEntry);
+    OrganizeCurrentListByCategory();
+        ValidateCurrentList();
    StateHasChanged();
     }
 
     private void RemoveFromList(string entryId)
     {
-      if (currentList != null)
-   {
-    currentList.Entries.RemoveAll(e => e.Id == entryId);
-       OrganizeCurrentListByCategory();
- StateHasChanged();
+        if (currentList != null)
+{
+            currentList.Entries.RemoveAll(e => e.Id == entryId);
+          OrganizeCurrentListByCategory();
+       ValidateCurrentList();
+   StateHasChanged();
         }
     }
 
     private void RecalculateTotal()
     {
-      StateHasChanged();
+        ValidateCurrentList();
+        StateHasChanged();
     }
 
     private void OrganizeCurrentListByCategory()
     {
         if (currentList == null || !currentList.Entries.Any())
- {
-     entriesByCategory = new Dictionary<string, List<ListEntry>>();
-  return;
-}
+    {
+            entriesByCategory = new Dictionary<string, List<ListEntry>>();
+     return;
+        }
 
     var categoryOrder = new[] { "Characters", "Battleline", "Dedicated Transports", "Fortifications", "Other" };
    entriesByCategory = new Dictionary<string, List<ListEntry>>();
 
         foreach (var entry in currentList.Entries)
-        {
-      var unit = allUnits?.FirstOrDefault(u => u.Id == entry.UnitId);
-      if (unit != null)
-   {
-     var category = unit.Category ?? "Other";
+     {
+    var unit = allUnits?.FirstOrDefault(u => u.Id == entry.UnitId);
+          if (unit != null)
+            {
+              var category = string.IsNullOrWhiteSpace(unit.Category) ? "Other" : unit.Category;
 
- if (!entriesByCategory.ContainsKey(category))
+        if (!entriesByCategory.ContainsKey(category))
   {
-  entriesByCategory[category] = new List<ListEntry>();
-  }
+       entriesByCategory[category] = new List<ListEntry>();
+                }
 
-     entriesByCategory[category].Add(entry);
-            }
-      }
+ entriesByCategory[category].Add(entry);
+     }
+     }
 
-  var sortedCategories = entriesByCategory.OrderBy(x =>
+   var sortedCategories = entriesByCategory.OrderBy(x =>
         {
-      var index = System.Array.IndexOf(categoryOrder, x.Key);
-  return index >= 0 ? index : categoryOrder.Length;
+            var index = System.Array.IndexOf(categoryOrder, x.Key);
+            return index >= 0 ? index : categoryOrder.Length;
         }).ToDictionary(x => x.Key, x => x.Value);
 
-        entriesByCategory = sortedCategories;
+entriesByCategory = sortedCategories;
     }
 
     private async Task SaveList()
-    {
-        try
 {
-       if (currentList != null && !string.IsNullOrWhiteSpace(currentList.Name))
-  {
-     currentList.Name = ListName;
-      currentList.Faction = SelectedFaction;
-   currentList.Detachment = SelectedDetachment;
- 
-     await ListStorageService.SaveListAsync(currentList);
-     
-       Console.WriteLine($"List '{currentList.Name}' saved successfully");
-    await OnSave.InvokeAsync();
-  }
-    else
-         {
-   Console.WriteLine("List name is required");
-     }
-  }
- catch (InvalidOperationException ex) when (ex.Message.Contains("Not authenticated"))
+        try
     {
-    Console.WriteLine("Error: You are not authenticated. Please log in.");
+         if (currentList != null && !string.IsNullOrWhiteSpace(currentList.Name))
+      {
+ currentList.Name = ListName;
+          currentList.Faction = SelectedFaction;
+          currentList.Detachment = SelectedDetachment;
+     
+                await ListStorageService.SaveListAsync(currentList);
+    
+                Console.WriteLine($"List '{currentList.Name}' saved successfully");
+          await OnSave.InvokeAsync();
+     }
+            else
+   {
+          Console.WriteLine("List name is required");
    }
-   catch (Exception ex)
+        }
+      catch (InvalidOperationException ex) when (ex.Message.Contains("Not authenticated"))
   {
-    Console.WriteLine($"Error saving list: {ex.Message}");
+            Console.WriteLine("Error: You are not authenticated. Please log in.");
+        }
+        catch (Exception ex)
+   {
+       Console.WriteLine($"Error saving list: {ex.Message}");
         }
     }
 
     private async Task HandleBack()
     {
-await OnBack.InvokeAsync();
+        await OnBack.InvokeAsync();
     }
 
     private async Task LoadDetachment()
     {
- try
+        try
         {
-   if (!string.IsNullOrWhiteSpace(SelectedDetachment))
- {
-       selectedDetachmentData = await DetachmentService.GetDetachmentByIdAsync(SelectedFaction, SelectedDetachment);
-       }
-}
-catch (Exception ex)
+    if (!string.IsNullOrWhiteSpace(SelectedDetachment))
+   {
+                selectedDetachmentData = await DetachmentService.GetDetachmentByIdAsync(SelectedFaction, SelectedDetachment);
+        }
+        }
+   catch (Exception ex)
         {
-   Console.WriteLine($"Error loading detachment: {ex.Message}");
+    Console.WriteLine($"Error loading detachment: {ex.Message}");
+        }
+    }
+
+    private void ValidateCurrentList()
+    {
+        if (currentList != null && allUnits != null)
+        {
+     validationMessages = ListValidationService.ValidateList(currentList, allUnits, PointsLimit);
      }
     }
 }

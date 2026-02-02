@@ -14,6 +14,7 @@ builder.Services.AddScoped<AuthStateProvider>();
 builder.Services.AddScoped<DatasheetService>();
 builder.Services.AddScoped<DetachmentService>();
 builder.Services.AddScoped<ListStorageService>();
+builder.Services.AddScoped<ListValidationService>();
 
 var host = builder.Build();
 

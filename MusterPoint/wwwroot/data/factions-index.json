@@ -3,8 +3,8 @@
     {
       "id": "space-marines",
       "name": "Space Marines",
-      "path": "/data/factions/space-marines.json"
+      "path": "/data/factions/space-marines/index.json"
     }
   ],
-  "description": "Central index for all faction unit data. Each faction has its own JSON file for easy management and scalability."
+  "description": "Central index for all faction unit data. Each faction has its own directory with modular unit files for easy management and scalability."
 }

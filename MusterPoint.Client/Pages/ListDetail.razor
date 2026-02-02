@@ -364,7 +364,7 @@ catch (Exception ex)
  "Battleline",
     "Dedicated Transports",
           "Fortifications",
-    "Other"
+  "Other"
         };
 
   unitsByCategory = new Dictionary<string, List<ListEntry>>();
@@ -374,7 +374,7 @@ catch (Exception ex)
  var unit = allUnits?.FirstOrDefault(u => u.Id == entry.UnitId);
     if (unit != null)
     {
-   var category = unit.Category ?? "Other";
+   var category = string.IsNullOrWhiteSpace(unit.Category) ? "Other" : unit.Category;
      
     if (!unitsByCategory.ContainsKey(category))
     {

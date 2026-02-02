@@ -1,0 +1,10 @@
+{
+  "faction": "Space Marines",
+  "units": [
+    { "ref": "characters.json" },
+    { "ref": "battleline.json" },
+ { "ref": "other.json" },
+    { "ref": "fortifications.json" },
+    { "ref": "transports.json" }
+  ]
+}
