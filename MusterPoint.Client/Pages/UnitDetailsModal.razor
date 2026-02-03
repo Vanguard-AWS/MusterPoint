@@ -58,7 +58,7 @@
      </div>
 
        <!-- Enhancements Section (Characters only) -->
-    @if (IsCharacter && AvailableEnhancements.Any())
+    @if (IsCharacter && IsEditingExistingEntry && AvailableEnhancements.Any())
  {
   <div class="section-box enhancement-section">
     <h3 class="section-title">ENHANCEMENTS</h3>
@@ -76,35 +76,35 @@
     @if (!string.IsNullOrEmpty(_selectedEnhancementId))
     {
   var selectedEnhance = AvailableEnhancements.FirstOrDefault(e => e.Id == _selectedEnhancementId);
-        if (selectedEnhance != null)
+    if (selectedEnhance != null)
         {
      <div class="enhancement-selected mt-3">
  <p class="is-size-7 terminal-text" style="color: var(--terminal-green);"><i class="fas fa-check-circle mr-2"></i>ENHANCEMENT SELECTED</p>
   <div class="mt-2">
   <span class="enhancement-name">@selectedEnhance.Name <span class="enhancement-cost">+@selectedEnhance.Points PTS</span></span>
-     <p class="enhancement-desc mt-2">@selectedEnhance.Description</p>
+   <p class="enhancement-desc mt-2">@selectedEnhance.Description</p>
      </div>
 <button class="terminal-button is-small is-danger mt-3" @onclick="ClearEnhancement">
 [ REMOVE ENHANCEMENT ]
      </button>
       </div>
         }
-        else
-        {
+      else
+      {
             <p style="color: red;">ERROR: Could not find enhancement with ID "@_selectedEnhancementId" in AvailableEnhancements</p>
       }
     }
   </div>
     }
-    else if (IsCharacter)
+    else if (IsCharacter && !IsEditingExistingEntry)
     {
-        <div class="section-box" style="border-color: orange;">
-        <p style="color: orange;">Enhancement section hidden - AvailableEnhancements.Count = @AvailableEnhancements.Count</p>
+     <div class="section-box" style="border-color: orange;">
+        <p style="color: orange;">Note: Enhancements can be added after adding this unit to your roster.</p>
         </div>
     }
 
     <!-- Warlord Section (Characters only) -->
- @if (IsCharacter)
+ @if (IsCharacter && IsEditingExistingEntry)
     {
 <div class="section-box warlord-section">
      <h3 class="section-title">WARLORD</h3>
@@ -325,6 +325,9 @@
     public Detachment? SelectedDetachment { get; set; }
 
     [Parameter]
+    public bool IsEditingExistingEntry { get; set; } = false;
+
+    [Parameter]
     public EventCallback<(string enhancementId, string enhancementName, int enhancementPoints, string enhancementDescription)> OnEnhancementSelected { get; set; }
 
     [Parameter]
@@ -333,7 +336,7 @@
     [Parameter]
     public EventCallback OnClose { get; set; }
 
- private List<Enhancement> AvailableEnhancements => SelectedDetachment?.Enhancements ?? new();
+    private List<Enhancement> AvailableEnhancements => SelectedDetachment?.Enhancements ?? new();
     private string _selectedEnhancementId = string.Empty;
     private bool IsWarlordSelected { get; set; } = false;
     

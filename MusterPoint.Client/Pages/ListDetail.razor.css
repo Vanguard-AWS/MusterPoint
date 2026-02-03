@@ -1,7 +1,7 @@
 /* List Detail View Styles - Terminal Theme */
 
 :root {
-    /* Terminal Colors */
+  /* Terminal Colors */
  --terminal-green: #00ff41;
     --terminal-orange: #ffaa00;
     --terminal-cyan: #00d4ff;
@@ -12,13 +12,13 @@
     --terminal-bg-medium: #1a1a2e;
     --terminal-bg-light: rgba(10, 10, 10, 0.8);
     
-    /* Shadows */
+/* Shadows */
   --shadow-green-soft: 0 0 5px rgba(0, 255, 65, 0.5);
   --shadow-green-medium: 0 0 15px rgba(0, 255, 65, 0.8);
   
     /* Typography */
-    --terminal-font: 'Courier New', 'Courier', monospace;
-    --transition-fast: 0.3s ease;
+  --terminal-font: 'Courier New', 'Courier', monospace;
+  --transition-fast: 0.3s ease;
 }
 
 /* ========================================
@@ -28,12 +28,14 @@
 .list-detail-container {
   background: #161624;
     color: var(--terminal-green);
-    font-family: var(--terminal-font);
-    min-height: 100vh;
-    max-width: 1400px;
-  margin: 0 auto;
-    padding: 1.5rem;
-    line-height: 1.5;
+  font-family: var(--terminal-font);
+    height: 100vh;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 /* ========================================
@@ -45,9 +47,10 @@
     border-bottom: 2px dashed var(--terminal-cyan);
     background: rgba(0, 255, 65, 0.02);
     padding: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin: 1.5rem 1.5rem 0 1.5rem;
     box-shadow: var(--shadow-green-soft);
     border-radius: 2px;
+    flex-shrink: 0;
 }
 
 .header-content {
@@ -80,7 +83,7 @@
 .meta-item {
     display: flex;
     gap: 0.5rem;
-    align-items: center;
+ align-items: center;
     font-size: 0.9rem;
 }
 
@@ -98,9 +101,44 @@
 
 .header-actions {
   display: flex;
-    gap: 1rem;
+ gap: 1rem;
     flex-wrap: wrap;
     justify-content: flex-end;
+}
+
+/* ========================================
+ SCROLLABLE CONTENT AREA
+   ======================================== */
+
+.units-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+  display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 2px solid var(--terminal-green);
+    background: rgba(0, 255, 65, 0.01);
+    margin: 0 1.5rem 1.5rem 1.5rem;
+    border-radius: 2px;
+    box-shadow: var(--shadow-green-soft);
+}
+
+.units-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.units-container::-webkit-scrollbar-track {
+    background: rgba(0, 255, 65, 0.05);
+}
+
+.units-container::-webkit-scrollbar-thumb {
+    background: var(--terminal-green);
+    border-radius: 4px;
+}
+
+.units-container::-webkit-scrollbar-thumb:hover {
+  background: var(--terminal-orange);
 }
 
 /* ========================================
@@ -108,12 +146,11 @@
    ======================================== */
 
 .loading-container {
-    border: 2px dashed var(--terminal-green);
+border: 2px dashed var(--terminal-green);
     background: rgba(0, 255, 65, 0.02);
     padding: 3rem;
     text-align: center;
     border-radius: 2px;
-  margin-top: 2rem;
 }
 
 .loading-text {
@@ -138,8 +175,7 @@
     background: rgba(255, 170, 0, 0.02);
     padding: 3rem;
   text-align: center;
-    border-radius: 2px;
-    margin-top: 2rem;
+ border-radius: 2px;
 }
 
 .empty-text {
@@ -150,37 +186,29 @@ color: var(--terminal-orange);
 }
 
 /* ========================================
-   UNITS CONTAINER
-   ======================================== */
-
-.units-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-/* ========================================
    CATEGORY SECTION
    ======================================== */
 
 .category-section {
-    border: 2px solid var(--terminal-green);
-    background: rgba(0, 255, 65, 0.01);
+    border: none;
+    background: transparent;
   padding: 0;
-    border-radius: 2px;
-    overflow: hidden;
-box-shadow: var(--shadow-green-soft);
+    border-radius: 0;
+    overflow: visible;
+box-shadow: none;
+    margin-bottom: 0;
 }
 
 .category-header {
-    background: rgba(0, 255, 65, 0.05);
-    border-bottom: 1px dashed var(--terminal-green);
-    padding: 0.75rem 1rem;
+    background: transparent;
+    border-bottom: none;
+    padding: 0.5rem 0 0.75rem 0;
+    margin-bottom: 0.5rem;
 }
 
 .category-title {
-    font-size: 0.9rem;
-    font-weight: bold;
+    font-size: 0.75rem;
+  font-weight: bold;
     color: var(--terminal-cyan);
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -192,7 +220,7 @@ box-shadow: var(--shadow-green-soft);
 
 .category-bracket {
     color: var(--terminal-green);
-    opacity: 0.6;
+  opacity: 0.6;
 }
 
 /* ========================================
@@ -211,7 +239,7 @@ box-shadow: var(--shadow-green-soft);
 
 .unit-row {
     border-bottom: 1px solid rgba(0, 255, 65, 0.2);
-    transition: all var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .unit-row:last-child {
@@ -233,6 +261,11 @@ box-shadow: var(--shadow-green-soft);
  padding: 1rem;
     cursor: pointer;
     transition: all var(--transition-fast);
+    user-select: none;
+}
+
+.unit-header:hover {
+    background-color: rgba(0, 255, 65, 0.02);
 }
 
 .unit-row.expanded .unit-header {
@@ -246,8 +279,8 @@ box-shadow: var(--shadow-green-soft);
     color: var(--terminal-green);
     width: 2rem;
     height: 2rem;
-    padding: 0;
-    font-size: 1rem;
+ padding: 0;
+ font-size: 1rem;
     cursor: pointer;
     border-radius: 2px;
     display: flex;
@@ -288,7 +321,7 @@ box-shadow: var(--shadow-green-soft);
     font-size: 0.8rem;
     color: var(--terminal-green-dim);
     display: flex;
-    gap: 1.5rem;
+  gap: 1.5rem;
   flex-wrap: wrap;
     align-items: center;
     text-transform: uppercase;
@@ -334,7 +367,7 @@ box-shadow: var(--shadow-green-soft);
    ======================================== */
 
 .detail-section {
-    background: rgba(0, 255, 65, 0.02);
+background: rgba(0, 255, 65, 0.02);
 border: 1px dashed rgba(0, 255, 65, 0.3);
     border-left: 3px solid var(--terminal-green);
     padding: 0.75rem;
@@ -405,7 +438,7 @@ font-weight: bold;
 }
 
 .data-table thead {
-    background: rgba(0, 255, 65, 0.07);
+  background: rgba(0, 255, 65, 0.07);
     border-top: 1px solid var(--terminal-green);
     border-bottom: 1px dashed var(--terminal-green);
 }
@@ -436,7 +469,7 @@ border-right: 1px solid rgba(0, 255, 65, 0.15);
 }
 
 .data-table tbody tr:last-child td {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .data-table tbody tr:hover {
@@ -454,7 +487,7 @@ border-right: 1px solid rgba(0, 255, 65, 0.15);
 }
 
 .keyword-tag {
-    display: inline-block;
+  display: inline-block;
  padding: 0.25rem 0.75rem;
     background: rgba(0, 255, 65, 0.05);
     border: 1px solid var(--terminal-green);
@@ -467,11 +500,11 @@ border-right: 1px solid rgba(0, 255, 65, 0.15);
 }
 
 /* ========================================
-   ABILITIES
+ ABILITIES
  ======================================== */
 
 .abilities-list {
-    display: flex;
+ display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
@@ -480,16 +513,16 @@ border-right: 1px solid rgba(0, 255, 65, 0.15);
     padding: 0.5rem;
     background: rgba(0, 255, 65, 0.02);
     border-left: 2px solid var(--terminal-cyan);
-    padding-left: 0.75rem;
+  padding-left: 0.75rem;
 }
 
 .ability-name {
     color: var(--terminal-cyan);
     font-weight: bold;
-    font-size: 0.8rem;
+  font-size: 0.8rem;
     margin: 0 0 0.25rem 0;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+  letter-spacing: 0.05em;
 }
 
 .ability-desc {
@@ -522,7 +555,7 @@ border-right: 1px solid rgba(0, 255, 65, 0.15);
     font-size: 0.8rem;
     margin: 0 0 0.25rem 0;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+  letter-spacing: 0.05em;
 }
 
 .wargear-desc {
@@ -535,7 +568,7 @@ border-right: 1px solid rgba(0, 255, 65, 0.15);
 .wargear-limit {
     color: var(--terminal-green-dim);
     font-size: 0.75rem;
-    margin: 0.25rem 0 0 0;
+ margin: 0.25rem 0 0 0;
 }
 
 /* ========================================
@@ -554,7 +587,7 @@ font-size: 0.75rem;
     font-weight: bold;
     transition: all var(--transition-fast);
     box-shadow: var(--shadow-green-soft);
-    letter-spacing: 0.05em;
+  letter-spacing: 0.05em;
     border-radius: 2px;
     white-space: nowrap;
 }
@@ -587,17 +620,22 @@ font-size: 0.75rem;
 }
 
 .terminal-button-secondary:hover {
-    background: rgba(0, 212, 255, 0.1);
+background: rgba(0, 212, 255, 0.1);
     box-shadow: 0 0 15px rgba(0, 212, 255, 0.5), inset 0 0 10px rgba(0, 212, 255, 0.2);
 }
 
 /* ========================================
-   RESPONSIVE DESIGN
+ RESPONSIVE DESIGN
    ======================================== */
 
 @media screen and (max-width: 768px) {
-    .list-detail-container {
+    .list-header {
         padding: 1rem;
+        margin: 1rem 1rem 0 1rem;
+    }
+
+    .units-container {
+   padding: 1rem;
     }
 
     .header-content {
@@ -605,18 +643,18 @@ font-size: 0.75rem;
       gap: 1rem;
     }
 
-    .list-title {
+ .list-title {
    font-size: 1.35rem;
     }
 
 .list-meta {
    flex-direction: column;
-        gap: 0.75rem;
+ gap: 0.75rem;
     }
 
 .header-actions {
    width: 100%;
-      gap: 0.75rem;
+ gap: 0.75rem;
   }
 
     .terminal-button {
@@ -635,7 +673,7 @@ font-size: 0.75rem;
   }
 
   .unit-details {
-  padding: 0.75rem;
+padding: 0.75rem;
     }
 
     .detail-section {
@@ -662,8 +700,17 @@ font-size: 0.75rem;
 
 @media screen and (max-width: 540px) {
     .list-detail-container {
-     padding: 0.75rem;
+     height: 100vh;
     }
+
+    .list-header {
+    padding: 0.75rem;
+  margin: 0.75rem 0.75rem 0 0.75rem;
+    }
+
+    .units-container {
+     padding: 0.75rem;
+  }
 
     .list-title {
       font-size: 1.1rem;
@@ -675,7 +722,7 @@ font-size: 0.75rem;
 
     .terminal-button {
  width: 100%;
-    }
+  }
 
  .unit-header {
   padding: 0.5rem;
@@ -692,7 +739,7 @@ font-size: 0.75rem;
  }
 
     .unit-details-inline {
-        flex-direction: column;
+  flex-direction: column;
    gap: 0.5rem;
     }
 }
@@ -703,8 +750,16 @@ font-size: 0.75rem;
 
 @media print {
     .list-detail-container {
-     background: white;
-        color: black;
+     height: auto;
+    }
+
+    .list-header {
+        margin-bottom: 1rem;
+    }
+
+  .units-container {
+    overflow: visible;
+        padding: 0;
     }
 
 .list-header,

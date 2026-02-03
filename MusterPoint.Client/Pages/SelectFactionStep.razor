@@ -1,61 +1,77 @@
 @namespace MusterPoint.Client.Pages
+@inject NavigationManager NavigationManager
 
 <div class="faction-selector-container">
-    <div class="faction-header">
-        <h1 class="title-main">SELECT FACTION</h1>
-        <p class="title-sub">Choose Your Army Alliance</p>
+    <div class="faction-header-top">
+        <div class="faction-header-left">
+            <h1 class="title-main">SELECT FACTION</h1>
+            <p class="title-sub">Choose Your Army Alliance</p>
+        </div>
+        <div class="faction-actions">
+            <button class="terminal-button terminal-button-secondary" @onclick="HandleBack">
+   <span class="button-bracket">[</span>
+    <span class="button-text">BACK</span>
+     <span class="button-bracket">]</span>
+     </button>
+       <button class="terminal-button terminal-button-secondary" disabled="@(string.IsNullOrEmpty(_localSelectedFaction))" @onclick="HandleContinue">
+             <span class="button-bracket">[</span>
+      <span class="button-text">CONTINUE</span>
+      <span class="button-bracket">]</span>
+       </button>
  </div>
+    </div>
 
     <div class="faction-grid">
         <!-- Imperium -->
-     <div class="faction-section">
-  <h2 class="faction-section-title imperium-title">Imperium</h2>
+      <div class="faction-section">
+  <h2 class="faction-section-title imperium-title">
+  Imperium
+     <img src="@GetFactionTypeIconPath("imperium")" alt="Imperium" class="faction-type-icon" />
+            </h2>
          <div class="faction-options">
-        @foreach (var faction in ImperiumFactions)
-     {
-     <button class="faction-card @(SelectedFaction == faction ? "is-selected" : "")" 
-     @onclick="() => SelectFaction(faction)">
-       <span class="faction-name">@faction</span>
-       </button>
-        }
-         </div>
-     </div>
+            @foreach (var faction in ImperiumFactions)
+      {
+      <button class="faction-card @(SelectedFaction == faction || _localSelectedFaction == faction ? "is-selected" : "")" @onclick="() => SelectFaction(faction)">
+   <img src="@GetFactionIconPath(faction)" alt="@faction" class="faction-icon" />
+            <span class="faction-name">@faction</span>
+    </button>
+      }
+            </div>
+        </div>
 
         <!-- Chaos -->
-     <div class="faction-section">
- <h2 class="faction-section-title chaos-title">Chaos</h2>
-<div class="faction-options">
-   @foreach (var faction in ChaosFactions)
-       {
-         <button class="faction-card @(SelectedFaction == faction ? "is-selected" : "")" 
-   @onclick="() => SelectFaction(faction)">
-  <span class="faction-name">@faction</span>
-</button>
-     }
-   </div>
-  </div>
+        <div class="faction-section">
+  <h2 class="faction-section-title chaos-title">
+              Chaos
+    <img src="@GetFactionTypeIconPath("chaos")" alt="Chaos" class="faction-type-icon" />
+    </h2>
+            <div class="faction-options">
+                @foreach (var faction in ChaosFactions)
+      {
+    <button class="faction-card @(SelectedFaction == faction || _localSelectedFaction == faction ? "is-selected" : "")" @onclick="() => SelectFaction(faction)">
+       <img src="@GetFactionIconPath(faction)" alt="@faction" class="faction-icon" />
+   <span class="faction-name">@faction</span>
+         </button>
+        }
+      </div>
+        </div>
 
         <!-- Xenos -->
-      <div class="faction-section">
-    <h2 class="faction-section-title xenos-title">Xenos</h2>
-    <div class="faction-options">
-   @foreach (var faction in XenosFactions)
-     {
-     <button class="faction-card @(SelectedFaction == faction ? "is-selected" : "")" 
-     @onclick="() => SelectFaction(faction)">
-  <span class="faction-name">@faction</span>
-     </button>
-    }
-  </div>
-  </div>
- </div>
-
-    <div class="faction-actions">
-    <button class="terminal-button terminal-button-secondary" disabled="@(string.IsNullOrEmpty(SelectedFaction))" @onclick="HandleContinue">
-     <span class="button-bracket">[</span>
-       <span class="button-text">CONTINUE</span>
-         <span class="button-bracket">]</span>
-        </button>
+        <div class="faction-section">
+            <h2 class="faction-section-title xenos-title">
+    Xenos
+         <img src="@GetFactionTypeIconPath("xenos")" alt="Xenos" class="faction-type-icon" />
+  </h2>
+   <div class="faction-options">
+       @foreach (var faction in XenosFactions)
+{
+     <button class="faction-card @(SelectedFaction == faction || _localSelectedFaction == faction ? "is-selected" : "")" @onclick="() => SelectFaction(faction)">
+          <img src="@GetFactionIconPath(faction)" alt="@faction" class="faction-icon" />
+         <span class="faction-name">@faction</span>
+ </button>
+  }
+       </div>
+        </div>
     </div>
 </div>
 
@@ -63,52 +79,93 @@
     [Parameter]
     public string SelectedFaction { get; set; } = string.Empty;
 
-  [Parameter]
+    [Parameter]
     public EventCallback<string> OnFactionSelected { get; set; }
+
+    private string _localSelectedFaction = string.Empty;
 
     private List<string> ImperiumFactions = new()
     {
-  "Adepta Sororitas",
-      "Adeptus Custodes",
-  "Adeptus Mechanicus",
-        "Adeptus Titanicus",
-  "Astra Militarum",
-  "Grey Knights",
-        "Imperial Agents",
+        "Adepta Sororitas",
+        "Adeptus Custodes",
+    "Adeptus Mechanicus",
+        "Astra Militarum",
+        "Grey Knights",
+   "Imperial Agents",
   "Imperial Knights",
-"Space Marines"
- };
-
-  private List<string> ChaosFactions = new()
-  {
-   "Chaos Daemons",
-   "Chaos Knights",
-  "Chaos Space Marines",
-"Death Guard",
-    "Emperor's Children",
- "Thousand Sons",
-        "World Eaters"
+        "Space Marines"
     };
 
-private List<string> XenosFactions = new()
+    private List<string> ChaosFactions = new()
+    {
+        "Chaos Daemons",
+    "Chaos Knights",
+        "Chaos Space Marines",
+        "Death Guard",
+        "Emperor's Children",
+        "Thousand Sons",
+  "World Eaters"
+    };
+
+    private List<string> XenosFactions = new()
     {
         "Aeldari",
-     "Drukhari",
- "Genestealer Cults",
+   "Drukhari",
+        "Genestealer Cults",
         "Leagues of Votann",
         "Necrons",
-        "Orks",
-  "T'au Empire",
+    "Orks",
+        "T'au Empire",
         "Tyranids"
     };
 
     private async Task SelectFaction(string faction)
     {
+     _localSelectedFaction = faction;
         SelectedFaction = faction;
- }
+    }
 
-    private async Task HandleContinue()
+private async Task HandleContinue()
     {
-        await OnFactionSelected.InvokeAsync(SelectedFaction);
+     await OnFactionSelected.InvokeAsync(SelectedFaction);
+    }
+
+    private void HandleBack()
+    {
+        NavigationManager.NavigateTo("/lists", replace: true);
+    }
+
+    private string GetFactionIconPath(string factionName)
+    {
+     // Convert faction name to kebab-case for file naming
+        string iconName = factionName
+    .ToLower()
+            .Replace(" ", "-")
+     .Replace("'", "");
+
+        // Determine which subfolder based on faction
+        string subfolder = "imperium"; // default
+
+        if (ChaosFactions.Contains(factionName))
+     {
+    subfolder = "chaos";
+        }
+  else if (XenosFactions.Contains(factionName))
+        {
+            subfolder = "xenos";
+        }
+
+        // Convert subfolder to kebab-case as well (in case of multi-word faction types)
+        string kebabSubfolder = subfolder.ToLower().Replace(" ", "-");
+
+        return $"/data/faction-icons/{kebabSubfolder}/{iconName}.svg";
+    }
+
+    private string GetFactionTypeIconPath(string factionType)
+    {
+  // This maps faction types to their icon files
+        // Assuming you have imperium.svg, chaos.svg, and xenos.svg in the respective folders
+        string kebabType = factionType.ToLower().Replace(" ", "-");
+      return $"/data/faction-icons/{kebabType}/{kebabType}.svg";
     }
 }

@@ -11,12 +11,31 @@
   margin-bottom: 2.5rem;
 }
 
-.configure-header .title-main {
+.configure-header-top {
+    display: flex;
+  justify-content: space-between;
+    align-items: baseline;
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+}
+
+.configure-header-left {
+    flex: 1;
+}
+
+.configure-header-left .title-main {
     margin: 0 0 0.5rem 0;
 }
 
-.configure-header .title-sub {
+.configure-header-left .title-sub {
     margin: 0;
+}
+
+.configure-header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
 }
 
 .configure-box {
@@ -42,6 +61,27 @@
     letter-spacing: 0.05em;
 }
 
+.faction-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faction-text {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0;
+}
+
+.faction-icon-inline {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    flex-shrink: 0;
+}
+
 .terminal-input {
 width: 100%;
     padding: 0.75rem 1rem;
@@ -62,26 +102,38 @@ width: 100%;
 
 .terminal-select {
     width: 100%;
-    padding: 0.75rem 1rem;
- background: rgba(0, 255, 65, 0.05);
+ padding: 0.75rem 1rem;
+    background: rgba(0, 255, 65, 0.05);
     border: 2px solid var(--terminal-green);
-    color: var(--terminal-green);
+ color: var(--terminal-green);
     font-family: var(--terminal-font);
     font-size: 0.9rem;
     box-sizing: border-box;
- outline: none;
+  outline: none;
     transition: all var(--transition-fast);
     cursor: pointer;
+    border-radius: 2px;
 }
 
-.terminal-select:hover,
-.terminal-select:focus {
+.terminal-select:hover {
     border-color: var(--terminal-orange);
     background: rgba(0, 255, 65, 0.1);
 }
 
+.terminal-select:focus {
+    border-color: var(--terminal-orange);
+    background: rgba(0, 255, 65, 0.15);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
 .terminal-select option {
-    background: var(--terminal-bg-dark);
+ background: var(--terminal-bg-dark);
+    color: var(--terminal-green);
+    padding: 0.5rem;
+}
+
+.terminal-select option:checked {
+    background: rgba(0, 255, 65, 0.2);
     color: var(--terminal-green);
 }
 
@@ -147,14 +199,18 @@ width: 100%;
 .configure-actions {
     display: flex;
     gap: 1rem;
-    justify-content: space-between;
-    margin-top: 2rem;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .configure-actions .terminal-button {
-  flex: 1;
-    min-width: 140px;
+    min-width: 160px;
+    width: 160px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
 }
 
 .configure-actions .terminal-button:disabled {
@@ -162,48 +218,77 @@ width: 100%;
     cursor: not-allowed;
 }
 
+.configure-actions .terminal-button:disabled:hover {
+    border-color: inherit;
+    background-color: transparent;
+    box-shadow: none;
+    transform: none;
+}
+
 /* Responsive */
 @media screen and (max-width: 768px) {
- .configure-list-container {
+    .configure-list-container {
         padding: 1.5rem;
         max-width: 100%;
-  }
+    }
 
-    .configure-header .title-main {
+    .configure-header-top {
+  flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .configure-header-left .title-main {
         font-size: 1.8rem;
     }
 
-    .configure-box {
-padding: 1.5rem;
-  }
-
-  .game-size-options {
-grid-template-columns: repeat(2, 1fr);
-    }
-
-  .configure-actions {
-  flex-direction: column;
+    .configure-actions {
+        width: 100%;
+     align-items: flex-start;
+        flex-direction: row;
     }
 
     .configure-actions .terminal-button {
-   width: 100%;
-  }
+        flex: 1;
+    }
+
+    .configure-box {
+        padding: 1.5rem;
+    }
+
+    .game-size-options {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media screen and (max-width: 540px) {
     .configure-list-container {
-  padding: 1rem;
-    }
-
-    .configure-header .title-main {
-        font-size: 1.5rem;
-  }
-
-    .configure-box {
         padding: 1rem;
     }
 
-  .game-size-options {
-    grid-template-columns: 1fr;
+    .configure-header-left .title-main {
+        font-size: 1.5rem;
   }
+
+  .configure-header-top {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .configure-actions {
+        flex-direction: column;
+        width: 100%;
+        align-items: stretch;
+    }
+
+    .configure-actions .terminal-button {
+ width: 100%;
+    }
+
+    .configure-box {
+      padding: 1rem;
+    }
+
+    .game-size-options {
+        grid-template-columns: 1fr;
+    }
 }

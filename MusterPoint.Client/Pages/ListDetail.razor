@@ -76,24 +76,23 @@
        var isExpanded = expandedUnits.Contains(entry.Id);
 
     <div class="unit-row @(isExpanded ? "expanded" : "")">
-           <div class="unit-header">
+           <div class="unit-header" @onclick="() => ToggleExpanded(entry.Id)">
       <button class="expand-btn @(isExpanded ? "open" : "")"
- @onclick="() => ToggleExpanded(entry.Id)"
-           aria-label="Toggle unit details">
-                    <i class="fas @(isExpanded ? "fa-angle-down" : "fa-angle-right")"></i>
+ aria-label="Toggle unit details">
+          <i class="fas @(isExpanded ? "fa-angle-down" : "fa-angle-right")"></i>
    </button>
      <div class="unit-info">
       <span class="unit-name">@entry.UnitName</span>
     <span class="unit-details-inline">
        @entry.ModelCount MODEL@(entry.ModelCount != 1 ? "S" : "") • @entry.CalculatePoints() PTS
             @if (entry.IsWarlord)
-                {
+        {
           <span class="warlord-badge">? WARLORD</span>
 }
         @if (!string.IsNullOrEmpty(entry.Enhancement))
   {
            <span class="enhancement-badge">? @entry.EnhancementName</span>
-             }
+   }
         </span>
     </div>
  </div>

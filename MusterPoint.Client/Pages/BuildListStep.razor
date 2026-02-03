@@ -1,25 +1,31 @@
-﻿@namespace MusterPoint.Client.Pages
+@namespace MusterPoint.Client.Pages
 @using MusterPoint.Client.Models
 @using MusterPoint.Client.Services
 @inject DatasheetService DatasheetService
 @inject ListStorageService ListStorageService
 @inject DetachmentService DetachmentService
 @inject ListValidationService ListValidationService
+@inject NavigationManager NavigationManager
 @rendermode InteractiveWebAssembly
 
 <div class="build-list-container">
   <div class="build-list-header">
         <div class="header-content">
- <h1 class="title-main">@ListName</h1>
-            <p class="title-sub">@SelectedFaction - @SelectedDetachment</p>
+            <h1 class="title-main">@ListName</h1>
+   <p class="title-sub">@SelectedFaction - @SelectedDetachment</p>
         </div>
         <div class="header-actions">
-      <button class="terminal-button terminal-button-secondary" @onclick="HandleBack">
-   <span class="button-bracket">[</span>
-           <span class="button-text">BACK</span>
-     <span class="button-bracket">]</span>
-    </button>
-        </div>
+            <button class="terminal-button terminal-button-secondary" @onclick="HandleLists">
+     <span class="button-bracket">[</span>
+        <span class="button-text">LISTS</span>
+  <span class="button-bracket">]</span>
+            </button>
+        <button class="terminal-button terminal-button-secondary" @onclick="HandleBack">
+     <span class="button-bracket">[</span>
+      <span class="button-text">BACK</span>
+       <span class="button-bracket">]</span>
+       </button>
+ </div>
     </div>
     <div class="build-columns @GetColumnsClass()">
  <!-- Left Column: Available Units -->
@@ -28,7 +34,7 @@
               <h2 class="section-title">AVAILABLE UNITS</h2>
 
   <div class="search-field">
-   <input type="text" class="terminal-input" placeholder="Search units..." @oninput="SearchUnits" />
+ <input type="text" class="terminal-input search-units-input" placeholder="Search units..." @oninput="SearchUnits" />
       </div>
 
       @if (isLoadingDatasheets)
@@ -65,11 +71,9 @@
      </div>
  </div>
              <div class="unit-card-action">
-        <button class="terminal-button terminal-button-primary" style="padding: 0.5rem 1rem; font-size: 0.8rem;" @onclick="() => AddUnitToList(unit)" title="Add unit to list">
-         <span class="button-bracket">[</span>
-<span class="button-text">+</span>
-   <span class="button-bracket">]</span>
-           </button>
+        <button class="terminal-button terminal-button-primary" style="padding: 0.25rem 0.5rem; font-size: 0.65rem;" @onclick="() => AddUnitToList(unit)" title="Add unit to list">
+         <span class="button-text">+</span>
+    </button>
         </div>
                  </div>
    }
@@ -98,7 +102,7 @@
     {
                  <div class="terminal-alert alert-danger">
                <h4 class="alert-title">
-      <span class="alert-icon">⚠</span>
+      <span class="alert-icon">?</span>
               INVALID LIST
       </h4>
      <ul class="alert-list">
@@ -113,7 +117,7 @@
           {
          <div class="terminal-alert alert-success">
       <h4 class="alert-title">
-  <span class="alert-icon">✓</span>
+  <span class="alert-icon">?</span>
        LIST IS VALID
    </h4>
    </div>
@@ -190,15 +194,15 @@
 @if (categoryGroup.Key != "Characters")
   {
   <div class="count-input">
-    <input type="number" class="terminal-input" style="width: 60px; padding: 0.5rem;" min="@entry.MinSize" max="@entry.MaxSize" @bind="entry.ModelCount" @bind:event="oninput" @onchange="() => RecalculateTotal()" />
+    <input type="number" class="terminal-input count-input-field" style="width: 60px; padding: 0.5rem;" min="@entry.MinSize" max="@entry.MaxSize" @bind="entry.ModelCount" @bind:event="oninput" @onchange="() => RecalculateTotal()" />
   </div>
-    }
+  }
 </td>
   <td class="total-cell">
    <span class="points-value">@totalPoints</span>
       </td>
     <td class="delete-cell">
-  <button class="terminal-button terminal-button-danger" style="padding: 0.5rem 0.75rem; font-size: 0.8rem;" @onclick="() => RemoveFromList(entry.Id)">×</button>
+  <button class="terminal-button terminal-button-danger" style="padding: 0.5rem 0.75rem; font-size: 0.8rem;" @onclick="() => RemoveFromList(entry.Id)">�</button>
        </td>
 </tr>
        }
@@ -210,19 +214,21 @@
      }
      </div>
 
-        <div class="total-bar">
-        <span class="total-label">TOTAL POINTS:</span>
-    <span class="total-value">@currentList?.CalculateTotalPoints() / @PointsLimit</span>
-      </div>
+   <div class="bottom-footer">
+     <div class="total-bar">
+      <span class="total-label">TOTAL POINTS:</span>
+     <span class="total-value">@currentList?.CalculateTotalPoints() / @PointsLimit</span>
+        </div>
 
-          <div class="action-buttons">
-       <button class="terminal-button terminal-button-primary" @onclick="SaveList">
-          <span class="button-bracket">[</span>
-    <span class="button-text">SAVE LIST</span>
+        <div class="action-buttons">
+      <button class="terminal-button terminal-button-primary" @onclick="SaveList">
+     <span class="button-bracket">[</span>
+   <span class="button-text">SAVE LIST</span>
        <span class="button-bracket">]</span>
-    </button>
-     </div>
+     </button>
+   </div>
       </div>
+    </div>
         </div>
 </div>
 </div>
@@ -230,9 +236,10 @@
 <!-- Unit Details Modal -->
 <UnitDetailsModal 
   SelectedUnit="selectedUnitForDetails"
-  SelectedDetachment="selectedDetachmentData"
+SelectedDetachment="selectedDetachmentData"
 InitialEnhancementId="@(selectedListEntryForEdit?.Enhancement ?? string.Empty)"
   InitialWarlordState="@(selectedListEntryForEdit?.IsWarlord ?? false)"
+  IsEditingExistingEntry="@(selectedListEntryForEdit != null)"
     IsOpen="showUnitDetailsModal"
 OnEnhancementSelected="HandleEnhancementSelected"
     OnWarlordSelected="HandleWarlordSelected"
@@ -569,9 +576,15 @@ entriesByCategory = sortedCategories;
 
     private async Task HandleBack()
     {
-   await OnBack.InvokeAsync();
+        // Invoke OnBack callback which handles step navigation in parent
+        await OnBack.InvokeAsync();
     }
 
+    private void HandleLists()
+ {
+      NavigationManager.NavigateTo("/lists", replace: true);
+    }
+  
     private async Task LoadDetachment()
     {
     try

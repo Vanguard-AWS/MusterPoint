@@ -1,47 +1,59 @@
 /* Select Faction Step Styles - Terminal Theme */
 
 .faction-selector-container {
-    padding: 2rem;
+    padding: 1.5rem;
     max-width: 1400px;
     margin: 0 auto;
     width: 100%;
 }
 
-.faction-header {
-    text-align: center;
-    margin-bottom: 3rem;
+.faction-header-top {
+    display: flex;
+    justify-content: space-between;
+align-items: baseline;
+    gap: 2rem;
+    margin-bottom: 2rem;
 }
 
-.faction-header .title-main {
+.faction-header-left {
+    flex: 1;
+}
+
+.faction-header-left .title-main {
     margin: 0 0 0.5rem 0;
 }
 
-.faction-header .title-sub {
- margin: 0;
+.faction-header-left .title-sub {
+    margin: 0;
 }
 
 .faction-grid {
  display: grid;
  grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    margin-bottom: 3rem;
+gap: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .faction-section {
     background: var(--terminal-bg-light);
     border: 2px solid var(--terminal-green);
-    padding: 1.5rem;
+    padding: 0.75rem;
     border-radius: 2px;
     box-shadow: var(--shadow-green-soft);
 }
 
 .faction-section-title {
  text-align: left;
- margin: 0 0 1.5rem 0;
-    font-size: 1.1rem;
-    text-transform: uppercase;
+ margin: 0 0 1rem 0;
+    font-size: 1rem;
+ text-transform: uppercase;
     letter-spacing: 0.1em;
-    font-weight: bold;
+ font-weight: bold;
+    display: flex;
+    align-items: center;
+  justify-content: space-between;
+gap: 0.75rem;
+    color: inherit;
 }
 
 .faction-section-title.imperium-title {
@@ -56,26 +68,46 @@
     color: var(--terminal-orange);
 }
 
+.faction-type-icon {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: brightness(0) invert(1);
+    margin-left: auto;
+}
+
 .faction-options {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.5rem;
 }
 
 .faction-card {
-    padding: 0.75rem 1rem;
-    border: 2px solid var(--terminal-green);
+    padding: 0.5rem 0.75rem;
+  border: 2px solid var(--terminal-green);
     border-radius: 2px;
     background-color: transparent;
     color: var(--terminal-green);
     cursor: pointer;
  transition: all var(--transition-fast);
-    text-align: left;
-    font-size: 0.95rem;
+text-align: left;
+    font-size: 0.85rem;
   font-family: var(--terminal-font);
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.faction-icon {
+ width: 30px;
+    height: 30px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: brightness(0) invert(1);
 }
 
 .faction-card:hover {
@@ -102,13 +134,19 @@
 }
 
 .faction-actions {
-  display: flex;
-    justify-content: center;
-    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
 }
 
 .faction-actions .terminal-button {
-    min-width: 200px;
+ min-width: 160px;
+    width: 160px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+gap: 0.25rem;
 }
 
 .faction-actions .terminal-button:disabled {
@@ -116,10 +154,17 @@
     cursor: not-allowed;
 }
 
+.faction-actions .terminal-button:disabled:hover {
+    border-color: inherit;
+    background-color: transparent;
+    box-shadow: none;
+    transform: none;
+}
+
 /* Responsive */
 @media screen and (max-width: 1200px) {
     .faction-selector-container {
-        padding: 1.5rem;
+    padding: 1.5rem;
     }
 
     .faction-grid {
@@ -134,33 +179,42 @@
     }
 
     .faction-grid {
-     grid-template-columns: 1fr;
-      gap: 1.5rem;
+  grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
-  .faction-header .title-main {
-     font-size: 1.8rem;
+    .faction-header .title-main {
+  font-size: 1.8rem;
+    }
+
+    .faction-actions {
+        flex-direction: row;
+    }
+
+    .faction-actions .terminal-button {
+        flex: 1;
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .faction-selector-container {
+        padding: 1rem;
+    }
+
+    .faction-header .title-main {
+        font-size: 1.5rem;
+}
+
+    .faction-section {
+    padding: 1rem;
     }
 
     .faction-actions {
         flex-direction: column;
     }
 
- .faction-actions .terminal-button {
+    .faction-actions .terminal-button {
         width: 100%;
-    }
-}
-
-@media screen and (max-width: 540px) {
-    .faction-selector-container {
-     padding: 1rem;
-    }
-
-    .faction-header .title-main {
-        font-size: 1.5rem;
-    }
-
-    .faction-section {
-        padding: 1rem;
     }
 }

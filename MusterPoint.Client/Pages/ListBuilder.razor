@@ -4,27 +4,28 @@
 @using MusterPoint.Client.Services
 @inject ListStorageService ListStorageService
 @inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
 @rendermode InteractiveWebAssembly
 
 <PageTitle>Create List - MusterPoint</PageTitle>
 
 <div class="list-setup-container">
     @if (currentStep == ListSetupStep.SelectFaction)
-    {
-      <SelectFactionStep SelectedFaction="selectedFaction" OnFactionSelected="HandleFactionSelected" />
+{
+    <SelectFactionStep SelectedFaction="selectedFaction" OnFactionSelected="HandleFactionSelected" />
     }
     else if (currentStep == ListSetupStep.ConfigureList)
     {
-        <ConfigureListStep 
-         SelectedFaction="@selectedFaction"
-       ListName="@listName"
+   <ConfigureListStep 
+     SelectedFaction="@selectedFaction"
+     ListName="@listName"
       SelectedDetachment="@selectedDetachment"
    SelectedGameSize="@selectedGameSize"
      OnListNameChanged="HandleListNameChanged"
    OnDetachmentChanged="HandleDetachmentChanged"
    OnGameSizeChanged="HandleGameSizeChanged"
-    OnBack="() => currentStep = ListSetupStep.SelectFaction"
-      OnContinue="() => currentStep = ListSetupStep.BuildList" />
+    OnBack="HandleBack"
+    OnContinue="() => currentStep = ListSetupStep.BuildList" />
     }
     else if (currentStep == ListSetupStep.BuildList)
     {
@@ -34,7 +35,7 @@
    SelectedDetachment="@selectedDetachment"
         PointsLimit="@selectedGameSize"
   ListId="@ListId"
-       OnBack="() => currentStep = ListSetupStep.ConfigureList"
+   OnBack="HandleBackFromBuildList"
   OnSave="HandleSaveList" />
     }
 </div>
@@ -44,64 +45,79 @@
     public string? ListId { get; set; }
 
     private enum ListSetupStep
-    {
-        SelectFaction,
+  {
+ SelectFaction,
      ConfigureList,
         BuildList
     }
 
-    private ListSetupStep currentStep = ListSetupStep.SelectFaction;
+private ListSetupStep currentStep = ListSetupStep.SelectFaction;
     private string selectedFaction = string.Empty;
     private string selectedDetachment = string.Empty;
     private string listName = string.Empty;
     private int selectedGameSize = 2000;
 
-    protected override async Task OnInitializedAsync()
+ protected override async Task OnInitializedAsync()
     {
-        // Don't load lists during prerendering - wait for OnAfterRenderAsync
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-     if (firstRender && !string.IsNullOrWhiteSpace(ListId))
+    // Check if this is an edit scenario (ListId is provided)
+        if (!string.IsNullOrWhiteSpace(ListId))
         {
-       await LoadListForEditing(ListId);
-            StateHasChanged();
-}
+     await LoadListForEditing(ListId);
+    }
     }
 
   private async Task LoadListForEditing(string listId)
   {
         try
-        {
+      {
   var savedLists = await ListStorageService.GetAllListsAsync();
-          var listToEdit = savedLists?.FirstOrDefault(l => l.Id == listId);
+     var listToEdit = savedLists?.FirstOrDefault(l => l.Id == listId);
  
   if (listToEdit != null)
         {
-       selectedFaction = listToEdit.Faction;
+    selectedFaction = listToEdit.Faction;
     selectedDetachment = listToEdit.Detachment;
  listName = listToEdit.Name;
-     currentStep = ListSetupStep.BuildList;
+  currentStep = ListSetupStep.BuildList;
  }
-        }
-        catch (Exception ex)
-   {
+  }
+    catch (Exception ex)
+ {
     Console.WriteLine($"Error loading list: {ex.Message}");
       }
     }
 
     private void HandleFactionSelected(string faction)
     {
-        selectedFaction = faction;
-        selectedDetachment = string.Empty;
+      selectedFaction = faction;
+    selectedDetachment = string.Empty;
         currentStep = ListSetupStep.ConfigureList;
         StateHasChanged();
     }
 
+    private async Task HandleBack()
+    {
+   // If we're on ConfigureList, go back to SelectFaction
+      if (currentStep == ListSetupStep.ConfigureList)
+        {
+ currentStep = ListSetupStep.SelectFaction;
+        }
+        else
+        {
+      // Otherwise use browser back button
+            await JSRuntime.InvokeVoidAsync("history.back");
+        }
+    }
+
+    private async Task HandleBackFromBuildList()
+    {
+        // From BuildList, go back to ConfigureList
+currentStep = ListSetupStep.ConfigureList;
+    }
+
     private void HandleListNameChanged(string name)
     {
-        listName = name;
+      listName = name;
     }
 
     private void HandleDetachmentChanged(string detachment)
@@ -110,11 +126,11 @@
     }
 
     private void HandleGameSizeChanged(int size)
-    {
-        selectedGameSize = size;
+{
+ selectedGameSize = size;
     }
 
-    private async Task HandleSaveList()
+  private async Task HandleSaveList()
   {
         NavigationManager.NavigateTo("/lists");
  }
