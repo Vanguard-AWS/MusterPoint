@@ -1,21 +1,26 @@
 ﻿<Router AppAssembly="typeof(Program).Assembly" AdditionalAssemblies="new[] { typeof(Client._Imports).Assembly }">
     <Found Context="routeData">
-        <RouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)" />
+        <RouteView RouteData="routeData" />
         <FocusOnNavigate RouteData="routeData" Selector="h1" />
     </Found>
     <NotFound>
         <PageTitle>Not found</PageTitle>
-        <LayoutView Layout="typeof(Layout.MainLayout)">
-            <div class="container mt-6">
-                <div class="columns is-centered">
-                    <div class="column is-6 has-text-centered">
-                        <h1 class="title is-1">404</h1>
-                        <h2 class="subtitle is-4">Page not found</h2>
-                        <p class="mb-4">Sorry, the page you're looking for doesn't exist.</p>
-                        <a href="/" class="button is-primary">Go to Home</a>
-                    </div>
+        <div class="terminal-container">
+            <div class="scanlines"></div>
+    <div class="terminal-content">
+         <h1 class="title-main">404</h1>
+        <p class="terminal-text terminal-info">Page Not Found</p>
+                <p class="terminal-text">
+          The page you're looking for doesn't exist.
+          </p>
+ <div class="terminal-section button-group">
+          <a href="/" class="terminal-button terminal-button-primary">
+    <span class="button-bracket">[</span>
+  <span class="button-text">RETURN HOME</span>
+    <span class="button-bracket">]</span>
+          </a>
                 </div>
             </div>
-        </LayoutView>
+      </div>
     </NotFound>
 </Router>

@@ -1,206 +1,150 @@
-/* Register Page Styles */
+/* Register Page Styles - Terminal Theme */
 
-.register-container {
-    min-height: 100vh;
+.register-content {
+    max-width: 700px;
     width: 100%;
-  display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 2rem;
 }
 
-.register-wrapper {
-    width: 100%;
-    max-width: 550px;
+/* Two-column layout */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.form-column {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
 }
 
-.register-box {
-  background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
- padding: 3.5rem;
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group:last-of-type {
+    margin-bottom: 0;
+}
+
+/* Terminal Input Fields */
+.terminal-input {
     width: 100%;
-}
-
-.register-box .title {
-    color: #2c3e50;
-    font-weight: 700;
-  letter-spacing: -0.5px;
-    margin-bottom: 2rem;
-}
-
-.register-box .label {
-    color: #363636;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    font-size: 1rem;
-}
-
-.register-box .input {
-    border-radius: 4px;
-    border: 1px solid #dbdbdb;
-    padding: 1rem;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    width: 100%;
+    padding: 0.75rem 1rem;
+    background: rgba(0, 255, 65, 0.05);
+    border: 2px solid var(--terminal-green);
+    color: var(--terminal-green);
+    font-family: var(--terminal-font);
+    font-size: 0.9rem;
+    letter-spacing: var(--terminal-letter-spacing-tight);
     box-sizing: border-box;
-    height: 2.75rem;
-}
-
-.register-box .input:focus {
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transition: all var(--transition-fast);
     outline: none;
 }
 
-.register-box .input::placeholder {
-    color: #b5bdc4;
+.terminal-input::placeholder {
+    color: var(--terminal-green-dim);
+    opacity: 0.7;
 }
 
-.register-box .help {
-    color: #7a7a7a;
-    font-size: 0.875rem;
-    margin-top: 0.5rem;
+.terminal-input:focus {
+    background: rgba(0, 255, 65, 0.1);
+    border-color: var(--terminal-orange);
+    box-shadow: 
+     0 0 15px rgba(0, 255, 65, 0.5),
+ inset 0 0 10px rgba(0, 255, 65, 0.1);
 }
 
-.register-box .button {
-    border-radius: 4px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
-  width: 100%;
-    padding: 1rem 1.5rem;
-    height: 2.75rem;
-    font-size: 1rem;
+/* Alert Messages */
+.terminal-alert {
+  margin: 1.5rem 0;
+    padding: 1rem;
+    border-left: 3px solid var(--terminal-green);
+    background: rgba(0, 255, 65, 0.05);
+    border-radius: 2px;
 }
 
-.register-box .button.is-success {
-    background-color: #48c774;
-    border-color: #48c774;
-    color: white;
-    border: none;
+.terminal-alert.alert-danger {
+    border-left-color: #f14668;
+    background: rgba(241, 70, 104, 0.05);
 }
 
-.register-box .button.is-success:hover:not(:disabled) {
-    background-color: #3aa373;
-  border-color: #3aa373;
-    box-shadow: 0 4px 12px rgba(72, 199, 116, 0.4);
+.terminal-alert.alert-danger .terminal-text {
+    color: #f14668;
 }
 
-.register-box .button:disabled {
+.terminal-alert.alert-success {
+    border-left-color: #48c774;
+    background: rgba(72, 199, 116, 0.05);
+}
+
+.terminal-alert.alert-success .terminal-text {
+    color: #48c774;
+}
+
+.alert-icon {
+    margin-right: 0.5rem;
+    font-weight: bold;
+}
+
+/* Terminal Link */
+.terminal-link {
+    color: var(--terminal-cyan);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    border-bottom: 1px dotted var(--terminal-cyan);
+}
+
+.terminal-link:hover {
+    color: var(--terminal-orange);
+    border-bottom: 1px dotted var(--terminal-orange);
+    text-shadow: 0 0 10px rgba(255, 170, 0, 0.5);
+}
+
+/* Input disabled state */
+.terminal-input:disabled {
+    opacity: 0.6;
+ cursor: not-allowed;
+}
+
+.terminal-button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
 
-.register-box .notification {
-    border-radius: 4px;
-    margin-bottom: 2rem;
-    padding: 1.25rem;
-}
-
-.register-box .notification.is-danger {
-    background-color: #ffe0e6;
-    border-left: 4px solid #f14668;
- color: #721c24;
-}
-
-.register-box .notification.is-success {
-    background-color: #e8f8f0;
-    border-left: 4px solid #48c774;
-    color: #22543d;
-}
-
-.register-box .notification .delete {
-    background-color: rgba(0, 0, 0, 0.1);
-}
-
-.register-box .field {
-    margin-bottom: 2rem;
-}
-
-.register-box .field:last-of-type {
-    margin-bottom: 2.5rem;
-}
-
-.register-box .has-text-centered {
-    text-align: center;
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid #efefef;
-}
-
-.register-box .has-text-centered p {
-    color: #7a7a7a;
-    margin-bottom: 0;
-}
-
-.register-box .has-text-primary {
-    color: #667eea;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.register-box .has-text-primary:hover {
-    color: #5568d3;
-    text-decoration: underline;
-}
-
-/* Icon spinner animation */
-.fa-spin {
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-   transform: rotate(360deg);
-    }
-}
-
 /* Responsive */
-@media screen and (max-width: 768px) {
-    .register-container {
-     padding: 1rem;
+@media (max-width: 1024px) {
+    .register-content {
+        max-width: 650px;
     }
 
- .register-wrapper {
+    .form-row {
+        gap: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .register-content {
         max-width: 100%;
     }
 
-    .register-box {
-        padding: 2.5rem;
+    /* Stack to single column on tablets and smaller */
+    .form-row {
+        grid-template-columns: 1fr;
+  gap: 0;
     }
 
-    .register-box .title {
-        font-size: 1.75rem;
+    .terminal-input {
+        font-size: 0.85rem;
+        padding: 0.6rem 0.9rem;
     }
 }
 
-@media screen and (max-width: 480px) {
-    .register-container {
-  padding: 0.5rem;
+@media (max-width: 540px) {
+    .terminal-input {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.8rem;
     }
 
-    .register-box {
-        padding: 1.5rem;
-        border-radius: 4px;
-    }
-
-    .register-box .label {
-font-size: 0.95rem;
-    }
-
-    .register-box .input {
-        font-size: 0.95rem;
- }
-
-    .register-box .field {
-        margin-bottom: 1.5rem;
+    .form-group {
+   margin-bottom: 1.2rem;
     }
 }

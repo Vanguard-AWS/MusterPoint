@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Components\Layout\" />
     <Folder Include="wwwroot\data\army-rules\" />
     <Folder Include="wwwroot\data\detachments\" />
   </ItemGroup>

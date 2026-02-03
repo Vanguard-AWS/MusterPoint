@@ -9,132 +9,131 @@
 
 @if (isCheckingAuth)
 {
-    <div style="display: flex; align-items: center; justify-content: center; height: 100vh;">
-    <div style="text-align: center;">
-   <div class="loading-spinner"></div>
- <p style="margin-top: 1rem; font-size: 1.1rem;">Checking authentication...</p>
+    <div class="terminal-container loading-screen">
+        <div class="scanlines"></div>
+     <div class="terminal-content">
+            <p class="terminal-text">[INITIALIZING SYSTEM...]</p>
+  <div class="loading-spinner-terminal"></div>
+            <p class="terminal-text">[AUTHENTICATING CREDENTIALS...]</p>
         </div>
     </div>
 }
 else
 {
-    <div class="login-container">
-      <div class="login-wrapper">
-      <div class="login-box">
-        <h1 class="title is-3 has-text-centered mb-5">Sign In</h1>
+    <div class="terminal-container">
+        <div class="scanlines"></div>
+        <div class="terminal-content login-content">
+          <div class="ascii-header">
+            <h1 class="title-main">ACCESS TERMINAL</h1>
+     <p class="title-sub">User Authentication Required</p>
+   </div>
 
        @if (!string.IsNullOrEmpty(errorMessage))
-        {
-      <div class="notification is-danger">
-        <button class="delete" @onclick="() => errorMessage = string.Empty"></button>
-        @errorMessage
-       </div>
- }
+    {
+          <div class="terminal-alert alert-danger">
+       <p class="terminal-text">
+          <span class="alert-icon">?</span> @errorMessage
+         </p>
+  </div>
+   }
 
-           <form @onsubmit="HandleLogin">
-      <div class="field">
-    <label class="label">Username</label>
-        <div class="control">
-        <input type="text" class="input" id="username" @bind="username" required placeholder="Enter your username" />
-       </div>
-       </div>
+        <form @onsubmit="HandleLogin">
+         <div class="terminal-section form-group">
+            <label class="terminal-text terminal-prompt">> USERNAME</label>
+           <input type="text" class="terminal-input" id="username" @bind="username" required placeholder="Enter your username" />
+  </div>
 
-      <div class="field">
-         <label class="label">Password</label>
-        <div class="control">
- <input type="password" class="input" id="password" @bind="password" required placeholder="Enter your password" />
-       </div>
-       </div>
+    <div class="terminal-section form-group">
+                    <label class="terminal-text terminal-prompt">> PASSWORD</label>
+  <input type="password" class="terminal-input" id="password" @bind="password" required placeholder="Enter your password" />
+      </div>
 
-    <div class="field is-grouped is-grouped-centered mt-6">
-        <div class="control">
-  <button type="submit" class="button is-primary" disabled="@isLoading">
-        @if (isLoading)
-      {
-          <span class="icon">
-       <i class="fas fa-spinner fa-spin"></i>
-      </span>
-     <span>Signing in...</span>
+         <div class="terminal-section button-group">
+           <button type="submit" class="terminal-button terminal-button-primary" disabled="@isLoading">
+               <span class="button-bracket">[</span>
+         <span class="button-text">
+     @if (isLoading)
+         {
+          <span>AUTHENTICATING...</span>
+            }
+            else
+       {
+      <span>SIGN IN</span>
      }
-     else
-        {
-         <span>Sign In</span>
-      }
-      </button>
-          </div>
-     </div>
+      </span>
+      <span class="button-bracket">]</span>
+       </button>
+                </div>
      </form>
 
-        <div class="has-text-centered mt-4">
-     <p>Don't have an account? <NavLink href="/register" class="has-text-primary">Register here</NavLink></p>
-         </div>
-  </div>
-      </div>
+            <div class="terminal-section footer">
+             <p class="terminal-text terminal-dim">
+         > No account? <a href="/register" class="terminal-link">CREATE NEW PROFILE</a>
+   </p>
+            </div>
+   </div>
     </div>
 }
 
 @code {
-  private string username = string.Empty;
+    private string username = string.Empty;
     private string password = string.Empty;
     private string errorMessage = string.Empty;
     private bool isLoading = false;
     private bool isCheckingAuth = true;
 
- protected override async Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
-   // Check if user is already authenticated
         isCheckingAuth = true;
-     try
+  try
         {
- var isAuthenticated = await AuthService.IsAuthenticatedAsync();
-       if (isAuthenticated)
+            var isAuthenticated = await AuthService.IsAuthenticatedAsync();
+   if (isAuthenticated)
        {
-    // User already logged in, redirect to lists immediately
-NavigationManager.NavigateTo("/lists", replace: true);
-     // Don't show the login page
-     return;
- }
- }
-        catch (Exception ex)
-  {
-  errorMessage = $"Error checking authentication: {ex.Message}";
+        NavigationManager.NavigateTo("/lists", replace: true);
+                return;
+            }
         }
-      finally
+        catch (Exception ex)
         {
-   isCheckingAuth = false;
-      }
+          errorMessage = $"Error checking authentication: {ex.Message}";
+        }
+        finally
+        {
+    isCheckingAuth = false;
+        }
     }
 
     private async Task HandleLogin()
-  {
-if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
-   {
-errorMessage = "Username and password are required";
-  return;
-}
-
-    isLoading = true;
-
-   try
-   {
-  var response = await AuthService.LoginAsync(username, password);
-
-   if (response.Success)
     {
-   NavigationManager.NavigateTo("/lists");
-     }
-    else
-   {
-   errorMessage = response.Message;
- }
-  }
-catch (Exception ex)
-  {
-  errorMessage = $"An error occurred: {ex.Message}";
-        }
- finally
+        if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
      {
-  isLoading = false;
-    }
+   errorMessage = "Username and password are required";
+            return;
+        }
+
+        isLoading = true;
+
+        try
+     {
+     var response = await AuthService.LoginAsync(username, password);
+
+            if (response.Success)
+            {
+     NavigationManager.NavigateTo("/lists");
+            }
+            else
+       {
+    errorMessage = response.Message;
+     }
+        }
+        catch (Exception ex)
+     {
+       errorMessage = $"An error occurred: {ex.Message}";
+        }
+        finally
+        {
+    isLoading = false;
+        }
     }
 }

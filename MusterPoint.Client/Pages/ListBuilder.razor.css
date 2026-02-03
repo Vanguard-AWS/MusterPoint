@@ -38,12 +38,54 @@ max-width: 1400px;
 .list-setup-container {
     width: 100%;
  min-height: 100vh;
+    background: linear-gradient(135deg, var(--terminal-bg-dark) 0%, var(--terminal-bg-medium) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.list-setup-container::before {
+ content: '';
+  position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+  rgba(0, 0, 0, 0.15) 2px,
+        transparent 2px,
+        transparent 4px
+    );
+    pointer-events: none;
+    z-index: 0;
+    animation: flicker 0.1s infinite;
+}
+
+.list-setup-container > * {
+    position: relative;
+    z-index: 2;
+}
+
+@keyframes flicker {
+    0% {
+        opacity: 0.95;
+  }
+    50% {
+  opacity: 1;
+    }
+    100% {
+    opacity: 0.95;
+    }
 }
 
 /* Responsive adjustments */
 @media screen and (max-width: 1023px) {
     .listbuilder-container {
-        padding: 1rem;
+    padding: 1rem;
     }
 
     .columns {
@@ -51,27 +93,32 @@ max-width: 1400px;
   }
 
     .column {
-        width: 100% !important;
+width: 100% !important;
   }
 
     .unit-list {
-        max-height: 400px;
+   max-height: 400px;
+    }
+
+    .list-setup-container {
+        align-items: flex-start;
+        padding: 2rem 0;
     }
 }
 
 @media screen and (max-width: 768px) {
     .listbuilder-container {
-        padding: 0.75rem;
+    padding: 0.75rem;
     }
 
     .listbuilder-container .title {
  font-size: 1.5rem;
-        margin-bottom: 1rem;
+      margin-bottom: 1rem;
     }
 
   .level-right .buttons {
      flex-wrap: wrap;
-        gap: 0.5rem;
+gap: 0.5rem;
  }
 
     .button {
@@ -80,5 +127,9 @@ max-width: 1400px;
 
     table {
    font-size: 0.875rem;
+    }
+
+    .list-setup-container {
+        padding: 1rem 0;
     }
 }

@@ -3,17 +3,16 @@
 @inject NavigationManager NavigationManager
 @rendermode InteractiveWebAssembly
 
-<button class="button is-danger" @onclick="HandleLogout" title="Sign out of your account">
-    <span class="icon">
-        <i class="fas fa-sign-out-alt"></i>
-</span>
-    <span>Sign Out</span>
+<button class="terminal-button terminal-button-danger" @onclick="HandleLogout" title="Sign out of your account">
+    <span class="button-bracket">[</span>
+  <span class="button-text">SIGN OUT</span>
+    <span class="button-bracket">]</span>
 </button>
 
 @code {
   private async Task HandleLogout()
     {
-        await AuthService.LogoutAsync();
+      await AuthService.LogoutAsync();
    NavigationManager.NavigateTo("/", replace: true);
     }
 }

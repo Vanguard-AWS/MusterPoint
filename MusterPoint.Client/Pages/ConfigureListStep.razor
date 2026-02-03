@@ -5,85 +5,81 @@
 @rendermode InteractiveWebAssembly
 
 <div class="configure-list-container">
- <div class="level mb-5">
-  <div class="level-left">
-   <h1 class="title is-2 mb-0">Configure Your List</h1>
-        </div>
+    <div class="configure-header">
+  <h1 class="title-main">CONFIGURE LIST</h1>
+  <p class="title-sub">Customize Your Roster</p>
     </div>
 
- <div class="configure-box">
-    <p class="mb-5"><strong>Faction:</strong> <span class="tag is-info is-large">@SelectedFaction</span></p>
+ <div class="configure-box terminal-panel">
+ <div class="form-group">
+    <p class="terminal-text">
+     <span class="config-label">FACTION:</span>
+     <span class="info-badge">@SelectedFaction</span>
+    </p>
+ </div>
 
-   <div class="field mb-5">
- <label class="label">List Name</label>
-      <div class="control">
-   <input type="text" class="input is-medium" placeholder="e.g., Competitive Build, Casual Patrol..." @bind="ListName" @bind:event="oninput" />
-         </div>
+   <div class="form-group">
+  <label class="terminal-text terminal-prompt">> LIST NAME</label>
+      <input type="text" class="terminal-input" @bind="localListName" @bind:event="oninput" />
     </div>
 
-   <div class="field mb-5">
-     <label class="label">Detachment</label>
-     <div class="control">
-        @if (isLoadingDetachments)
+   <div class="form-group">
+  <label class="terminal-text terminal-prompt">> DETACHMENT</label>
+   @if (isLoadingDetachments)
     {
-         <p class="has-text-grey"><em>Loading detachments...</em></p>
-    }
+      <p class="terminal-text">[LOADING DETACHMENTS...]</p>
+  }
     else if (availableDetachments == null || !availableDetachments.Any())
-         {
-   <p class="has-text-grey">No detachments available for this faction.</p>
+     {
+   <p class="terminal-text">[NO DETACHMENTS AVAILABLE]</p>
         }
-        else
-       {
-  <div class="select is-fullwidth is-medium">
-           <select @bind="SelectedDetachment">
-     <option value="">-- Select a Detachment --</option>
-        @foreach (var detachment in availableDetachments)
-       {
+      else
+  {
+  <select class="terminal-select" @bind="localSelectedDetachment">
+     <option value="">Select a Detachment</option>
+   @foreach (var detachment in availableDetachments)
+ {
         <option value="@detachment.Id">@detachment.Name</option>
    }
   </select>
-    </div>
    }
    </div>
-   </div>
 
-  <div class="field mb-5">
-  <label class="label">Game Size</label>
-   <div class="control game-size-options">
-        <button class="game-size-button @(SelectedGameSize == 1000 ? "is-selected" : "")" @onclick="() => SelectGameSize(1000)">
-     <span class="size-name">Incursion</span>
-  <span class="size-points">1000 points</span>
+  <div class="form-group">
+  <label class="terminal-text terminal-prompt">> FORCE SIZE</label>
+   <div class="game-size-options">
+        <button class="game-size-button @(localGameSize == 500 ? "is-selected" : "")" @onclick="() => SelectGameSize(500)">
+   <span class="size-name">Combat Patrol</span>
+  <span class="size-points">500 PTS</span>
   </button>
-     <button class="game-size-button @(SelectedGameSize == 2000 ? "is-selected" : "")" @onclick="() => SelectGameSize(2000)">
-       <span class="size-name">Strike Force</span>
-<span class="size-points">2000 points</span>
+     <button class="game-size-button @(localGameSize == 1000 ? "is-selected" : "")" @onclick="() => SelectGameSize(1000)">
+ <span class="size-name">Incursion</span>
+  <span class="size-points">1000 PTS</span>
   </button>
-   <button class="game-size-button @(SelectedGameSize == 3000 ? "is-selected" : "")" @onclick="() => SelectGameSize(3000)">
+     <button class="game-size-button @(localGameSize == 2000 ? "is-selected" : "")" @onclick="() => SelectGameSize(2000)">
+   <span class="size-name">Strike Force</span>
+<span class="size-points">2000 PTS</span>
+  </button>
+   <button class="game-size-button @(localGameSize == 3000 ? "is-selected" : "")" @onclick="() => SelectGameSize(3000)">
 <span class="size-name">Onslaught</span>
-<span class="size-points">3000 points</span>
+<span class="size-points">3000 PTS</span>
  </button>
       </div>
-   </div>
+ </div>
    </div>
 
-    <div class="level mt-6">
-  <div class="level-left">
- <button class="button is-large" @onclick="HandleBack">
-     <span class="icon">
- <i class="fas fa-arrow-left"></i>
-      </span>
-       <span>Back</span>
-     </button>
-      </div>
-   <div class="level-right">
-  <button class="button is-primary is-large" disabled="@(string.IsNullOrWhiteSpace(ListName) || string.IsNullOrWhiteSpace(SelectedDetachment))" @onclick="HandleContinue">
- <span class="icon">
-    <i class="fas fa-arrow-right"></i>
-             </span>
-<span>Continue</span>
+    <div class="configure-actions">
+  <button class="terminal-button terminal-button-secondary" @onclick="HandleBack">
+ <span class="button-bracket">[</span>
+       <span class="button-text">BACK</span>
+<span class="button-bracket">]</span>
+</button>
+  <button class="terminal-button terminal-button-primary" disabled="@(string.IsNullOrWhiteSpace(localListName) || string.IsNullOrWhiteSpace(localSelectedDetachment))" @onclick="HandleContinue">
+ <span class="button-bracket">[</span>
+    <span class="button-text">CONTINUE</span>
+      <span class="button-bracket">]</span>
 </button>
    </div>
-    </div>
 </div>
 
 @code {
@@ -93,67 +89,80 @@
     [Parameter]
     public string ListName { get; set; } = string.Empty;
 
-   [Parameter]
+ [Parameter]
     public string SelectedDetachment { get; set; } = string.Empty;
 
    [Parameter]
-    public int SelectedGameSize { get; set; } = 2000;
+  public int SelectedGameSize { get; set; } = 2000;
 
     [Parameter]
-    public EventCallback<string> OnListNameChanged { get; set; }
+  public EventCallback<string> OnListNameChanged { get; set; }
 
  [Parameter]
-    public EventCallback<string> OnDetachmentChanged { get; set; }
+  public EventCallback<string> OnDetachmentChanged { get; set; }
 
-   [Parameter]
+ [Parameter]
     public EventCallback<int> OnGameSizeChanged { get; set; }
 
     [Parameter]
     public EventCallback OnBack { get; set; }
 
-    [Parameter]
+ [Parameter]
     public EventCallback OnContinue { get; set; }
 
     private List<Detachment> availableDetachments = new();
-    private bool isLoadingDetachments = false;
+  private bool isLoadingDetachments = false;
+    
+    // Local fields to prevent binding issues during re-renders
+    private string localListName = string.Empty;
+    private string localSelectedDetachment = string.Empty;
+    private int localGameSize = 2000;
 
     protected override async Task OnInitializedAsync()
    {
-    await LoadDetachments();
+  await LoadDetachments();
+  }
+
+    protected override void OnParametersSet()
+    {
+        // Sync parameter values to local fields
+        localListName = ListName;
+        localSelectedDetachment = SelectedDetachment;
+      localGameSize = SelectedGameSize;
     }
 
     private async Task LoadDetachments()
     {
-        try
+    try
    {
 isLoadingDetachments = true;
-            availableDetachments = await DetachmentService.GetDetachmentsByFactionAsync(SelectedFaction);
-        }
+   availableDetachments = await DetachmentService.GetDetachmentsByFactionAsync(SelectedFaction);
+}
         catch (Exception ex)
     {
      Console.WriteLine($"Error loading detachments: {ex.Message}");
-        }
-      finally
- {
-          isLoadingDetachments = false;
-     }
     }
+    finally
+ {
+  isLoadingDetachments = false;
+  }
+ }
 
     private async Task HandleBack()
     {
   await OnBack.InvokeAsync();
     }
 
-    private async Task SelectGameSize(int size)
+    private void SelectGameSize(int size)
     {
-    SelectedGameSize = size;
-        await OnGameSizeChanged.InvokeAsync(size);
+    localGameSize = size;
     }
 
   private async Task HandleContinue()
   {
-  await OnListNameChanged.InvokeAsync(ListName);
-        await OnDetachmentChanged.InvokeAsync(SelectedDetachment);
+  await OnListNameChanged.InvokeAsync(localListName);
+    await OnDetachmentChanged.InvokeAsync(localSelectedDetachment);
+    await OnGameSizeChanged.InvokeAsync(localGameSize);
     await OnContinue.InvokeAsync();
     }
 }

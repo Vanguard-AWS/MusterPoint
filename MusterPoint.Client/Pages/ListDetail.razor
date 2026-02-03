@@ -9,295 +9,287 @@
 <PageTitle>List Details - MusterPoint</PageTitle>
 
 <div class="list-detail-container">
-<div class="level mb-6">
-      <div class="level-left">
-    <div>
- <h1 class="title is-2">@(currentList?.Name ?? "Loading...")</h1>
+    <!-- Header Section -->
+    <div class="list-header">
+        <div class="header-content">
+            <div class="header-info">
+      <h1 class="list-title">@(currentList?.Name ?? "LOADING...")</h1>
           @if (currentList != null)
-            {
-    <p class="subtitle is-5">
-    <span class="tag is-light mr-2">@currentList.Faction</span>
-    <span class="tag is-success">@currentList.CalculateTotalPoints() / 2000 pts</span>
-      </p>
-         }
-       </div>
+         {
+           <div class="list-meta">
+ <span class="meta-item">
+         <span class="meta-label">FACTION:</span>
+       <span class="meta-value">@currentList.Faction</span>
+          </span>
+       <span class="meta-item">
+   <span class="meta-label">POINTS:</span>
+             <span class="meta-value">@currentList.CalculateTotalPoints() / 2000</span>
+      </span>
+         </div>
+    }
+            </div>
+            <div class="header-actions">
+           @if (currentList != null)
+    {
+        <a href="/listbuilder/@currentList.Id" class="terminal-button terminal-button-primary">
+ <i class="fas fa-edit mr-2"></i>EDIT
+                </a>
+    }
+                <a href="/lists" class="terminal-button terminal-button-secondary">
+        <i class="fas fa-arrow-left mr-2"></i>BACK
+    </a>
      </div>
-        <div class="level-right">
-            <div class="buttons">
-        @if (currentList != null)
-   {
-  <a href="/listbuilder/@currentList.Id" class="button is-primary">
-       <span class="icon">
-    <i class="fas fa-edit"></i>
-     </span>
-           <span>Edit List</span>
-     </a>
-         }
-       <a href="/lists" class="button is-light">
-         <span class="icon">
-         <i class="fas fa-arrow-left"></i>
-         </span>
-   <span>Back</span>
-   </a>
-    </div>
-        </div>
+     </div>
     </div>
 
-    @if (isLoading)
+    <!-- Content Section -->
+@if (isLoading)
     {
-    <div class="box">
-   <p class="has-text-grey"><em>Loading list details...</em></p>
- </div>
+        <div class="loading-container">
+  <p class="loading-text">INITIALIZING DATASHEET...</p>
+        </div>
     }
     else if (currentList == null || !currentList.Entries.Any())
     {
-        <div class="box">
-       <p class="has-text-grey has-text-centered py-5">This list is empty.</p>
-        </div>
+        <div class="empty-state">
+            <p class="empty-text">> LIST IS EMPTY</p>
+  </div>
     }
     else
-  {
-        <div class="units-list">
-     <!-- Group units by category -->
-            @foreach (var categoryGroup in unitsByCategory)
-        {
-                <div class="category-section mb-6">
-        <h2 class="title is-4 mb-4 has-text-primary">
-           <span class="icon mr-2">
-      <i class="fas fa-folder"></i>
-    </span>
-    @categoryGroup.Key
+    {
+    <div class="units-container">
+         @foreach (var categoryGroup in unitsByCategory)
+            {
+              <div class="category-section">
+         <div class="category-header">
+     <h2 class="category-title">
+          <span class="category-bracket">[</span>
+       @categoryGroup.Key.ToUpper()
+           <span class="category-bracket">]</span>
       </h2>
-
-         <div class="category-units">
- @foreach (var entry in categoryGroup.Value)
-     {
-   var unit = allUnits?.FirstOrDefault(u => u.Id == entry.UnitId);
-         var isExpanded = expandedUnits.Contains(entry.Id);
-
-      <div class="box unit-entry mb-4">
-   <div class="level is-mobile">
-     <div class="level-left">
-        <div>
-         <h3 class="title is-5 mb-1">@entry.UnitName</h3>
-     @if (entry.IsWarlord)
-          {
-  <p class="is-size-7 has-text-warning mb-2">
-          <i class="fas fa-crown mr-1"></i><strong>Warlord</strong>
-   </p>
-     }
- <p class="has-text-grey is-size-7">
-     @entry.ModelCount model@(entry.ModelCount != 1 ? "s" : "") - @entry.CalculatePoints() pts
-     </p>
-        </div>
-       </div>
-  <div class="level-right">
-        <button class="button is-ghost" @onclick="() => ToggleExpanded(entry.Id)">
- <span class="icon">
-              <i class="fas @(isExpanded ? "fa-chevron-up" : "fa-chevron-down")"></i>
-     </span>
-         </button>
-      </div>
          </div>
 
-                 @if (isExpanded && unit != null)
-           {
-    <div class="unit-details mt-4">
- <!-- Enhancement (if character) -->
-     @if (!string.IsNullOrEmpty(entry.Enhancement) && unit.Category == "Characters")
-       {
-     <div class="box mb-4 enhancement-display">
-   <h3 class="subtitle is-6 has-text-weight-bold has-text-success">
-    <span class="icon mr-2">
-      <i class="fas fa-star"></i>
-   </span>
-    Enhancement Applied
- </h3>
- <p class="enhancement-name"><strong>@(entry.EnhancementName ?? "Unknown")</strong></p>
-    <p class="has-text-weight-bold is-size-7 mb-2 has-text-success">+@entry.EnhancementPoints pts</p>
-      <p class="is-size-7">@entry.EnhancementDescription</p>
-     </div>
-      }
-
- <!-- Unit Composition -->
-           @if (unit.UnitComposition.Any())
-    {
-         <div class="mb-4">
-      <h3 class="subtitle is-6 has-text-weight-bold">Unit Composition</h3>
-            @foreach (var role in unit.UnitComposition)
-    {
-     <p class="is-size-7">
-                  @role.Role: @role.Count
-          </p>
-          }
-           </div>
-        }
-
-       <!-- Keywords -->
-           @if (unit.Keywords.Any())
-         {
-     <div class="mb-4">
-      <h3 class="subtitle is-6 has-text-weight-bold">Keywords</h3>
-    <div>
-  @foreach (var keyword in unit.Keywords)
-         {
-      <span class="tag is-light mr-2 mb-1">@keyword</span>
-     }
-            </div>
-     </div>
-           }
-
- <!-- Unit Profiles (Stats) -->
-       @if (unit.Profiles.Any())
-     {
-        <div class="mb-4">
-  <h3 class="subtitle is-6 has-text-weight-bold">Unit Profiles</h3>
-   <div class="table-container">
-      <table class="table is-fullwidth is-size-7">
-   <thead>
- <tr>
-        <th>Model</th>
-       <th>M</th>
-         <th>T</th>
-    <th>Sv</th>
-                <th>W</th>
-      <th>Ld</th>
-     <th>OC</th>
-             </tr>
-       </thead>
-       <tbody>
-     @foreach (var profile in unit.Profiles)
+        <div class="units-list">
+        @foreach (var entry in categoryGroup.Value)
       {
-     <tr>
-        <td class="has-text-weight-bold">@profile.Name</td>
-              <td>@profile.Movement</td>
-             <td>@profile.Toughness</td>
-   <td>@profile.Save</td>
-      <td>@profile.Wounds</td>
-      <td>@profile.Leadership</td>
-         <td>@profile.ObjectiveControl</td>
-            </tr>
-     }
-            </tbody>
-      </table>
-  </div>
-                </div>
-           }
+     var unit = allUnits?.FirstOrDefault(u => u.Id == entry.UnitId);
+       var isExpanded = expandedUnits.Contains(entry.Id);
 
-    <!-- Ranged Weapons -->
-   @if (unit.RangedWeapons.Any())
+    <div class="unit-row @(isExpanded ? "expanded" : "")">
+           <div class="unit-header">
+      <button class="expand-btn @(isExpanded ? "open" : "")"
+ @onclick="() => ToggleExpanded(entry.Id)"
+           aria-label="Toggle unit details">
+                    <i class="fas @(isExpanded ? "fa-angle-down" : "fa-angle-right")"></i>
+   </button>
+     <div class="unit-info">
+      <span class="unit-name">@entry.UnitName</span>
+    <span class="unit-details-inline">
+       @entry.ModelCount MODEL@(entry.ModelCount != 1 ? "S" : "") • @entry.CalculatePoints() PTS
+            @if (entry.IsWarlord)
+                {
+          <span class="warlord-badge">? WARLORD</span>
+}
+        @if (!string.IsNullOrEmpty(entry.Enhancement))
   {
-            <div class="mb-4">
-      <h3 class="subtitle is-6 has-text-weight-bold">Ranged Weapons</h3>
-     <div class="table-container">
-    <table class="table is-fullwidth is-size-7">
-           <thead>
-           <tr>
-       <th>Weapon</th>
-         <th>Range</th>
-    <th>A</th>
-        <th>BS</th>
-            <th>S</th>
-     <th>AP</th>
-       <th>D</th>
-             </tr>
-        </thead>
-             <tbody>
-       @foreach (var weapon in unit.RangedWeapons)
-         {
-          <tr>
-           <td class="has-text-weight-bold">@weapon.Name</td>
-        <td>@weapon.Range</td>
-        <td>@weapon.Attacks</td>
-    <td>@weapon.BallisticSkill</td>
-<td>@weapon.Strength</td>
-     <td>@weapon.ArmorPenetration</td>
-          <td>@weapon.Damage</td>
-              </tr>
-  }
-       </tbody>
-            </table>
-               </div>
-     </div>
- }
+           <span class="enhancement-badge">? @entry.EnhancementName</span>
+             }
+        </span>
+    </div>
+ </div>
 
- <!-- Melee Weapons -->
-      @if (unit.MeleeWeapons.Any())
-        {
-       <div class="mb-4">
-                  <h3 class="subtitle is-6 has-text-weight-bold">Melee Weapons</h3>
-           <div class="table-container">
-           <table class="table is-fullwidth is-size-7">
-       <thead>
- <tr>
-       <th>Weapon</th>
-                  <th>A</th>
-         <th>WS</th>
-    <th>S</th>
-      <th>AP</th>
-     <th>D</th>
-     </tr>
-          </thead>
-        <tbody>
-          @foreach (var weapon in unit.MeleeWeapons)
-       {
-     <tr>
-         <td class="has-text-weight-bold">@weapon.Name</td>
-       <td>@weapon.Attacks</td>
-          <td>@weapon.WeaponSkill</td>
-    <td>@weapon.Strength</td>
- <td>@weapon.ArmorPenetration</td>
- <td>@weapon.Damage</td>
-            </tr>
-               }
-       </tbody>
-       </table>
+              @if (isExpanded && unit != null)
+           {
+       <div class="unit-details">
+       @if (!string.IsNullOrEmpty(entry.Enhancement))
+               {
+       <div class="detail-section enhancement-section">
+  <div class="section-header">
+<span class="section-title">ENHANCEMENT</span>
+   </div>
+ <div class="section-content">
+  <p class="enhancement-name">@entry.EnhancementName</p>
+          <p class="enhancement-points">+@entry.EnhancementPoints PTS</p>
+            <p class="enhancement-desc">@entry.EnhancementDescription</p>
               </div>
-         </div>
-                }
+   </div>
+           }
 
-    <!-- Abilities -->
-@if (unit.Abilities.Any())
-       {
-           <div class="mb-4">
- <h3 class="subtitle is-6 has-text-weight-bold">Abilities</h3>
-            @foreach (var ability in unit.Abilities)
-             {
- <div class="mb-3">
-  <p class="has-text-weight-bold is-size-7">@ability.Name</p>
-     <p class="is-size-7">@ability.Description</p>
-     </div>
-       }
-        </div>
-      }
-
-        <!-- Wargear Options -->
-        @if (unit.WargearOptions.Any())
-   {
-   <div class="mb-4">
-    <h3 class="subtitle is-6 has-text-weight-bold">Wargear Options</h3>
-        @foreach (var option in unit.WargearOptions)
-     {
-       <div class="mb-3">
-                  <p class="has-text-weight-bold is-size-7">@option.Name</p>
-     <p class="is-size-7">@option.Description</p>
-             @if (option.SelectionLimit != null)
-       {
-        <p class="is-size-7 has-text-grey">Limit: @option.SelectionLimit</p>
-            }
-     </div>
+       @if (unit.Profiles.Any())
+  {
+         <div class="detail-section">
+       <div class="section-header">
+        <span class="section-title">PROFILES</span>
+       </div>
+                 <div class="table-container">
+           <table class="data-table">
+   <thead>
+            <tr>
+        <th>MODEL</th>
+     <th>M</th>
+           <th>T</th>
+           <th>SV</th>
+   <th>W</th>
+         <th>LD</th>
+          <th>OC</th>
+   </tr>
+  </thead>
+<tbody>
+          @foreach (var profile in unit.Profiles)
+{
+               <tr>
+       <td>@profile.Name</td>
+      <td>@profile.Movement</td>
+   <td>@profile.Toughness</td>
+     <td>@profile.Save</td>
+             <td>@profile.Wounds</td>
+        <td>@profile.Leadership</td>
+     <td>@profile.ObjectiveControl</td>
+           </tr>
+           }
+ </tbody>
+          </table>
+               </div>
+   </div>
    }
-         </div>
-           }
-            </div>
-    }
-            </div>
-           }
+
+             @if (unit.RangedWeapons.Any())
+     {
+     <div class="detail-section">
+     <div class="section-header">
+      <span class="section-title">RANGED WEAPONS</span>
       </div>
+          <div class="table-container">
+    <table class="data-table">
+  <thead>
+       <tr>
+    <th>WEAPON</th>
+                <th>RNG</th>
+      <th>A</th>
+         <th>BS</th>
+  <th>S</th>
+      <th>AP</th>
+       <th>D</th>
+        </tr>
+       </thead>
+ <tbody>
+    @foreach (var weapon in unit.RangedWeapons)
+                {
+            <tr>
+          <td>@weapon.Name</td>
+                  <td>@weapon.Range</td>
+            <td>@weapon.Attacks</td>
+             <td>@weapon.BallisticSkill</td>
+      <td>@weapon.Strength</td>
+      <td>@weapon.ArmorPenetration</td>
+    <td>@weapon.Damage</td>
+    </tr>
+         }
+        </tbody>
+        </table>
+      </div>
+     </div>
+          }
+
+   @if (unit.MeleeWeapons.Any())
+ {
+       <div class="detail-section">
+            <div class="section-header">
+           <span class="section-title">MELEE WEAPONS</span>
+         </div>
+      <div class="table-container">
+                 <table class="data-table">
+            <thead>
+       <tr>
+             <th>WEAPON</th>
+ <th>A</th>
+          <th>WS</th>
+                   <th>S</th>
+              <th>AP</th>
+          <th>D</th>
+        </tr>
+ </thead>
+          <tbody>
+     @foreach (var weapon in unit.MeleeWeapons)
+           {
+       <tr>
+         <td>@weapon.Name</td>
+          <td>@weapon.Attacks</td>
+   <td>@weapon.WeaponSkill</td>
+    <td>@weapon.Strength</td>
+       <td>@weapon.ArmorPenetration</td>
+        <td>@weapon.Damage</td>
+        </tr>
+         }
+      </tbody>
+                </table>
+          </div>
+           </div>
+         }
+
+   @if (unit.Keywords.Any())
+          {
+          <div class="detail-section">
+         <div class="section-header">
+        <span class="section-title">KEYWORDS</span>
+     </div>
+     <div class="keywords-list">
+             @foreach (var keyword in unit.Keywords)
+   {
+         <span class="keyword-tag">@keyword</span>
+         }
+   </div>
+    </div>
+       }
+
+       @if (unit.Abilities.Any())
+       {
+          <div class="detail-section">
+       <div class="section-header">
+         <span class="section-title">ABILITIES</span>
+      </div>
+      <div class="abilities-list">
+  @foreach (var ability in unit.Abilities)
+       {
+       <div class="ability-item">
+             <p class="ability-name">@ability.Name</p>
+      <p class="ability-desc">@ability.Description</p>
               </div>
      }
-  </div>
+     </div>
+      </div>
+   }
+
+  @if (unit.WargearOptions.Any())
+     {
+        <div class="detail-section">
+         <div class="section-header">
+   <span class="section-title">WARGEAR OPTIONS</span>
+      </div>
+      <div class="wargear-list">
+        @foreach (var option in unit.WargearOptions)
+            {
+            <div class="wargear-item">
+         <p class="wargear-name">@option.Name</p>
+       <p class="wargear-desc">@option.Description</p>
+      @if (option.SelectionLimit != null)
+        {
+<p class="wargear-limit">Limit: @option.SelectionLimit</p>
+   }
+    </div>
   }
+            </div>
+        </div>
+         }
+              </div>
+   }
+            </div>
+        }
+    </div>
+      </div>
+            }
+        </div>
+    }
 </div>
 
 @code {
@@ -312,100 +304,100 @@
 
     protected override async Task OnInitializedAsync()
     {
-  if (string.IsNullOrWhiteSpace(ListId))
+      if (string.IsNullOrWhiteSpace(ListId))
      {
-     NavigationManager.NavigateTo("/lists");
-        return;
-        }
+    NavigationManager.NavigateTo("/lists");
+       return;
+    }
 
-        await LoadListAndUnits();
+     await LoadListAndUnits();
     }
 
     private async Task LoadListAndUnits()
     {
-     try
+        try
         {
-            isLoading = true;
-    
-            // Load all lists and find the one we need
-       var lists = await ListStorageService.GetAllListsAsync();
-    currentList = lists?.FirstOrDefault(l => l.Id == ListId);
+   isLoading = true;
 
-       // Load all units for detailed information
+            // Load all lists and find the one we need
+         var lists = await ListStorageService.GetAllListsAsync();
+     currentList = lists?.FirstOrDefault(l => l.Id == ListId);
+
+            // Load all units for detailed information
          allUnits = await DatasheetService.GetAllUnitsAsync();
 
-  // Group units by category with custom order
-  if (currentList != null && allUnits != null)
-      {
-         unitsByCategory = OrganizeUnitsByCategory(currentList);
-            }
-
-     if (currentList == null)
+ // Group units by category with custom order
+        if (currentList != null && allUnits != null)
   {
-   NavigationManager.NavigateTo("/lists");
-    }
-     }
-catch (Exception ex)
-        {
-        Console.WriteLine($"Error loading list details: {ex.Message}");
-        }
-     finally
-        {
-         isLoading = false;
+ unitsByCategory = OrganizeUnitsByCategory(currentList);
  }
+
+            if (currentList == null)
+       {
+                NavigationManager.NavigateTo("/lists");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading list details: {ex.Message}");
+        }
+        finally
+        {
+      isLoading = false;
+        }
     }
 
     private Dictionary<string, List<ListEntry>> OrganizeUnitsByCategory(UserList list)
     {
-   // Define custom category order
-  var categoryOrder = new[]
+        // Define custom category order
+        var categoryOrder = new[]
         {
-  "Characters",
- "Battleline",
-    "Dedicated Transports",
-          "Fortifications",
-  "Other"
+   "Characters",
+            "Battleline",
+            "Dedicated Transports",
+   "Fortifications",
+   "Other"
         };
 
-  unitsByCategory = new Dictionary<string, List<ListEntry>>();
+        unitsByCategory = new Dictionary<string, List<ListEntry>>();
 
-  foreach (var entry in list.Entries)
-       {
- var unit = allUnits?.FirstOrDefault(u => u.Id == entry.UnitId);
-    if (unit != null)
-    {
-   var category = string.IsNullOrWhiteSpace(unit.Category) ? "Other" : unit.Category;
-     
+        foreach (var entry in list.Entries)
+        {
+            var unit = allUnits?.FirstOrDefault(u => u.Id == entry.UnitId);
+     if (unit != null)
+            {
+           var category = string.IsNullOrWhiteSpace(unit.Category) ? "Other" : unit.Category;
+
     if (!unitsByCategory.ContainsKey(category))
-    {
-      unitsByCategory[category] = new List<ListEntry>();
-   }
-      
-   unitsByCategory[category].Add(entry);
-   }
-       }
+      {
+   unitsByCategory[category] = new List<ListEntry>();
+              }
+
+       unitsByCategory[category].Add(entry);
+        }
+    }
 
         // Sort the dictionary by category order
         var sortedCategories = unitsByCategory
-    .OrderBy(x =>
-      {
-    var index = System.Array.IndexOf(categoryOrder, x.Key);
-  return index >= 0 ? index : categoryOrder.Length;
- })
-   .ToDictionary(x => x.Key, x => x.Value);
+            .OrderBy(x =>
+    {
+         var index = System.Array.IndexOf(categoryOrder, x.Key);
+       return index >= 0 ? index : categoryOrder.Length;
+            })
+            .ToDictionary(x => x.Key, x => x.Value);
 
-  return sortedCategories;
-    }
+     return sortedCategories;
+ }
 
     private void ToggleExpanded(string entryId)
     {
- if (expandedUnits.Contains(entryId))
+        if (expandedUnits.Contains(entryId))
         {
-        expandedUnits.Remove(entryId);
+            expandedUnits.Remove(entryId);
+  }
+     else
+        {
+ expandedUnits.Add(entryId);
         }
-   else
-        {
-  expandedUnits.Add(entryId);
-    }
     }
 }

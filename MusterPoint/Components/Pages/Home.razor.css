@@ -1,135 +1,294 @@
-/* Home Page Styles */
+/* Warhammer 40K Terminal Styling */
 
-.home-hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.terminal-container {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+    color: #00ff41;
+    font-family: 'Courier New', 'Courier', monospace;
+  min-height: 100vh;
+ display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
     overflow: hidden;
+text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
 }
 
-.home-hero::before {
-  content: '';
+/* Scanlines Effect */
+.scanlines {
     position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 200%;
-    height: 200%;
-    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0,50 Q25,25 50,50 T100,50" stroke="rgba(255,255,255,0.05)" stroke-width="1" fill="none"/></svg>');
-    background-size: 50px 50px;
-    animation: float 6s ease-in-out infinite;
+    top: 0;
+  left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+ rgba(0, 0, 0, 0.3),
+        rgba(0, 0, 0, 0.3) 2px,
+        transparent 2px,
+        transparent 4px
+    );
     pointer-events: none;
+    z-index: 1;
+    animation: flicker 0.1s infinite;
 }
 
-@keyframes float {
+@keyframes flicker {
+    0% {
+        opacity: 0.95;
+    }
+  50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.95;
+    }
+}
+
+.terminal-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+  padding: 3rem;
+    border: 3px solid #00ff41;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 65, 0.5),
+     inset 0 0 20px rgba(0, 255, 65, 0.1);
+    background: rgba(10, 10, 10, 0.8);
+}
+
+/* Title Styling */
+.ascii-header {
+    text-align: center;
+    margin-bottom: 2rem;
+padding-bottom: 1.5rem;
+    border-bottom: 2px solid #00ff41;
+}
+
+.title-main {
+    margin: 0;
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ffaa00;
+    text-shadow: 0 0 20px rgba(255, 170, 0, 0.8);
+    letter-spacing: 0.2em;
+    animation: titleGlow 2s ease-in-out infinite;
+}
+
+.title-sub {
+    margin: 0.5rem 0 0 0;
+    font-size: 0.9rem;
+    color: #00d4ff;
+    text-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
+    letter-spacing: 0.15em;
+}
+
+@keyframes titleGlow {
     0%, 100% {
- transform: translateY(0px);
+text-shadow: 0 0 15px rgba(255, 170, 0, 0.6);
     }
     50% {
-        transform: translateY(20px);
+        text-shadow: 0 0 30px rgba(255, 170, 0, 1);
     }
 }
 
-.home-title {
-    color: white;
-    font-weight: 900;
-    letter-spacing: -2px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    margin-bottom: 0.5rem;
+/* Terminal Text */
+.terminal-text {
+ margin: 0.5rem 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    letter-spacing: 0.05em;
+    color: #00ff41;
+    animation: textGlow 2s ease-in-out infinite;
 }
 
-.home-title-accent {
-    color: #ffd700;
-    font-style: italic;
+@keyframes textGlow {
+  0%, 100% {
+        text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+    }
+    50% {
+      text-shadow: 0 0 15px rgba(0, 255, 65, 0.8);
+    }
 }
 
-.home-subtitle {
-    color: rgba(255, 255, 255, 0.95);
-    font-weight: 300;
-    letter-spacing: 1px;
+.terminal-prompt {
+    color: #ffaa00;
+    font-weight: bold;
 }
 
-.home-description {
-  color: rgba(255, 255, 255, 0.9);
-    line-height: 1.8;
+.terminal-info {
+    color: #00d4ff;
+    font-weight: bold;
+    margin: 1rem 0;
 }
 
-.home-divider {
-    background-color: rgba(255, 255, 255, 0.2);
-    border: none;
-    height: 2px;
-    margin: 2rem 0;
+.terminal-dim {
+color: #00aa33;
+  font-size: 0.9rem;
+    opacity: 0.8;
 }
 
-.home-feature {
-    padding: 1.5rem;
-    border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
+/* Terminal Sections */
+.terminal-section {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    border-left: 3px solid #00ff41;
+    padding-left: 1.5rem;
 }
 
-.home-feature:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+.description-box {
+    background: rgba(0, 255, 65, 0.05);
+    border: 1px dashed #00ff41;
+    border-left: 3px solid #00ff41;
 }
 
 /* Button Styling */
-.home-hero .button {
-    border-radius: 6px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  transition: all 0.3s ease;
-    border: 2px solid transparent;
+.button-group {
+    display: flex;
+    gap: 1.5rem;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+    border: none;
+    padding: 0;
 }
 
-.home-hero .button.is-primary {
-    background-color: white;
-    color: #667eea;
+.terminal-button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: 2px solid #00ff41;
+    color: #00ff41;
+ font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+ transition: all 0.3s ease;
+ text-transform: uppercase;
+    letter-spacing: 0.1em;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
 }
 
-.home-hero .button.is-primary:hover {
-    background-color: #ffd700;
-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+.terminal-button:hover {
+    background: rgba(0, 255, 65, 0.1);
+    box-shadow: 
+     0 0 20px rgba(0, 255, 65, 0.7),
+        inset 0 0 10px rgba(0, 255, 65, 0.2);
+ transform: scale(1.05);
 }
 
-.home-hero .button.is-info.is-outlined {
-    color: white;
-    border-color: white;
-    background-color: transparent;
+.terminal-button-primary {
+    border-color: #ffaa00;
+    color: #ffaa00;
+    box-shadow: 0 0 10px rgba(255, 170, 0, 0.3);
 }
 
-.home-hero .button.is-info.is-outlined:hover {
-    background-color: white;
-    color: #667eea;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+.terminal-button-primary:hover {
+    box-shadow: 
+    0 0 20px rgba(255, 170, 0, 0.7),
+        inset 0 0 10px rgba(255, 170, 0, 0.2);
 }
 
-/* Responsive adjustments */
-@media screen and (max-width: 768px) {
-    .home-title {
-    font-size: 2rem;
+.terminal-button-secondary {
+    border-color: #00d4ff;
+    color: #00d4ff;
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+.terminal-button-secondary:hover {
+    box-shadow: 
+    0 0 20px rgba(0, 212, 255, 0.7),
+   inset 0 0 10px rgba(0, 212, 255, 0.2);
+}
+
+.button-bracket {
+    margin: 0 0.25rem;
+}
+
+.button-text {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.terminal-button:hover .button-text {
+  transform: scale(1.1);
+}
+
+/* Loading Screen */
+.loading-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-spinner-terminal {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #00ff41;
+  border-top-color: #ffaa00;
+    border-radius: 50%;
+    animation: spinTerminal 1s linear infinite;
+    margin: 1rem 0;
+}
+
+@keyframes spinTerminal {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    border-top: 2px dashed #00ff41;
+    border-left: none;
+    padding-top: 1.5rem;
+    margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .terminal-content {
+        padding: 2rem;
+        margin: 1rem;
     }
 
-    .home-subtitle {
- font-size: 1.1rem;
+    .button-group {
+   flex-direction: column;
+     gap: 1rem;
     }
 
-    .home-description {
-        font-size: 1rem;
+    .terminal-button {
+   width: 100%;
+ text-align: center;
     }
 
-    .home-feature {
-    margin-bottom: 1rem;
+    .title-main {
+   font-size: 2rem;
     }
 
-    .buttons.is-centered {
-        flex-direction: column;
-        align-items: center;
+    .title-sub {
+        font-size: 0.8rem;
     }
 
-    .buttons.is-centered .button {
-        width: 100%;
-  max-width: 300px;
+    .terminal-text {
+        font-size: 0.9rem;
     }
+}
+
+/* Glitch Effect (optional enhancement) */
+@keyframes glitch {
+    0% {
+        text-shadow: 3px 0 #ffaa00, -3px 0 #00d4ff;
+    }
+    50% {
+text-shadow: -3px 0 #ffaa00, 3px 0 #00d4ff;
+    }
+    100% {
+        text-shadow: 3px 0 #ffaa00, -3px 0 #00d4ff;
+    }
+}
+
+.terminal-prompt:hover {
+    animation: glitch 0.3s ease-in-out;
 }

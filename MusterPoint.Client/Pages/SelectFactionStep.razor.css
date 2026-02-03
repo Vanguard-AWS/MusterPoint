@@ -1,34 +1,59 @@
-/* Select Faction Step Styles */
+/* Select Faction Step Styles - Terminal Theme */
 
 .faction-selector-container {
     padding: 2rem;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
+    width: 100%;
 }
 
-.faction-selector-container .title {
-    color: #2c3e50;
+.faction-header {
     text-align: center;
     margin-bottom: 3rem;
 }
 
+.faction-header .title-main {
+    margin: 0 0 0.5rem 0;
+}
+
+.faction-header .title-sub {
+ margin: 0;
+}
+
 .faction-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 3rem;
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
     margin-bottom: 3rem;
 }
 
 .faction-section {
-    background: #f5f5f5;
-    padding: 2rem;
-    border-radius: 8px;
+    background: var(--terminal-bg-light);
+    border: 2px solid var(--terminal-green);
+    padding: 1.5rem;
+    border-radius: 2px;
+    box-shadow: var(--shadow-green-soft);
 }
 
-.faction-section .title {
-    text-align: left;
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
+.faction-section-title {
+ text-align: left;
+ margin: 0 0 1.5rem 0;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+}
+
+.faction-section-title.imperium-title {
+    color: var(--terminal-cyan);
+}
+
+.faction-section-title.chaos-title {
+    color: #f14668;
+}
+
+.faction-section-title.xenos-title {
+    color: var(--terminal-orange);
 }
 
 .faction-options {
@@ -38,62 +63,104 @@
 }
 
 .faction-card {
-    padding: 1rem;
-    border: 2px solid #dbdbdb;
-    border-radius: 6px;
-    background-color: white;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--terminal-green);
+    border-radius: 2px;
+    background-color: transparent;
+    color: var(--terminal-green);
     cursor: pointer;
-    transition: all 0.3s ease;
+ transition: all var(--transition-fast);
     text-align: left;
-    font-size: 1rem;
+    font-size: 0.95rem;
+  font-family: var(--terminal-font);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .faction-card:hover {
-    border-color: #3273dc;
-    background-color: #f0f7ff;
+    border-color: var(--terminal-orange);
+    background-color: rgba(255, 170, 0, 0.1);
+    box-shadow: 0 0 10px rgba(255, 170, 0, 0.3);
  transform: translateX(4px);
 }
 
 .faction-card.is-selected {
- border-color: #3273dc;
-    background-color: #3273dc;
-    color: white;
-  font-weight: 600;
+ border-color: var(--terminal-orange);
+    background-color: rgba(255, 170, 0, 0.2);
+    color: var(--terminal-orange);
+    box-shadow: 0 0 15px rgba(255, 170, 0, 0.5);
 }
 
 .faction-card.is-selected:hover {
-    background-color: #2366d1;
+    background-color: rgba(255, 170, 0, 0.3);
+    box-shadow: 0 0 20px rgba(255, 170, 0, 0.6);
 }
 
 .faction-name {
     display: block;
 }
 
+.faction-actions {
+  display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.faction-actions .terminal-button {
+    min-width: 200px;
+}
+
+.faction-actions .terminal-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
 /* Responsive */
-@media screen and (max-width: 768px) {
-.faction-selector-container {
-        padding: 1rem;
+@media screen and (max-width: 1200px) {
+    .faction-selector-container {
+        padding: 1.5rem;
     }
 
     .faction-grid {
- grid-template-columns: 1fr;
-      gap: 2rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .faction-selector-container {
+        padding: 1.5rem;
     }
 
-    .faction-selector-container .title {
-        font-size: 1.5rem;
- }
-
-    .level {
-flex-direction: column;
+    .faction-grid {
+     grid-template-columns: 1fr;
+      gap: 1.5rem;
     }
 
-    .level-right {
+  .faction-header .title-main {
+     font-size: 1.8rem;
+    }
+
+    .faction-actions {
+        flex-direction: column;
+    }
+
+ .faction-actions .terminal-button {
         width: 100%;
-        justify-content: center !important;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .faction-selector-container {
+     padding: 1rem;
     }
 
-    .button {
-      width: 100%;
+    .faction-header .title-main {
+        font-size: 1.5rem;
+    }
+
+    .faction-section {
+        padding: 1rem;
     }
 }

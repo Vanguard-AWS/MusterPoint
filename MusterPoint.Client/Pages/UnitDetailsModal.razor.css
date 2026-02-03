@@ -1,228 +1,344 @@
+/* Terminal Theme Modal Styles */
+
 ::deep .unit-details-modal {
     max-width: 900px;
     max-height: 90vh;
-    overflow-y: auto;
-}
-
-::deep .border-bottom {
-    border-bottom: 1px solid #e5e5e5;
-}
-
-::deep .unit-details-modal .modal-card-body {
-    overflow-y: auto;
-    max-height: 70vh;
+    border: 2px solid var(--terminal-green);
+    background-color: var(--terminal-bg-dark);
+    box-shadow: var(--shadow-green-strong);
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
 }
 
 ::deep .modal-card-head {
-    background-color: #f5f5f5;
-    border-bottom: 2px solid #dbdbdb;
+    background-color: var(--terminal-bg-light);
+    border-bottom: 2px solid var(--terminal-green);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 ::deep .modal-card-title {
-    font-weight: 600;
-    font-size: 1.25rem;
+    font-family: var(--terminal-font);
+    color: var(--terminal-orange);
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-shadow: var(--glow-orange);
+    letter-spacing: 0.1em;
+    margin: 0;
 }
 
-::deep .unit-details-modal table {
-    margin-bottom: 0;
+::deep .delete {
+    background: transparent;
+    border: none;
+    color: var(--terminal-green);
+    font-size: 1.5rem;
+    cursor: pointer;
+    text-shadow: var(--shadow-green-soft);
+    transition: all 0.2s;
 }
 
-::deep .unit-details-modal .tag {
-  margin-right: 0.5rem;
-    margin-bottom: 0.25rem;
+::deep .delete:hover {
+    color: var(--terminal-orange);
+    text-shadow: var(--glow-orange);
+    transform: scale(1.1);
 }
 
-::deep .unit-details-modal .box {
-    padding: 1.25rem;
-    border-left: 4px solid #3273dc;
-    box-shadow: 0 2px 4px rgba(10, 10, 10, 0.1);
+::deep .modal-card-body {
+    background-color: rgba(10, 10, 10, 0.95);
+    color: var(--terminal-green);
+    font-family: var(--terminal-font);
+    padding: 1.5rem;
+    overflow-y: auto;
 }
 
-::deep .unit-details-modal .box:hover {
-    box-shadow: 0 4px 8px rgba(10, 10, 10, 0.15);
-}
-
-/* Stats table styling */
-::deep .unit-details-modal thead th {
-    background-color: #f5f5f5;
-    font-weight: 700;
- text-align: center;
-    padding: 0.75rem 0.5rem;
-}
-
-::deep .unit-details-modal tbody td {
-    text-align: center;
-    padding: 0.5rem;
-}
-
-::deep .unit-details-modal tbody td:first-child {
-    text-align: left;
-    font-weight: 500;
-}
-
-/* Weapon tables specific styling */
-::deep .unit-details-modal .table.is-narrow tbody td {
-    padding: 0.375rem;
-}
-
-::deep .unit-details-modal .is-size-7 {
-    font-size: 0.875rem;
-}
-
-/* Modal footer */
-::deep .modal-card-foot {
-    padding: 1rem;
-    background-color: #fafafa;
-    border-top: 1px solid #dbdbdb;
-}
-
-/* Scrollbar styling */
-::deep .unit-details-modal::-webkit-scrollbar {
+/* Scrollbar styling for modal body */
+::deep .modal-card-body::-webkit-scrollbar {
     width: 8px;
 }
 
-::deep .unit-details-modal::-webkit-scrollbar-track {
-    background: #f1f1f1;
+::deep .modal-card-body::-webkit-scrollbar-track {
+    background: rgba(0, 255, 65, 0.05);
 }
 
-::deep .unit-details-modal::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 4px;
+::deep .modal-card-body::-webkit-scrollbar-thumb {
+    background: var(--terminal-green);
+    border-radius: 2px;
 }
 
-::deep .unit-details-modal::-webkit-scrollbar-thumb:hover {
-    background: #555;
+::deep .modal-card-body::-webkit-scrollbar-thumb:hover {
+    background: var(--terminal-orange);
 }
 
-/* Enhancement Section Styling */
+::deep .modal-card-foot {
+    background-color: var(--terminal-bg-light);
+    border-top: 2px solid var(--terminal-green);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Section Styling */
+::deep .section-box {
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--terminal-green);
+    padding: 1rem;
+    background: rgba(0, 255, 65, 0.02);
+    position: relative;
+}
+
+::deep .section-title {
+    color: var(--terminal-cyan);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    border-bottom: 1px dashed var(--terminal-green);
+    padding-bottom: 0.5rem;
+    text-shadow: var(--glow-cyan);
+}
+
+/* Info Grid */
+::deep .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+::deep .info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+::deep .info-label {
+    font-size: 0.7rem;
+    color: var(--terminal-green-dim);
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+}
+
+::deep .info-value {
+    font-size: 1rem;
+    color: var(--terminal-green);
+    font-weight: bold;
+}
+
+/* Tags */
+::deep .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+::deep .terminal-tag {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid var(--terminal-green);
+    color: var(--terminal-green);
+    text-transform: uppercase;
+    background: rgba(0, 255, 65, 0.05);
+}
+
+::deep .terminal-tag.faction-tag {
+    border-color: var(--terminal-cyan);
+    color: var(--terminal-cyan);
+}
+
+::deep .terminal-tag.keyword-tag {
+    border-color: var(--terminal-orange);
+    color: var(--terminal-orange);
+}
+
+/* Tables */
+::deep .terminal-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+::deep .terminal-table th {
+    text-align: left;
+    padding: 0.5rem;
+    color: var(--terminal-orange);
+    border-bottom: 1px solid var(--terminal-green);
+    text-transform: uppercase;
+    font-weight: normal;
+}
+
+::deep .terminal-table td {
+    padding: 0.5rem;
+    border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+    color: var(--terminal-green);
+}
+
+::deep .terminal-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Weapon Profiles */
+::deep .weapon-profile {
+    margin-bottom: 1rem;
+    border-bottom: 1px dashed rgba(0, 255, 65, 0.3);
+    padding-bottom: 1rem;
+}
+
+::deep .weapon-profile:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+::deep .weapon-name {
+    color: var(--terminal-green);
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+::deep .weapon-special {
+    font-size: 0.75rem;
+    color: var(--terminal-green-dim);
+    font-style: italic;
+    margin-top: 0.25rem;
+}
+
+/* Enhancements */
 ::deep .enhancement-section {
-    border-left-color: #48c774 !important;
+    border-color: var(--terminal-green);
+    box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.1);
 }
 
-::deep .enhancement-list {
+::deep .enhancement-dropdown-container {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    margin-bottom: 1rem;
 }
 
-::deep .enhancement-option {
-    background: white;
-    border: 2px solid #e5e5e5;
-    border-radius: 6px;
-    padding: 1rem;
+::deep .enhancement-label {
+    color: var(--terminal-green);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+::deep .enhancement-select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-family: var(--terminal-font);
+    font-size: 0.9rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid var(--terminal-green);
+    color: var(--terminal-orange);
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2300ff41' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+}
+
+::deep .enhancement-select:hover {
+    border-color: var(--terminal-orange);
+    box-shadow: 0 0 5px rgba(255, 170, 0, 0.3);
+}
+
+::deep .enhancement-select:focus {
+    outline: none;
+    border-color: var(--terminal-orange);
+    box-shadow: 0 0 10px rgba(255, 170, 0, 0.5);
+}
+
+::deep .enhancement-select option {
+    background-color: #0a0a0a;
+    color: var(--terminal-green);
+    padding: 0.5rem;
+}
+
+/* Warlord Toggle */
+::deep .warlord-section {
+    border-color: var(--terminal-orange);
+}
+
+::deep .warlord-checkbox {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    transition: all 0.2s ease;
+    gap: 0.5rem;
+    cursor: pointer;
+    color: var(--terminal-orange);
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
-::deep .enhancement-option:hover {
-    border-color: #3273dc;
-    background-color: #f8f9fa;
-    box-shadow: 0 2px 4px rgba(50, 115, 220, 0.2);
+::deep .warlord-checkbox input {
+    accent-color: var(--terminal-orange);
 }
 
-::deep .enhancement-option.is-selected {
-  background-color: #e8f4f8;
-    border-color: #48c774;
-    box-shadow: 0 2px 8px rgba(72, 199, 116, 0.3);
-}
-
-::deep .enhancement-content {
-    margin: 0;
-    flex: 1;
+/* Enhancement Selected Display */
+::deep .enhancement-selected {
+    padding: 1rem;
+    border: 1px solid var(--terminal-green);
+    background: rgba(0, 255, 65, 0.1);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
 }
 
 ::deep .enhancement-name {
- margin: 0 0 0.5rem 0;
-    color: #363636;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    color: var(--terminal-orange);
+    font-weight: bold;
+  display: block;
 }
 
 ::deep .enhancement-cost {
-    color: #48c774;
-    font-weight: 600;
-    font-size: 0.875rem;
+    color: var(--terminal-cyan);
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
 }
 
 ::deep .enhancement-desc {
-    margin: 0;
-    font-size: 0.875rem;
-    color: #7a7a7a;
-    line-height: 1.4;
+    color: var(--terminal-green);
+    font-size: 0.85rem;
+ white-space: pre-line;
+    line-height: 1.6;
+    display: block;
 }
 
-::deep .enhancement-option .button {
-    margin-left: 1rem;
-    flex-shrink: 0;
-    min-width: 80px;
-    transition: all 0.2s ease;
-}
-
-::deep .enhancement-option .button.is-success {
-    background-color: #48c774;
-    border-color: #48c774;
-    color: white;
-}
-
-::deep .enhancement-option .button.is-success:hover {
-    background-color: #3aa95c;
-    border-color: #3aa95c;
-}
-
-::deep .enhancement-option .button.is-danger {
-background-color: #f14668;
-    border-color: #f14668;
-    color: white;
-}
-
-::deep .enhancement-option .button.is-danger:hover {
-background-color: #d4000a;
-    border-color: #d4000a;
-}
-
-::deep .enhancement-option .button.is-light {
-    background-color: #f5f5f5;
- border-color: #dbdbdb;
-    color: #363636;
-    cursor: default;
-}
-
-::deep .enhancement-option .button.is-light:hover {
-    background-color: #f5f5f5;
-    border-color: #dbdbdb;
-}
-
-/* Warlord Section Styling */
-::deep .warlord-section {
-    border-left-color: #ffdd57 !important;
-    background: linear-gradient(135deg, #fffacd 0%, #ffffeb 100%);
-}
-
-::deep .warlord-section .title {
-    color: #b8860b;
-}
-
-::deep .warlord-section .checkbox {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.5rem;
-  color: #363636;
-}
-
-::deep .warlord-section .checkbox input[type="checkbox"] {
+/* Buttons */
+::deep .terminal-button {
+  background: transparent;
+    border: 1px solid var(--terminal-green);
+    color: var(--terminal-green);
+    font-family: var(--terminal-font);
+    padding: 0.5rem 1rem;
     cursor: pointer;
-    margin-right: 0.5rem;
+    text-transform: uppercase;
+    transition: all 0.2s;
 }
 
-::deep .warlord-section .checkbox span {
-    cursor: pointer;
-    user-select: none;
+::deep .terminal-button:hover {
+    background: var(--terminal-green);
+    color: black;
+    box-shadow: 0 0 10px var(--terminal-green);
 }
 
-::deep .warlord-section .checkbox input[type="checkbox"]:checked + span {
-    color: #ffdd57;
-  font-weight: 600;
+::deep .terminal-button.is-small {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+}
+
+::deep .terminal-button.is-danger {
+    border-color: #ff3333;
+    color: #ff3333;
+}
+
+::deep .terminal-button.is-danger:hover {
+    background: #ff3333;
+    color: black;
+    box-shadow: 0 0 10px #ff3333;
+}
+
+::deep .terminal-button.is-success {
+    border-color: var(--terminal-green);
 }
