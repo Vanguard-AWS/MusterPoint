@@ -9,14 +9,10 @@
         </div>
         <div class="faction-actions">
             <button class="terminal-button terminal-button-secondary" @onclick="HandleBack">
-   <span class="button-bracket">[</span>
-    <span class="button-text">BACK</span>
-     <span class="button-bracket">]</span>
+    <span class="button-text">LISTS</span>
      </button>
        <button class="terminal-button terminal-button-secondary" disabled="@(string.IsNullOrEmpty(_localSelectedFaction))" @onclick="HandleContinue">
-             <span class="button-bracket">[</span>
       <span class="button-text">CONTINUE</span>
-      <span class="button-bracket">]</span>
        </button>
  </div>
     </div>

@@ -110,6 +110,15 @@
     cursor: not-allowed;
 }
 
+/* Validation hint - no wrapping */
+.validation-hint {
+    margin-top: 0.5rem !important;
+    font-size: 0.8rem !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
     .register-content {

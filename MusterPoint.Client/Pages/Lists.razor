@@ -1,9 +1,12 @@
-@page "/lists"
+﻿@page "/lists"
 @using MusterPoint.Client.Models
 @using MusterPoint.Client.Services
 @using MusterPoint.Client.Components
 @inject ListStorageService ListStorageService
 @inject NavigationManager NavigationManager
+@inject ListValidationService ListValidationService
+@inject DatasheetService DatasheetService
+@inject AuthService AuthService
 @rendermode InteractiveWebAssembly
 
 <PageTitle>My Lists - MusterPoint</PageTitle>
@@ -11,14 +14,17 @@
 <div class="lists-container">
     <div class="lists-header">
     <div class="header-left">
-       <h1 class="title-main">MY LISTS</h1>
-      <p class="title-sub">Manage Your Army Rosters</p>
-        </div>
+    <a href="/" class="logo-button" title="Home" @onclick="NavigateHome">
+   <img src="/images/musterpoint-logo.png" alt="MusterPoint Logo" class="logo-image" />
+ </a>
+   <div class="header-titles">
+     <h1 class="title-main">MY LISTS</h1>
+ <p class="title-sub">Manage Your Army Rosters</p>
+   </div>
+  </div>
         <div class="header-right">
      <a href="/listbuilder" class="terminal-button terminal-button-secondary">
-   <span class="button-bracket">[</span>
        <span class="button-text">+ NEW LIST</span>
-   <span class="button-bracket">]</span>
      </a>
    <SignOutButton />
  </div>
@@ -42,45 +48,77 @@
     }
     else
     {
-     <div class="lists-grid">
-@foreach (var list in userLists)
-          {
-   <div class="list-card terminal-panel">
-        <div class="card-header">
-        <h2 class="card-title terminal-prompt">@list.Name</h2>
-              </div>
-
-       <div class="card-info">
-      <p class="terminal-text terminal-dim">
-       <span class="info-badge">@list.Faction</span>
-   @if (!string.IsNullOrEmpty(list.Detachment))
+     <div class="lists-cards-container">
+       @foreach (var list in userLists)
          {
-   <span class="info-badge">@list.Detachment</span>
-         }
-           <span class="info-badge">@list.CalculateTotalPoints() PTS</span>
-     </p>
-             </div>
-
-     <div class="card-actions">
-          <a href="/list/@list.Id" class="icon-button icon-view" title="View Details">
-   <i class="fas fa-eye"></i>
-   </a>
-     <a href="/listbuilder/@list.Id" class="icon-button icon-edit" title="Edit List">
-  <i class="fas fa-edit"></i>
-             </a>
-          <button class="icon-button icon-delete" @onclick="() => DeleteList(list.Id)" title="Delete List">
-   <i class="fas fa-trash"></i>
-     </button>
-        </div>
-     </div>
+ <a href="/listbuilder/@list.Id" class="list-card-link">
+      <div class="list-card">
+     <div class="card-content">
+ <div class="card-icon">
+    <img src="@GetFactionIconPath(list.Faction)" alt="@list.Faction" class="faction-icon" />
+ </div>
+ <div class="card-main">
+   <div class="list-name">
+   @list.Name
+        
+   </div>
+   <div class="card-meta">
+     <span class="info-badge">@list.Faction</span>
+   @if (!string.IsNullOrEmpty(list.Detachment))
+   {
+  <span class="info-badge">@list.Detachment</span>
 }
+     </div>
+   @if (listValidationStatus.TryGetValue(list.Id, out var validationStatus))
+   {
+ if (!validationStatus.IsValid && validationStatus.Errors.Any())
+     {
+   <div class="validation-messages error-messages">
+  @foreach (var error in validationStatus.Errors)
+{
+     <p class="validation-message">⚠️ @error</p>
+    }
   </div>
+    }
+   else if (validationStatus.HasWarnings && validationStatus.Warnings.Any())
+  {
+ <div class="validation-messages warning-messages">
+       @foreach (var warning in validationStatus.Warnings)
+{
+  <p class="validation-message">⚠️ @warning</p>
+  }
+    </div>
+   }
+   }
+  </div>
+  </div>
+   <div class="card-actions-right">
+   <div class="points-section">
+   <span class="points-value">@list.CalculateTotalPoints()/<span class="max-points">@list.GameSize</span> PTS</span>
+     </div>
+ <div class="card-actions" @onclick:stopPropagation>
+  <a href="/list/@list.Id" class="icon-button icon-view" title="View Details" @onclick:stopPropagation>
+         <i class="fas fa-eye"></i>
+  </a>
+ <a href="/listbuilder/@list.Id" class="icon-button icon-edit" title="Edit List" @onclick:stopPropagation>
+      <i class="fas fa-edit"></i>
+     </a>
+   <button class="icon-button icon-delete" @onclick="() => DeleteList(list.Id)" title="Delete List" @onclick:stopPropagation>
+       <i class="fas fa-trash"></i>
+    </button>
+    </div>
+  </div>
+  </div>
+ </a>
+      }
+ </div>
     }
 </div>
 
 @code {
   private List<UserList>? userLists;
     private bool isLoading = true;
+    private Dictionary<string, (bool IsValid, bool HasWarnings, List<string> Errors, List<string> Warnings)> listValidationStatus = new();
 
     protected override async Task OnInitializedAsync()
   {
@@ -93,6 +131,20 @@ private async Task LoadLists()
         {
           isLoading = true;
             userLists = await ListStorageService.GetAllListsAsync();
+            
+            // Validate all lists
+            if (userLists != null)
+            {
+     var allUnits = await DatasheetService.GetAllUnitsAsync();
+                foreach (var list in userLists)
+                {
+                    var messages = ListValidationService.ValidateList(list, allUnits);
+                    var errors = messages.Where(m => m.Severity == ListValidationService.ValidationSeverity.Error).Select(m => m.Message).ToList();
+                    var warnings = messages.Where(m => m.Severity == ListValidationService.ValidationSeverity.Warning).Select(m => m.Message).ToList();
+                    
+                    listValidationStatus[list.Id] = (!errors.Any(), warnings.Any(), errors, warnings);
+                }
+            }
         }
    catch (Exception ex)
         {
@@ -111,10 +163,78 @@ finally
 {
        await ListStorageService.DeleteListAsync(listId);
     await LoadLists();
-        }
+     }
         catch (Exception ex)
         {
      Console.WriteLine($"Error deleting list: {ex.Message}");
+      }
+    }
+
+    private string GetFactionIconPath(string factionName)
+    {
+        if (string.IsNullOrEmpty(factionName))
+         return string.Empty;
+
+        // Convert faction name to kebab-case for file naming
+        string iconName = factionName
+          .ToLower()
+.Replace(" ", "-")
+    .Replace("'", "");
+
+        // Determine which subfolder based on faction
+     string subfolder = "imperium"; // default
+
+        // Check if faction is in Chaos
+        var chaosFactions = new List<string>
+        {
+        "Chaos Daemons",
+            "Chaos Knights",
+            "Chaos Space Marines",
+            "Death Guard",
+"Emperor's Children",
+     "Thousand Sons",
+            "World Eaters"
+        };
+
+        // Check if faction is in Xenos
+  var xenosFactions = new List<string>
+   {
+       "Aeldari",
+        "Drukhari",
+          "Genestealer Cults",
+        "Leagues of Votann",
+   "Necrons",
+      "Orks",
+          "T'au Empire",
+   "Tyranids"
+        };
+
+   if (chaosFactions.Contains(factionName))
+        {
+            subfolder = "chaos";
         }
+        else if (xenosFactions.Contains(factionName))
+     {
+            subfolder = "xenos";
+        }
+
+        // Convert subfolder to kebab-case
+        string kebabSubfolder = subfolder.ToLower().Replace(" ", "-");
+
+        return $"/data/faction-icons/{kebabSubfolder}/{iconName}.svg";
+    }
+
+    private string GetValidationTooltip(List<string> messages)
+    {
+        return string.Join("\n", messages);
+    }
+
+    private async Task NavigateHome()
+    {
+        // Sign out the user
+        await AuthService.LogoutAsync();
+        
+     // Navigate to home
+      NavigationManager.NavigateTo("/", forceLoad: true);
     }
 }

@@ -1,0 +1,16 @@
+{
+  "armyRules": [
+    {
+      "faction": "Space Marines",
+      "path": "data/army-rules/space-marines.json"
+    },
+    {
+      "faction": "Imperial Knights",
+      "path": "data/army-rules/imperial-knights.json"
+  },
+    {
+    "faction": "Tyranids",
+  "path": "data/army-rules/tyranids.json"
+    }
+  ]
+}

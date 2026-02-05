@@ -15,6 +15,7 @@ public class UserList
     public string Faction { get; set; } = string.Empty;
     public string Detachment { get; set; } = string.Empty;
     public int ArmyPoints { get; set; }
+    public int GameSize { get; set; } = 2000;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
   public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     public List<ListEntry> Entries { get; set; } = new();

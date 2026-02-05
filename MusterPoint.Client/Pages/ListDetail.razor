@@ -3,6 +3,8 @@
 @using MusterPoint.Client.Services
 @inject ListStorageService ListStorageService
 @inject DatasheetService DatasheetService
+@inject DetachmentService DetachmentService
+@inject ArmyRulesService ArmyRulesService
 @inject NavigationManager NavigationManager
 @rendermode InteractiveWebAssembly
 
@@ -12,31 +14,41 @@
     <!-- Header Section -->
     <div class="list-header">
         <div class="header-content">
-            <div class="header-info">
-      <h1 class="list-title">@(currentList?.Name ?? "LOADING...")</h1>
-          @if (currentList != null)
-         {
-           <div class="list-meta">
+    <div class="header-info">
+<div class="header-with-icon">
+  <img src="@GetFactionIconPath(currentList?.Faction)" alt="@currentList?.Faction" class="header-faction-icon" />
+        <h1 class="list-title">@(currentList?.Name ?? "LOADING...")</h1>
+      </div>
+    @if (currentList != null)
+{
+   <div class="list-meta">
  <span class="meta-item">
-         <span class="meta-label">FACTION:</span>
-       <span class="meta-value">@currentList.Faction</span>
-          </span>
-       <span class="meta-item">
+       <span class="meta-label">FACTION:</span>
+       <span class="meta-value">@currentList.Faction.ToUpper()</span>
+        </span>
+  @if (!string.IsNullOrEmpty(currentList.Detachment))
+  {
+  <span class="meta-item">
+       <span class="meta-label">DETACHMENT:</span>
+       <span class="meta-value">@currentList.Detachment.ToUpper()</span>
+    </span>
+  }
+  <span class="meta-item">
    <span class="meta-label">POINTS:</span>
-             <span class="meta-value">@currentList.CalculateTotalPoints() / 2000</span>
-      </span>
-         </div>
+   <span class="meta-value">@currentList.CalculateTotalPoints() / @currentList.GameSize</span>
+  </span>
+</div>
     }
-            </div>
-            <div class="header-actions">
-           @if (currentList != null)
+      </div>
+  <div class="header-actions">
+       @if (currentList != null)
     {
-        <a href="/listbuilder/@currentList.Id" class="terminal-button terminal-button-primary">
+   <a href="/listbuilder/@currentList.Id" class="terminal-button terminal-button-primary">
  <i class="fas fa-edit mr-2"></i>EDIT
-                </a>
+       </a>
     }
-                <a href="/lists" class="terminal-button terminal-button-secondary">
-        <i class="fas fa-arrow-left mr-2"></i>BACK
+    <a href="/lists" class="terminal-button terminal-button-secondary">
+    <i class="fas fa-arrow-left mr-2"></i>BACK
     </a>
      </div>
      </div>
@@ -47,39 +59,123 @@
     {
         <div class="loading-container">
   <p class="loading-text">INITIALIZING DATASHEET...</p>
-        </div>
+     </div>
     }
     else if (currentList == null || !currentList.Entries.Any())
     {
         <div class="empty-state">
-            <p class="empty-text">> LIST IS EMPTY</p>
+   <p class="empty-text">> LIST IS EMPTY</p>
   </div>
     }
     else
     {
     <div class="units-container">
+   <!-- Rules Section - Direct Dropdowns -->
+      <div class="rules-section">
+     @if (armyRulesData != null && armyRulesData.ArmyRules.Any())
+   {
+   <div class="army-rules-dropdown">
+      <div class="dropdown-header army-rules-header" @onclick="ToggleArmyRulesExpanded">
+     <button class="dropdown-toggle-btn @(armyRulesExpanded ? "open" : "")">
+  <i class="fas @(armyRulesExpanded ? "fa-chevron-down" : "fa-chevron-right")"></i>
+   </button>
+   <h4 class="dropdown-title">ARMY RULES</h4>
+      </div>
+
+      @if (armyRulesExpanded)
+  {
+        <div class="dropdown-content army-rules-content">
+   @foreach (var armyRule in armyRulesData.ArmyRules)
+   {
+        <div class="army-rule">
+           <div class="rule-header">
+       <h5 class="rule-title">@armyRule.Name</h5>
+ </div>
+   @if (!string.IsNullOrEmpty(armyRule.FlavorText))
+   {
+ <p class="flavor-text">@armyRule.FlavorText</p>
+    }
+ <div class="rule-content">
+      @foreach (var ruleText in armyRule.Rules)
+    {
+    <p class="rule-text">@ruleText</p>
+    }
+     </div>
+   @if (armyRule.Tables != null && armyRule.Tables.Any())
+      {
+    @foreach (var table in armyRule.Tables)
+    {
+    <div class="rule-table">
+    <h6 class="table-title">@table.Title</h6>
+ <table class="data-table">
+ <tbody>
+  @foreach (var row in table.Rows)
+{
+      <tr>
+   <td class="roll-cell">@row.Roll</td>
+    <td class="content-cell">@row.Content</td>
+       </tr>
+   }
+   </tbody>
+        </table>
+     </div>
+        }
+ }
+   </div>
+      }
+      </div>
+ }
+    </div>
+    }
+
+        @if (detachmentData != null && detachmentData.DetachmentRule != null)
+    {
+    <div class="detachment-rules-dropdown">
+    <div class="dropdown-header detachment-rules-header" @onclick="ToggleDetachmentRulesExpanded">
+    <button class="dropdown-toggle-btn @(detachmentRulesExpanded ? "open" : "")">
+      <i class="fas @(detachmentRulesExpanded ? "fa-chevron-down" : "fa-chevron-right")"></i>
+    </button>
+ <h4 class="dropdown-title">DETACHMENT RULE</h4>
+  </div>
+
+      @if (detachmentRulesExpanded)
+   {
+   <div class="dropdown-content detachment-rules-content">
+     <div class="rule-header">
+   <h5 class="rule-title">@detachmentData.DetachmentRule.Name</h5>
+</div>
+  <p class="rule-description">@detachmentData.DetachmentRule.Description</p>
+     </div>
+   }
+    </div>
+     }
+      </div>
+
+   <!-- Spacing before units -->
+        <div class="rules-units-divider"></div>
+
          @foreach (var categoryGroup in unitsByCategory)
-            {
-              <div class="category-section">
+         {
+        <div class="category-section">
          <div class="category-header">
      <h2 class="category-title">
-          <span class="category-bracket">[</span>
+       <img src="@GetCategoryIconPath(categoryGroup.Key)" alt="@categoryGroup.Key" class="category-icon" />
        @categoryGroup.Key.ToUpper()
-           <span class="category-bracket">]</span>
+
       </h2>
-         </div>
+      </div>
 
         <div class="units-list">
-        @foreach (var entry in categoryGroup.Value)
+@foreach (var entry in categoryGroup.Value)
       {
-     var unit = allUnits?.FirstOrDefault(u => u.Id == entry.UnitId);
+ var unit = allUnits?.FirstOrDefault(u => u.Id == entry.UnitId);
        var isExpanded = expandedUnits.Contains(entry.Id);
 
     <div class="unit-row @(isExpanded ? "expanded" : "")">
-           <div class="unit-header" @onclick="() => ToggleExpanded(entry.Id)">
+    <div class="unit-header" @onclick="() => ToggleExpanded(entry.Id)">
       <button class="expand-btn @(isExpanded ? "open" : "")"
  aria-label="Toggle unit details">
-          <i class="fas @(isExpanded ? "fa-angle-down" : "fa-angle-right")"></i>
+      <i class="fas @(isExpanded ? "fa-angle-down" : "fa-angle-right")"></i>
    </button>
      <div class="unit-info">
       <span class="unit-name">@entry.UnitName</span>
@@ -87,56 +183,56 @@
        @entry.ModelCount MODEL@(entry.ModelCount != 1 ? "S" : "") • @entry.CalculatePoints() PTS
             @if (entry.IsWarlord)
         {
-          <span class="warlord-badge">? WARLORD</span>
+ <span class="warlord-badge">? WARLORD</span>
 }
         @if (!string.IsNullOrEmpty(entry.Enhancement))
   {
-           <span class="enhancement-badge">? @entry.EnhancementName</span>
+ <span class="enhancement-badge">? @entry.EnhancementName</span>
    }
-        </span>
+   </span>
     </div>
  </div>
 
-              @if (isExpanded && unit != null)
-           {
-       <div class="unit-details">
+    @if (isExpanded && unit != null)
+   {
+    <div class="unit-details">
        @if (!string.IsNullOrEmpty(entry.Enhancement))
-               {
+         {
        <div class="detail-section enhancement-section">
   <div class="section-header">
 <span class="section-title">ENHANCEMENT</span>
    </div>
  <div class="section-content">
   <p class="enhancement-name">@entry.EnhancementName</p>
-          <p class="enhancement-points">+@entry.EnhancementPoints PTS</p>
-            <p class="enhancement-desc">@entry.EnhancementDescription</p>
-              </div>
+        <p class="enhancement-points">+@entry.EnhancementPoints PTS</p>
+       <p class="enhancement-desc">@entry.EnhancementDescription</p>
+      </div>
    </div>
-           }
+     }
 
        @if (unit.Profiles.Any())
   {
-         <div class="detail-section">
+       <div class="detail-section">
        <div class="section-header">
-        <span class="section-title">PROFILES</span>
+     <span class="section-title">PROFILES</span>
        </div>
-                 <div class="table-container">
-           <table class="data-table">
+      <div class="table-container">
+         <table class="data-table">
    <thead>
             <tr>
-        <th>MODEL</th>
-     <th>M</th>
-           <th>T</th>
-           <th>SV</th>
+     <th>MODEL</th>
+   <th>M</th>
+     <th>T</th>
+       <th>SV</th>
    <th>W</th>
-         <th>LD</th>
+      <th>LD</th>
           <th>OC</th>
    </tr>
   </thead>
 <tbody>
-          @foreach (var profile in unit.Profiles)
+   @foreach (var profile in unit.Profiles)
 {
-               <tr>
+          <tr>
        <td>@profile.Name</td>
       <td>@profile.Movement</td>
    <td>@profile.Toughness</td>
@@ -144,43 +240,43 @@
              <td>@profile.Wounds</td>
         <td>@profile.Leadership</td>
      <td>@profile.ObjectiveControl</td>
-           </tr>
-           }
+      </tr>
+      }
  </tbody>
           </table>
-               </div>
+       </div>
    </div>
    }
 
-             @if (unit.RangedWeapons.Any())
-     {
+        @if (unit.RangedWeapons.Any())
+   {
      <div class="detail-section">
      <div class="section-header">
-      <span class="section-title">RANGED WEAPONS</span>
+    <span class="section-title">RANGED WEAPONS</span>
       </div>
           <div class="table-container">
     <table class="data-table">
   <thead>
        <tr>
     <th>WEAPON</th>
-                <th>RNG</th>
+          <th>RNG</th>
       <th>A</th>
          <th>BS</th>
   <th>S</th>
       <th>AP</th>
        <th>D</th>
         </tr>
-       </thead>
+    </thead>
  <tbody>
     @foreach (var weapon in unit.RangedWeapons)
-                {
-            <tr>
-          <td>@weapon.Name</td>
-                  <td>@weapon.Range</td>
-            <td>@weapon.Attacks</td>
-             <td>@weapon.BallisticSkill</td>
+        {
+          <tr>
+  <td>@weapon.Name</td>
+        <td>@weapon.Range</td>
+          <td>@weapon.Attacks</td>
+      <td>@weapon.BallisticSkill</td>
       <td>@weapon.Strength</td>
-      <td>@weapon.ArmorPenetration</td>
+   <td>@weapon.ArmorPenetration</td>
     <td>@weapon.Damage</td>
     </tr>
          }
@@ -188,31 +284,31 @@
         </table>
       </div>
      </div>
-          }
+  }
 
    @if (unit.MeleeWeapons.Any())
  {
        <div class="detail-section">
             <div class="section-header">
-           <span class="section-title">MELEE WEAPONS</span>
-         </div>
+        <span class="section-title">MELEE WEAPONS</span>
+    </div>
       <div class="table-container">
-                 <table class="data-table">
+           <table class="data-table">
             <thead>
        <tr>
-             <th>WEAPON</th>
+        <th>WEAPON</th>
  <th>A</th>
-          <th>WS</th>
-                   <th>S</th>
-              <th>AP</th>
+    <th>WS</th>
+    <th>S</th>
+          <th>AP</th>
           <th>D</th>
         </tr>
  </thead>
-          <tbody>
+        <tbody>
      @foreach (var weapon in unit.MeleeWeapons)
-           {
+    {
        <tr>
-         <td>@weapon.Name</td>
+      <td>@weapon.Name</td>
           <td>@weapon.Attacks</td>
    <td>@weapon.WeaponSkill</td>
     <td>@weapon.Strength</td>
@@ -221,41 +317,41 @@
         </tr>
          }
       </tbody>
-                </table>
-          </div>
+  </table>
+    </div>
            </div>
          }
 
    @if (unit.Keywords.Any())
-          {
-          <div class="detail-section">
-         <div class="section-header">
+        {
+    <div class="detail-section">
+    <div class="section-header">
         <span class="section-title">KEYWORDS</span>
      </div>
-     <div class="keywords-list">
-             @foreach (var keyword in unit.Keywords)
+   <div class="keywords-list">
+     @foreach (var keyword in unit.Keywords)
    {
-         <span class="keyword-tag">@keyword</span>
+    <span class="keyword-tag">@keyword</span>
          }
    </div>
     </div>
        }
 
        @if (unit.Abilities.Any())
-       {
+   {
           <div class="detail-section">
        <div class="section-header">
-         <span class="section-title">ABILITIES</span>
+ <span class="section-title">ABILITIES</span>
       </div>
       <div class="abilities-list">
-  @foreach (var ability in unit.Abilities)
+@foreach (var ability in unit.Abilities)
        {
-       <div class="ability-item">
-             <p class="ability-name">@ability.Name</p>
+<div class="ability-item">
+          <p class="ability-name">@ability.Name</p>
       <p class="ability-desc">@ability.Description</p>
-              </div>
+   </div>
      }
-     </div>
+  </div>
       </div>
    }
 
@@ -266,13 +362,13 @@
    <span class="section-title">WARGEAR OPTIONS</span>
       </div>
       <div class="wargear-list">
-        @foreach (var option in unit.WargearOptions)
-            {
+ @foreach (var option in unit.WargearOptions)
+{
             <div class="wargear-item">
-         <p class="wargear-name">@option.Name</p>
+     <p class="wargear-name">@option.Name</p>
        <p class="wargear-desc">@option.Description</p>
       @if (option.SelectionLimit != null)
-        {
+  {
 <p class="wargear-limit">Limit: @option.SelectionLimit</p>
    }
     </div>
@@ -280,12 +376,12 @@
             </div>
         </div>
          }
-              </div>
+    </div>
    }
-            </div>
+         </div>
         }
     </div>
-      </div>
+    </div>
             }
         </div>
     }
@@ -296,10 +392,14 @@
     public string? ListId { get; set; }
 
     private UserList? currentList;
-    private List<Unit>? allUnits;
+private List<Unit>? allUnits;
     private bool isLoading = true;
     private HashSet<string> expandedUnits = new();
     private Dictionary<string, List<ListEntry>>? unitsByCategory;
+  private Detachment? detachmentData;
+    private ArmyRulesData? armyRulesData;
+    private bool armyRulesExpanded = false;
+    private bool detachmentRulesExpanded = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -314,34 +414,36 @@
 
     private async Task LoadListAndUnits()
     {
-        try
+      try
         {
    isLoading = true;
 
-            // Load all lists and find the one we need
-         var lists = await ListStorageService.GetAllListsAsync();
+       // Load all lists and find the one we need
+       var lists = await ListStorageService.GetAllListsAsync();
      currentList = lists?.FirstOrDefault(l => l.Id == ListId);
 
-            // Load all units for detailed information
+        // Load all units for detailed information
          allUnits = await DatasheetService.GetAllUnitsAsync();
 
  // Group units by category with custom order
-        if (currentList != null && allUnits != null)
+   if (currentList != null && allUnits != null)
   {
  unitsByCategory = OrganizeUnitsByCategory(currentList);
+   await LoadDetachment();
+   await LoadArmyRules();
  }
 
-            if (currentList == null)
+        if (currentList == null)
        {
-                NavigationManager.NavigateTo("/lists");
+       NavigationManager.NavigateTo("/lists");
             }
         }
-        catch (Exception ex)
+     catch (Exception ex)
         {
             Console.WriteLine($"Error loading list details: {ex.Message}");
         }
         finally
-        {
+ {
       isLoading = false;
         }
     }
@@ -353,15 +455,15 @@
         {
    "Characters",
             "Battleline",
-            "Dedicated Transports",
+    "Dedicated Transports",
    "Fortifications",
    "Other"
         };
 
         unitsByCategory = new Dictionary<string, List<ListEntry>>();
 
-        foreach (var entry in list.Entries)
-        {
+     foreach (var entry in list.Entries)
+  {
             var unit = allUnits?.FirstOrDefault(u => u.Id == entry.UnitId);
      if (unit != null)
             {
@@ -370,7 +472,7 @@
     if (!unitsByCategory.ContainsKey(category))
       {
    unitsByCategory[category] = new List<ListEntry>();
-              }
+      }
 
        unitsByCategory[category].Add(entry);
         }
@@ -381,7 +483,7 @@
             .OrderBy(x =>
     {
          var index = System.Array.IndexOf(categoryOrder, x.Key);
-       return index >= 0 ? index : categoryOrder.Length;
+     return index >= 0 ? index : categoryOrder.Length;
             })
             .ToDictionary(x => x.Key, x => x.Value);
 
@@ -390,13 +492,118 @@
 
     private void ToggleExpanded(string entryId)
     {
-        if (expandedUnits.Contains(entryId))
+    if (expandedUnits.Contains(entryId))
         {
             expandedUnits.Remove(entryId);
   }
      else
-        {
+      {
  expandedUnits.Add(entryId);
+ }
+    }
+
+  private string GetFactionIconPath(string? factionName)
+  {
+        if (string.IsNullOrEmpty(factionName))
+      return string.Empty;
+
+     // Convert faction name to kebab-case for file naming
+     string iconName = factionName
+     .ToLower()
+     .Replace(" ", "-")
+ .Replace("'", "");
+
+ // Determine which subfolder based on faction
+        string subfolder = "imperium"; // default
+
+        // Check if faction is in Chaos
+        var chaosFactions = new List<string>
+        {
+     "Chaos Daemons",
+"Chaos Knights",
+   "Chaos Space Marines",
+ "Death Guard",
+ "Emperor's Children",
+       "Thousand Sons",
+            "World Eaters"
+        };
+
+        // Check if faction is in Xenos
+      var xenosFactions = new List<string>
+   {
+      "Aeldari",
+"Drukhari",
+            "Genestealer Cults",
+        "Leagues of Votann",
+         "Necrons",
+     "Orks",
+     "T'au Empire",
+   "Tyranids"
+        };
+
+      if (chaosFactions.Contains(factionName))
+  {
+        subfolder = "chaos";
+ }
+  else if (xenosFactions.Contains(factionName))
+        {
+    subfolder = "xenos";
+ }
+
+// Convert subfolder to kebab-case
+        string kebabSubfolder = subfolder.ToLower().Replace(" ", "-");
+
+        return $"/data/faction-icons/{kebabSubfolder}/{iconName}.svg";
+    }
+
+    private string GetCategoryIconPath(string categoryName)
+    {
+      // Convert category name to kebab-case for file naming
+  string iconName = categoryName
+      .ToLower()
+    .Replace(" ", "-")
+    .Replace("'", "");
+
+   return $"/data/unit-category-icons/header-icons/header-{iconName}.svg";
+    }
+
+    private async Task LoadDetachment()
+    {
+        if (currentList != null && !string.IsNullOrWhiteSpace(currentList.Detachment))
+        {
+     try
+      {
+    detachmentData = await DetachmentService.GetDetachmentByIdAsync(currentList.Faction, currentList.Detachment);
+     }
+     catch (Exception ex)
+     {
+   Console.WriteLine($"Error loading detachment: {ex.Message}");
+     }
+  }
+    }
+
+    private async Task LoadArmyRules()
+    {
+        if (currentList != null && !string.IsNullOrEmpty(currentList.Faction))
+        {
+            try
+          {
+         armyRulesData = await ArmyRulesService.GetArmyRulesByFactionAsync(currentList.Faction);
         }
+      catch (Exception ex)
+      {
+     Console.WriteLine($"Error loading army rules: {ex.Message}");
+            }
+     }
+    }
+
+    private void ToggleArmyRulesExpanded()
+    {
+        armyRulesExpanded = !armyRulesExpanded;
+    }
+
+    private void ToggleDetachmentRulesExpanded()
+    {
+        detachmentRulesExpanded = !detachmentRulesExpanded;
     }
 }

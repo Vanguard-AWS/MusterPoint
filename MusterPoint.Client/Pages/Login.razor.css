@@ -26,19 +26,18 @@
     box-sizing: border-box;
     transition: all var(--transition-fast);
     outline: none;
+    font-weight: 500;
 }
 
 .terminal-input::placeholder {
-    color: var(--terminal-green-dim);
-    opacity: 0.7;
+    color: var(--terminal-green);
+    opacity: 0.6;
 }
 
 .terminal-input:focus {
-    background: rgba(0, 255, 65, 0.1);
-    border-color: var(--terminal-orange);
-    box-shadow: 
-        0 0 15px rgba(0, 255, 65, 0.5),
-        inset 0 0 10px rgba(0, 255, 65, 0.1);
+    border-color: var(--terminal-orange) !important;
+    background: rgba(0, 255, 65, 0.1) !important;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
 }
 
 /* Alert Messages */
@@ -96,6 +95,44 @@
 .terminal-button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+}
+
+/* Search units input styling (inherited from BuildListStep) */
+.search-units-input {
+    border: 2px solid var(--terminal-green) !important;
+    background: rgba(0, 255, 65, 0.05) !important;
+    color: var(--terminal-green) !important;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+}
+
+.search-units-input::placeholder {
+    color: var(--terminal-green);
+    opacity: 0.6;
+}
+
+.search-units-input:focus {
+    border-color: var(--terminal-orange) !important;
+    background: rgba(0, 255, 65, 0.1) !important;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+/* Override Bulma input styling for terminal inputs */
+input.terminal-input,
+input.terminal-input:not([type="checkbox"]):not([type="radio"]) {
+    background: rgba(0, 255, 65, 0.05) !important;
+    color: var(--terminal-green) !important;
+}
+
+input.terminal-input::autofill,
+input.terminal-input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px rgba(0, 255, 65, 0.05) inset !important;
+    -webkit-text-fill-color: var(--terminal-green) !important;
+}
+
+input.terminal-input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px rgba(0, 255, 65, 0.1) inset !important;
+    border-color: var(--terminal-orange) !important;
 }
 
 /* Responsive */

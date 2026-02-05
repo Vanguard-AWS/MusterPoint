@@ -68,7 +68,7 @@ else
      <div class="terminal-section form-group">
   <label class="terminal-text terminal-prompt">> PASSWORD</label>
    <input type="password" class="terminal-input" id="password" @bind="password" required placeholder="At least 8 characters" />
-   <p class="terminal-text terminal-dim" style="margin-top: 0.5rem; font-size: 0.8rem;">[ Minimum 8 characters required ]</p>
+   <p class="terminal-text terminal-dim validation-hint" style="margin-top: 0.5rem; font-size: 0.8rem;">[ Minimum 8 characters required ]</p>
     </div>
    </div>
 
@@ -93,6 +93,11 @@ else
     <span>REGISTER</span>
     }
   </span>
+        <span class="button-bracket">]</span>
+    </button>
+    <button type="button" class="terminal-button terminal-button-secondary" @onclick="HandleBack">
+        <span class="button-bracket">[</span>
+  <span class="button-text">BACK</span>
         <span class="button-bracket">]</span>
     </button>
     </div>
@@ -186,4 +191,9 @@ else
        isLoading = false;
     }
    }
+
+    private void HandleBack()
+    {
+        NavigationManager.NavigateTo("/");
+    }
 }

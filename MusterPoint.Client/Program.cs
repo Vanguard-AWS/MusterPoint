@@ -15,6 +15,7 @@ builder.Services.AddScoped<DatasheetService>();
 builder.Services.AddScoped<DetachmentService>();
 builder.Services.AddScoped<ListStorageService>();
 builder.Services.AddScoped<ListValidationService>();
+builder.Services.AddScoped<ArmyRulesService>();
 
 var host = builder.Build();
 

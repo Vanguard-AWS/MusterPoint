@@ -12,14 +12,10 @@
         </div>
         <div class="configure-actions">
             <button class="terminal-button terminal-button-secondary" @onclick="HandleBack">
-                <span class="button-bracket">[</span>
-                <span class="button-text">BACK</span>
-                <span class="button-bracket">]</span>
+                <span class="button-text">FACTIONS</span>
             </button>
             <button class="terminal-button terminal-button-primary" disabled="@(string.IsNullOrWhiteSpace(localListName) || string.IsNullOrWhiteSpace(localSelectedDetachment))" @onclick="HandleContinue">
-                <span class="button-bracket">[</span>
                 <span class="button-text">CONTINUE</span>
-                <span class="button-bracket">]</span>
             </button>
         </div>
     </div>

@@ -1,0 +1,271 @@
+﻿@page "/"
+@using MusterPoint.Client.Services
+@using System.Threading
+@implements IDisposable
+@rendermode InteractiveWebAssembly
+@inject AuthService AuthService
+@inject ListStorageService ListStorageService
+@inject NavigationManager NavigationManager
+
+<PageTitle>MusterPoint - List Builder</PageTitle>
+
+@if (isChecking)
+{
+  <div class="terminal-container loading-screen">
+  <div class="scanlines"></div>
+  <div class="terminal-content">
+<p class="terminal-text">[INITIALIZING SYSTEM...]</p>
+      <div class="loading-spinner-terminal"></div>
+   <p class="terminal-text">[LOADING DATA...]</p>
+     </div>
+  </div>
+}
+else if (!isAuthenticated)
+{
+ <div class="terminal-container">
+   <div class="scanlines"></div>
+    <div class="terminal-content">
+  <div class="ascii-header">
+    <div class="header-with-logo">
+  <img src="/images/musterpoint-logo.png" alt="MusterPoint Logo" class="musterpoint-logo" />
+  <div class="title-wrapper">
+ <h1 class="title-main">MUSTERPOINT COMMAND INTERFACE</h1>
+    <p class="title-sub">Army List Configuration Terminal</p>
+</div>
+    </div>
+   </div>
+
+ <div class="home-grid">
+  <div class="grid-item system-info">
+<p class="terminal-text terminal-prompt">> SYSTEM STATUS: OPERATIONAL</p>
+   @if (visibleStatusLines > 0)
+   {
+ <p class="terminal-text terminal-dim status-line-animate">[AWAKENING MACHINE SPIRITS]</p>
+   }
+   @if (visibleStatusLines > 1)
+   {
+     <p class="terminal-text terminal-dim status-line-animate">[DATABASE SYNC: COMPLETE]</p>
+   }
+   @if (visibleStatusLines > 2)
+   {
+   <p class="terminal-text terminal-dim status-line-animate">[TACTICAL OVERLAY: READY]</p>
+   }
+
+   <div class="terminal-graph">
+ <p class="terminal-text terminal-dim">[DATASLATE INTEGRITY]</p>
+     <div class="graph-container">
+   <p class="graph-line">@dataslateGraph @dataslateIntegrity%</p>
+     </div>
+   </div>
+  </div>
+
+  <div class="grid-item right-status">
+   <div class="terminal-graph">
+ <p class="terminal-text terminal-dim">[NETWORK ACTIVITY]</p>
+     <div class="graph-container">
+  <p class="graph-line">@networkBars  ACTIVE</p>
+  <p class="graph-line">↓ @downloadData.ToString("N1")PB  ↑ @uploadData.ToString("N1")PB</p>
+   </div>
+   </div>
+
+   
+
+   <div class="terminal-graph performance-index">
+ <p class="terminal-text terminal-dim">[PERFORMANCE INDEX]</p>
+ <div class="graph-container">
+       <p class="graph-line">@performanceBoxLine1</p>
+       <p class="graph-line">@performanceBoxLine2</p>
+     <p class="graph-line">@performanceBoxLine3</p>
+   </div>
+</div>
+  </div>
+
+     <div class="grid-item features-panel">
+   <p class="terminal-text terminal-prompt">> CAPABILITIES</p>
+  <ul class="feature-list">
+       <li class="terminal-text terminal-dim">Multi-faction army lists</li>
+      <li class="terminal-text terminal-dim">Real-time validation</li>
+   <li class="terminal-text terminal-dim">Point tracking</li>
+   </ul>
+   
+   </div>
+
+  <div class="grid-item buttons-panel">
+     <p class="terminal-text terminal-prompt">> AUTHENTICATE</p>
+    <div class="button-group">
+     <a href="/login" class="terminal-button terminal-button-primary">
+   <span class="button-bracket">[</span>
+   <span class="button-text">SIGN IN</span>
+<span class="button-bracket">]</span>
+  </a>
+   <a href="/register" class="terminal-button terminal-button-secondary">
+   <span class="button-bracket">[</span>
+    <span class="button-text">REGISTER</span>
+      <span class="button-bracket">]</span>
+ </a>
+   </div>
+  </div>
+  </div>
+    </div>
+    </div>
+}
+
+@code {
+    private bool isAuthenticated = false;
+  private bool isChecking = true;
+  private string networkBars = "\u258C\u258C \u258C \u258C\u258C\u258C \u258C \u258C";
+    private double downloadData = 847.3;
+    private double uploadData = 512.8;
+private int dataslateIntegrity = 94;
+    private string dataslateGraph = "\u2582\u2583\u2584\u2585\u2586\u2587\u2588\u2588\u2587\u2586";
+    private Timer? networkTimer;
+    private Random random = new Random();
+    private int updateCounter = 0;
+    private int visibleStatusLines = 0; // Start at 0 to animate
+    private string performanceBoxLine1 = "\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510";
+    private string performanceBoxLine2 = "\u2502 \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588 98%";
+    private string performanceBoxLine3 = "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518";
+
+    protected override async Task OnInitializedAsync()
+    {
+      try
+     {
+ isAuthenticated = await AuthService.IsAuthenticatedAsync();
+
+  // If authenticated, redirect immediately
+    if (isAuthenticated)
+    {
+  try
+  {
+   var userLists = await ListStorageService.GetAllListsAsync();
+
+ // If user has lists, navigate to /lists
+ if (userLists != null && userLists.Any())
+   {
+   NavigationManager.NavigateTo("/lists", replace: true);
+     }
+   // If no lists, navigate to /listbuilder to create one
+       else
+    {
+  NavigationManager.NavigateTo("/listbuilder", replace: true);
+ }
+   }
+   catch (Exception ex)
+{
+Console.WriteLine($"Error fetching lists: {ex.Message}");
+ // If there's an error, still redirect to lists
+    NavigationManager.NavigateTo("/lists", replace: true);
+  }
+        return; // Don't show the home page
+ }
+ }
+  catch (Exception ex)
+   {
+  Console.WriteLine($"Error checking authentication: {ex.Message}");
+  isAuthenticated = false;
+   }
+ finally
+    {
+       isChecking = false;
+   }
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+ if (firstRender && !isAuthenticated)
+   {
+    // Animate status lines appearing one at a time
+        _ = AnimateStatusLines();
+      
+    // Start the network activity simulation after 5 seconds (after all status lines appear)
+            networkTimer = new Timer(UpdateNetworkActivity, null, 5000, 500);
+        }
+   base.OnAfterRender(firstRender);
+    }
+
+    private async Task AnimateStatusLines()
+    {
+   // Show each status line with a 1.5-2 second delay
+        for (int i = 1; i <= 3; i++)
+   {
+    visibleStatusLines = i;
+            await InvokeAsync(StateHasChanged);
+        await Task.Delay(1500); // 1.5 seconds between each line
+   }
+    }
+
+    private void UpdateNetworkActivity(object? state)
+  {
+   // Update download data with realistic fluctuation
+ downloadData += (random.NextDouble() * 200) - 100;
+   downloadData = Math.Max(500, Math.Min(1200, downloadData));
+
+ // Update upload data with realistic fluctuation
+      uploadData += (random.NextDouble() * 150) - 75;
+   uploadData = Math.Max(300, Math.Min(800, uploadData));
+
+  // Update network bars randomly (30% chance each cycle)
+  if (random.Next(100) < 30)
+ {
+  char[] chars = new char[14];
+ for (int i = 0; i < chars.Length; i++)
+  {
+  int choice = random.Next(3);
+   chars[i] = choice == 0 ? '\u258C' : (choice == 1 ? ' ' : '\u2590');
+   }
+      networkBars = new string(chars);
+  }
+
+   // Update dataslate integrity every 3rd cycle (1.5 seconds instead of 500ms)
+   updateCounter++;
+   if (updateCounter % 3 == 0)
+   {
+   dataslateIntegrity += random.Next(-3, 4); // -3 to +3 fluctuation
+   dataslateIntegrity = Math.Max(75, Math.Min(99, dataslateIntegrity)); // Keep between 75-99
+
+   // Update dataslate graph based on integrity value
+   UpdateDataslateGraph();
+   }
+
+   // Force UI re-render from background thread
+InvokeAsync(StateHasChanged);
+    }
+
+   private void UpdateDataslateGraph()
+   {
+       // Create a sparkline visualization based on the integrity value
+    // Map 75-99 range to 0-10 bars for better visualization
+   int filledBars = ((dataslateIntegrity - 75) * 10) / 25; // Maps 75-99 to 0-10 bars
+ filledBars = Math.Min(10, Math.Max(0, filledBars)); // Clamp between 0-10
+   
+  char[] graphChars = new char[10];
+  string[] barCharacters = { "\u2582", "\u2583", "\u2584", "\u2585", "\u2586", "\u2587", "\u2588" };
+ 
+       for (int i = 0; i < graphChars.Length; i++)
+  {
+      if (i < filledBars)
+      {
+      // Filled bars - vary the character for visual interest
+   int charIndex = Math.Min(6, (i + random.Next(-1, 2)) % barCharacters.Length);
+     graphChars[i] = barCharacters[Math.Max(0, charIndex)][0];
+ }
+   else if (i == filledBars && filledBars < 10)
+  {
+   // Partial bar for current level
+     graphChars[i] = '\u2586';
+ }
+ else
+ {
+    // Empty bars
+       graphChars[i] = '\u2582';
+}
+       }
+ 
+       dataslateGraph = new string(graphChars);
+   }
+
+  public void Dispose()
+    {
+    networkTimer?.Dispose();
+ }
+}

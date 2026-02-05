@@ -40,12 +40,12 @@ else
         <form @onsubmit="HandleLogin">
          <div class="terminal-section form-group">
             <label class="terminal-text terminal-prompt">> USERNAME</label>
-           <input type="text" class="terminal-input" id="username" @bind="username" required placeholder="Enter your username" />
+           <input type="text" class="terminal-input search-units-input" id="username" @bind="username" autocomplete="off" required placeholder="Enter your username" />
   </div>
 
     <div class="terminal-section form-group">
                     <label class="terminal-text terminal-prompt">> PASSWORD</label>
-  <input type="password" class="terminal-input" id="password" @bind="password" required placeholder="Enter your password" />
+  <input type="password" class="terminal-input search-units-input" id="password" @bind="password" autocomplete="off" required placeholder="Enter your password" />
       </div>
 
          <div class="terminal-section button-group">
@@ -63,7 +63,12 @@ else
       </span>
       <span class="button-bracket">]</span>
        </button>
-                </div>
+       <button type="button" class="terminal-button terminal-button-secondary" @onclick="HandleBack">
+        <span class="button-bracket">[</span>
+         <span class="button-text">BACK</span>
+  <span class="button-bracket">]</span>
+       </button>
+       </div>
      </form>
 
             <div class="terminal-section footer">
@@ -112,28 +117,33 @@ else
             return;
         }
 
-        isLoading = true;
+     isLoading = true;
 
         try
      {
      var response = await AuthService.LoginAsync(username, password);
 
-            if (response.Success)
-            {
+     if (response.Success)
+  {
      NavigationManager.NavigateTo("/lists");
-            }
-            else
+ }
+       else
        {
     errorMessage = response.Message;
      }
         }
-        catch (Exception ex)
+   catch (Exception ex)
      {
        errorMessage = $"An error occurred: {ex.Message}";
-        }
+      }
         finally
         {
     isLoading = false;
-        }
+   }
+    }
+
+    private void HandleBack()
+    {
+        NavigationManager.NavigateTo("/");
     }
 }

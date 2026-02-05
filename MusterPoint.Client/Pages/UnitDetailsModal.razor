@@ -6,6 +6,10 @@
     <div class="modal-background" @onclick="OnClose"></div>
     <div class="modal-card unit-details-modal">
         <header class="modal-card-head">
+ @if (!string.IsNullOrEmpty(SelectedUnit?.Category))
+   {
+  <img src="@GetCategoryCardIconPath(SelectedUnit.Category)" alt="@SelectedUnit.Category" class="modal-category-icon" />
+     }
  <p class="modal-card-title">@SelectedUnit?.Name</p>
         </header>
         <section class="modal-card-body">
@@ -377,6 +381,20 @@ await OnEnhancementSelected.InvokeAsync((_selectedEnhancementId, selectedEnhance
     private async Task ClearEnhancement()
     {
     _selectedEnhancementId = string.Empty;
-        await OnEnhancementSelected.InvokeAsync((string.Empty, string.Empty, 0, string.Empty));
+    await OnEnhancementSelected.InvokeAsync((string.Empty, string.Empty, 0, string.Empty));
+    }
+
+    private string GetCategoryCardIconPath(string? categoryName)
+  {
+  if (string.IsNullOrEmpty(categoryName))
+          return string.Empty;
+
+      // Convert category name to kebab-case for file naming
+     string iconName = categoryName
+.ToLower()
+  .Replace(" ", "-")
+  .Replace("'", "");
+
+   return $"/data/unit-category-icons/unit-card-icons/{iconName}.svg";
     }
 }

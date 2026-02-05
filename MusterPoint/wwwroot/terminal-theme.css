@@ -114,13 +114,12 @@ CONTAINER UTILITIES
 .terminal-content {
     position: relative;
     z-index: 2;
-    max-width: 900px;
-    padding: 3rem;
-    border: 3px solid var(--terminal-green);
-    box-shadow: 
-  var(--shadow-green-strong),
-        inset 0 0 20px rgba(0, 255, 65, 0.1);
-    background: var(--terminal-bg-light);
+    max-width: 100%;
+    width: 90%;
+    padding: 1.5rem;
+    border: none;
+    box-shadow: none;
+    background: transparent;
 }
 
 .terminal-panel {
@@ -397,10 +396,10 @@ text-shadow: -3px 0 var(--terminal-orange), 3px 0 var(--terminal-cyan);
     .button-group {
       flex-direction: column;
       gap: 1rem;
-    }
+  }
 
     .terminal-button {
-        width: 100%;
+    width: 100%;
         text-align: center;
     }
 
@@ -417,18 +416,9 @@ text-shadow: -3px 0 var(--terminal-orange), 3px 0 var(--terminal-cyan);
     }
 }
 
-@media (max-width: 540px) {
+@media (min-width: 1400px) {
     .terminal-content {
-        padding: 1.5rem;
-        border: 2px solid var(--terminal-green);
-    }
-
-    .title-main {
-        font-size: 1.5rem;
-    }
-
-    .terminal-button {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.8rem;
-    }
+        width: 85%;
+      max-width: 1200px;
+  }
 }

@@ -45,6 +45,9 @@ builder.Services.AddHttpClient<MusterPoint.Client.Services.AuthService>();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<MusterPoint.Client.Services.ListStorageService>();
 builder.Services.AddScoped<DatasheetService>();
+builder.Services.AddScoped<DetachmentService>();
+builder.Services.AddScoped<ListValidationService>();
+builder.Services.AddScoped<ArmyRulesService>();
 
 // Add custom services
 builder.Services.AddScoped<AuthenticationService>();
