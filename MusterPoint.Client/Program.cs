@@ -11,6 +11,7 @@ builder.Services.AddLogging();
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<AuthStateProvider>();
+builder.Services.AddScoped<BSdataService>();
 builder.Services.AddScoped<DatasheetService>();
 builder.Services.AddScoped<DetachmentService>();
 builder.Services.AddScoped<ListStorageService>();

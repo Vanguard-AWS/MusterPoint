@@ -48,11 +48,42 @@
             {
                 <select class="terminal-select" @bind="localSelectedDetachment">
                     <option value="">Select a Detachment</option>
-                    @foreach (var detachment in availableDetachments)
+                   
+                    @if (genericDetachments.Any())
                     {
-                        <option value="@detachment.Id">@detachment.Name</option>
+                        <optgroup label="Core Detachments (Available to All)">
+                        @foreach (var detachment in genericDetachments)
+                        {
+                            <option value="@detachment.Id">@detachment.Name</option>
+                        }
+                        </optgroup>
+                    }
+                           
+                    @if (subfactionDetachments.Any())
+                    {
+                        <optgroup label="Subfaction-Specific Detachments">
+                        @foreach (var detachment in subfactionDetachments)
+                        {
+                            <option value="@detachment.Id">@detachment.Name (Subfaction-specific)</option>
+                        }
+                        </optgroup>
                     }
                 </select>
+    
+                @if (availableDetachments.Count > 0)
+                {
+                    <p class="terminal-text" style="margin-top: 10px; font-size: 0.9em;">
+                    Total: @availableDetachments.Count detachments
+                    @if (genericDetachments.Any())
+                    {
+                        <span> | Core: @genericDetachments.Count</span>
+                    }
+                    @if (subfactionDetachments.Any())
+                     {
+                        <span> | Subfaction-specific: @subfactionDetachments.Count</span>
+                    }
+                    </p>
+                }
             }
         </div>
 
@@ -109,6 +140,8 @@
     public EventCallback OnContinue { get; set; }
 
     private List<Detachment> availableDetachments = new();
+    private List<Detachment> genericDetachments = new();
+    private List<Detachment> subfactionDetachments = new();
     private bool isLoadingDetachments = false;
 
     // Local fields to prevent binding issues during re-renders
@@ -129,19 +162,54 @@
         localGameSize = SelectedGameSize;
     }
 
+  protected override async Task OnParametersSetAsync()
+ {
+        // If the faction has changed, reload detachments
+        await LoadDetachments();
+    }
+
     private async Task LoadDetachments()
     {
         try
         {
+     if (string.IsNullOrEmpty(SelectedFaction))
+            {
+            Console.WriteLine("[ConfigureListStep] No faction selected, skipping detachment load");
+                return;
+     }
+
             isLoadingDetachments = true;
-            availableDetachments = await DetachmentService.GetDetachmentsByFactionAsync(SelectedFaction);
-        }
+ Console.WriteLine($"[ConfigureListStep] Loading detachments for faction: {SelectedFaction}");
+
+     availableDetachments = await DetachmentService.GetDetachmentsByFactionAsync(SelectedFaction);
+
+            // Categorize detachments
+            genericDetachments = availableDetachments
+                .Where(d => d.RequiredSubfactionIds == null || d.RequiredSubfactionIds.Count == 0)
+         .OrderBy(d => d.Name)
+        .ToList();
+
+     subfactionDetachments = availableDetachments
+ .Where(d => d.RequiredSubfactionIds != null && d.RequiredSubfactionIds.Count > 0)
+  .OrderBy(d => d.Name)
+  .ToList();
+
+        Console.WriteLine($"[ConfigureListStep] Loaded {availableDetachments.Count} total detachments for {SelectedFaction}");
+Console.WriteLine($"[ConfigureListStep]   - Core detachments: {genericDetachments.Count}");
+      Console.WriteLine($"[ConfigureListStep]   - Subfaction-specific: {subfactionDetachments.Count}");
+
+        // Show some logging for debugging
+            foreach (var detachment in availableDetachments.Take(3))
+            {
+         Console.WriteLine($"[ConfigureListStep]   - {detachment.Name} (ID: {detachment.Id})");
+   }
+    }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error loading detachments: {ex.Message}");
-        }
-        finally
-        {
+        Console.WriteLine($"[ConfigureListStep] Error loading detachments: {ex.Message}");
+     }
+     finally
+   {
             isLoadingDetachments = false;
         }
     }

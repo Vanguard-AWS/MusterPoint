@@ -4,12 +4,12 @@
     padding: 1.5rem;
     max-width: 1400px;
     margin: 0 auto;
-    width: 100%;
+width: 100%;
 }
 
 .faction-header-top {
     display: flex;
-    justify-content: space-between;
+ justify-content: space-between;
 align-items: baseline;
     gap: 2rem;
     margin-bottom: 2rem;
@@ -20,7 +20,7 @@ align-items: baseline;
 }
 
 .faction-header-left .title-main {
-    margin: 0 0 0.5rem 0;
+  margin: 0 0 0.5rem 0;
 }
 
 .faction-header-left .title-sub {
@@ -31,7 +31,7 @@ align-items: baseline;
  display: grid;
  grid-template-columns: repeat(3, 1fr);
 gap: 1.5rem;
-    margin-bottom: 1.5rem;
+ margin-bottom: 1.5rem;
 }
 
 .faction-section {
@@ -45,7 +45,7 @@ gap: 1.5rem;
 .faction-section-title {
  text-align: left;
  margin: 0 0 1rem 0;
-    font-size: 1rem;
+font-size: 1rem;
  text-transform: uppercase;
     letter-spacing: 0.1em;
  font-weight: bold;
@@ -95,7 +95,7 @@ text-align: left;
     font-size: 0.85rem;
   font-family: var(--terminal-font);
     font-weight: bold;
-    text-transform: uppercase;
+ text-transform: uppercase;
     letter-spacing: 0.05em;
     display: flex;
     align-items: center;
@@ -111,7 +111,7 @@ text-align: left;
 }
 
 .faction-card:hover {
-    border-color: var(--terminal-orange);
+border-color: var(--terminal-orange);
     background-color: rgba(255, 170, 0, 0.1);
     box-shadow: 0 0 10px rgba(255, 170, 0, 0.3);
  transform: translateX(4px);
@@ -131,6 +131,88 @@ text-align: left;
 
 .faction-name {
     display: block;
+}
+
+/* Space Marines Dropdown Styling */
+.faction-dropdown-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.faction-dropdown-icon {
+    position: absolute;
+    left: 0.75rem;
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+  filter: brightness(0) invert(1);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.faction-dropdown {
+    width: 100%;
+    padding: 1rem 0.85rem 0.5rem 3rem;
+    align-items: baseline;
+    border: 2px solid var(--terminal-green);
+    border-radius: 2px;
+    background-color: transparent;
+    color: var(--terminal-green);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-size: 0.85rem;
+    font-family: var(--terminal-font);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.faction-dropdown:hover {
+    border-color: var(--terminal-orange);
+  background-color: rgba(255, 170, 0, 0.1);
+    box-shadow: 0 0 10px rgba(255, 170, 0, 0.3);
+}
+
+.faction-dropdown:focus {
+    outline: none;
+  border-color: var(--terminal-orange);
+    box-shadow: 0 0 10px rgba(255, 170, 0, 0.3);
+}
+
+.faction-dropdown.is-selected {
+    border-color: var(--terminal-orange);
+    background-color: rgba(255, 170, 0, 0.2);
+    color: var(--terminal-orange);
+    box-shadow: 0 0 15px rgba(255, 170, 0, 0.5);
+}
+
+.faction-dropdown:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Style dropdown options */
+.faction-dropdown option {
+    background-color: #1a1a1a;
+    color: var(--terminal-green);
+    padding: 0.5rem;
+    font-weight: bold;
+}
+
+.faction-dropdown option:checked {
+    background-color: rgba(255, 170, 0, 0.3);
+    color: var(--terminal-orange);
+}
+
+/* Hidden dropdown that opens on button click */
+.faction-dropdown-hidden {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
 }
 
 .faction-actions {
@@ -169,7 +251,7 @@ gap: 0.25rem;
 
     .faction-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
+     gap: 1.5rem;
     }
 }
 
@@ -183,7 +265,7 @@ gap: 0.25rem;
         gap: 1.5rem;
     }
 
-    .faction-header .title-main {
+  .faction-header .title-main {
   font-size: 1.8rem;
     }
 
@@ -193,8 +275,8 @@ gap: 0.25rem;
 
     .faction-actions .terminal-button {
         flex: 1;
-        width: auto;
-    }
+ width: auto;
+ }
 }
 
 @media screen and (max-width: 540px) {

@@ -6,150 +6,113 @@ namespace MusterPoint.Client.Services;
 public class DatasheetService
 {
     private readonly HttpClient _httpClient;
+    private readonly BSdataService _bsdataService;
     private Dictionary<string, Unit>? _unitsCache;
     private List<string>? _factionsCache;
-    private Dictionary<string, string>? _factionPathsCache;
 
-    public DatasheetService(HttpClient httpClient)
+    public DatasheetService(HttpClient httpClient, BSdataService bsdataService)
     {
-   _httpClient = httpClient;
-    }
-
-    /// <summary>
-    /// Load faction index to get paths to each faction's unit file
-    /// </summary>
-    private async Task<Dictionary<string, string>> LoadFactionIndexAsync()
-    {
-        if (_factionPathsCache != null)
-            return _factionPathsCache;
-
-     _factionPathsCache = new();
-
-        try
-        {
-            var factionIndex = await _httpClient.GetFromJsonAsync<FactionIndex>("data/factions-index.json");
- 
-            if (factionIndex?.Factions != null)
-{
-      foreach (var faction in factionIndex.Factions)
-                {
-   _factionPathsCache[faction.Name] = faction.Path;
-  }
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error loading faction index: {ex.Message}");
-        }
-
-        return _factionPathsCache;
+  _httpClient = httpClient;
+  _bsdataService = bsdataService;
     }
 
     public async Task<List<Unit>> GetAllUnitsAsync()
     {
-    if (_unitsCache != null)
-   return _unitsCache.Values.ToList();
+        if (_unitsCache != null)
+  {
+      Console.WriteLine($"[DatasheetService] Returning cached units ({_unitsCache.Count} units)");
+  return _unitsCache.Values.ToList();
+      }
 
-_unitsCache = new();
+    _unitsCache = new();
 
+      try
+ {
+       Console.WriteLine($"[DatasheetService] Starting to load all units from BSdata");
+
+        // Load from BSdata
+      Console.WriteLine($"[DatasheetService] Fetching available factions from BSdata...");
+          var factions = await _bsdataService.GetAvailableFactionsAsync();
+     Console.WriteLine($"[DatasheetService] Loading units from {factions.Count} factions");
+
+     foreach (var faction in factions)
+          {
  try
    {
-    // Load faction index
-         var factionPaths = await LoadFactionIndexAsync();
-
-   // Load units from each faction's modular unit files
-            foreach (var (factionName, factionIndexPath) in factionPaths)
-   {
-            try
-      {
-         // Load the faction's unit index (e.g., /data/factions/space-marines/index.json)
-           var factionUnitIndex = await _httpClient.GetFromJsonAsync<FactionUnitIndex>(factionIndexPath);
-
-      if (factionUnitIndex?.Units != null)
-   {
-           // Get the directory path from the faction index path
-            var factionDir = factionIndexPath.Substring(0, factionIndexPath.LastIndexOf('/'));
-
-// Load each unit category file referenced in the index
-          foreach (var unitRef in factionUnitIndex.Units)
-           {
-        try
-   {
-       // Construct the full path to the category file
-                 var categoryPath = $"{factionDir}/{unitRef.Ref}";
- var units = await _httpClient.GetFromJsonAsync<List<Unit>>(categoryPath);
-
-           if (units != null)
-           {
-          foreach (var unit in units)
-            {
-      _unitsCache[unit.Id] = unit;
-              }
-          }
-          }
- catch (Exception ex)
+ Console.WriteLine($"[DatasheetService] --> Loading units for faction: {faction}");
+         var factionUnits = await _bsdataService.GetUnitsByFactionAsync(faction);
+  
+       foreach (var unit in factionUnits)
     {
-            Console.WriteLine($"Error loading unit category {unitRef.Ref}: {ex.Message}");
-   }
+            _unitsCache[unit.Id] = unit;
       }
-                }
-        }
-          catch (Exception ex)
- {
-    Console.WriteLine($"Error loading faction {factionName}: {ex.Message}");
-         }
-       }
-        }
-     catch (Exception ex)
-        {
-            Console.WriteLine($"Error loading datasheets: {ex.Message}");
+         
+  Console.WriteLine($"[DatasheetService] --> Successfully loaded {factionUnits.Count} units for {faction}");
+   }
+        catch (Exception ex)
+   {
+ Console.WriteLine($"[DatasheetService] Error loading units for {faction} from BSdata: {ex.Message}");
+  }
         }
 
-    return _unitsCache.Values.ToList();
+     Console.WriteLine($"[DatasheetService] All factions loaded. Total units in cache: {_unitsCache.Count}");
+  }
+        catch (Exception ex)
+        {
+  Console.WriteLine($"[DatasheetService] Error loading datasheets: {ex.Message}");
+    Console.WriteLine($"[DatasheetService] Stack trace: {ex.StackTrace}");
+  }
+
+        return _unitsCache.Values.ToList();
     }
 
     public async Task<Unit?> GetUnitByIdAsync(string unitId)
     {
-      if (_unitsCache == null)
-        await GetAllUnitsAsync();
+       if (_unitsCache == null)
+          await GetAllUnitsAsync();
 
-        return _unitsCache?.TryGetValue(unitId, out var unit) == true ? unit : null;
+        var result = _unitsCache?.TryGetValue(unitId, out var unit) == true ? unit : null;
+      Console.WriteLine($"[DatasheetService] GetUnitByIdAsync: {unitId} -> {(result != null ? result.Name : "NOT FOUND")}");
+      return result;
     }
 
     public async Task<List<Unit>> GetUnitsByFactionAsync(string faction)
     {
-        var allUnits = await GetAllUnitsAsync();
-        return allUnits.Where(u => u.Faction.Equals(faction, StringComparison.OrdinalIgnoreCase)).ToList();
-  }
+ Console.WriteLine($"[DatasheetService] GetUnitsByFactionAsync: {faction}");
+        var result = await _bsdataService.GetUnitsByFactionAsync(faction);
+       Console.WriteLine($"[DatasheetService] Found {result.Count} units for faction: {faction}");
+        return result;
+   }
 
-  public async Task<List<string>> GetFactionsAsync()
+    public async Task<List<string>> GetFactionsAsync()
     {
         if (_factionsCache != null)
-    return _factionsCache;
+        {
+       Console.WriteLine($"[DatasheetService] Returning cached factions ({_factionsCache.Count} factions)");
+     return _factionsCache;
+       }
 
-   var allUnits = await GetAllUnitsAsync();
-   _factionsCache = allUnits
-   .Select(u => u.Faction)
-      .Distinct()
-     .OrderBy(f => f)
-.ToList();
+        Console.WriteLine($"[DatasheetService] Loading factions from BSdata");
+     _factionsCache = await _bsdataService.GetAvailableFactionsAsync();
 
-      return _factionsCache;
-    }
+    Console.WriteLine($"[DatasheetService] Factions loaded: {string.Join(", ", _factionsCache.Take(5))}...");
+ return _factionsCache;
+}
 
     public async Task<List<Unit>> SearchUnitsAsync(string searchTerm)
     {
-   var allUnits = await GetAllUnitsAsync();
- var lowerSearch = searchTerm.ToLower();
-    return allUnits
-         .Where(u => u.Name.ToLower().Contains(lowerSearch) || u.Faction.ToLower().Contains(lowerSearch))
-            .ToList();
+        Console.WriteLine($"[DatasheetService] SearchUnitsAsync: '{searchTerm}'");
+  var allUnits = await GetAllUnitsAsync();
+        var lowerSearch = searchTerm.ToLower();
+       var results = allUnits
+            .Where(u => u.Name.ToLower().Contains(lowerSearch) || u.Faction.ToLower().Contains(lowerSearch))
+           .ToList();
+  
+     Console.WriteLine($"[DatasheetService] Search found {results.Count} results for '{searchTerm}'");
+  return results;
     }
 }
 
-/// <summary>
-/// Models for faction index deserialization
-/// </summary>
 public class FactionIndex
 {
     public List<FactionEntry>? Factions { get; set; }
@@ -163,9 +126,6 @@ public class FactionEntry
     public string Path { get; set; } = string.Empty;
 }
 
-/// <summary>
-/// Model for faction unit index deserialization (e.g., data/factions/space-marines/index.json)
-/// </summary>
 public class FactionUnitIndex
 {
     public string Faction { get; set; } = string.Empty;

@@ -42,6 +42,7 @@ builder.Services.AddScoped<MigrationService>();
 
 // Register client-side services for server-side rendering
 builder.Services.AddHttpClient<MusterPoint.Client.Services.AuthService>();
+builder.Services.AddHttpClient<MusterPoint.Client.Services.BSdataService>();
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<MusterPoint.Client.Services.ListStorageService>();
 builder.Services.AddScoped<DatasheetService>();
